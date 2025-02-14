@@ -95,18 +95,8 @@ featProp global.IU.joyceArray add 'Luther'
 featProp global.IU.joyceArray add 'Kendrick Lamar and SZA'
 featProp global.IU.joyceArray add 2024
 featProp global.IU.joyceArray add 28
- 
-//featProp global.IU.joyceArray add 'SM_Messy.png'
-//featProp global.IU.joyceArray add 'Messy'
-//featProp global.IU.joyceArray add 'Lola Young'
-//featProp global.IU.joyceArray add 2024
-//featProp global.IU.joyceArray add 5
 
-//featProp global.IU.joyceArray add 'SM_who.png'
-//featProp global.IU.joyceArray add 'Who'
-//featProp global.IU.joyceArray add 'Jimin'
-//featProp global.IU.joyceArray add 2024
-//featProp global.IU.joyceArray add 200
+// ADD SONGS HERE ^^^
 
 featProp global.IU.joyceArray print
 
