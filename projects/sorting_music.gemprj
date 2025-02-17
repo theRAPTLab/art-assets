@@ -55,6 +55,8 @@ addProp num_players number 0
 addProp countReady number 0
 addProp test_sorting boolean false
 addProp count_num_comparisons number 0
+// <editable>
+// ✏️ CHANGE players can choose which attribute of the song the comparison is made by
 addProp index_sort_by number 5
 addProp sort_by string 'plays'
 
@@ -97,6 +99,7 @@ featProp global.IU.joyceArray add 2024
 featProp global.IU.joyceArray add 28
 
 // ADD SONGS HERE ^^^
+// <editable\>
 
 featProp global.IU.joyceArray print
 
@@ -157,6 +160,7 @@ addFeature Population
 
 // set the costume
 featProp song.Costume.costumeName setTo 'SM_APT.png'
+// ✏️ CHANGE players can change costume
 featProp song.Costume.scale setTo 0.35
 
 // add other features
