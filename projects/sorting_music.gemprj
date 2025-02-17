@@ -99,7 +99,7 @@ featProp global.IU.joyceArray add 2024
 featProp global.IU.joyceArray add 28
 
 // ADD SONGS HERE ^^^
-// <editable\>
+// </editable>
 
 featProp global.IU.joyceArray print
 
