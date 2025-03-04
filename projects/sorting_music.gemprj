@@ -31,19 +31,7 @@
 # TAG IsPozyxControllable false
 # TAG IsPtrackControllable false
 
-// COMMENT KEY
-// 🔎 WHAT DOES THIS DO? heading
-// 🔎 body
-// ✏️ LETS CHANGE THIS: heading
-// ✏️ body
-
 # PROGRAM INIT
-
-// 🔎 WHAT DOES THIS MODEL DO?
-// 🔎 This starter model is inteded to help users explore how people interacting with each other
-// 🔎 might impact the other people. The existing code mirrors a basic disease spread scenario for
-// 🔎 some sample code to muck with
-// 🔎 Change this description once you are ready to share the model so others know how it is supposed to work.
 
 prop global.visible setTo false
 addFeature Population
@@ -56,7 +44,6 @@ addProp countReady number 0
 addProp test_sorting boolean false
 addProp count_num_comparisons number 0
 // <editable>
-// ✏️ CHANGE players can choose which attribute of the song the comparison is made by
 addProp index_sort_by number 5
 addProp sort_by string 'plays'
 
@@ -101,9 +88,6 @@ featProp global.IU.joyceArray add 28
 // ADD SONGS HERE ^^^
 // </editable>
 
-featProp global.IU.joyceArray print
-
-// required directive
 # PROGRAM UPDATE
 
 ifExpr {{ global.getProp('num_players').value!=0 && global.getProp('countReady').value == global.getProp('num_players').value }} [[
@@ -128,16 +112,7 @@ featProp Background.Costume.costumeName setTo 'SM_background.png'
 featProp Background.Costume.scale setTo 0.82
 
 # PROGRAM UPDATE
-// code to run every frame
-// when xxx touches yyy [[ ]]
-// every 5 runAfter [[ ]]
-// onEvent Tick [[ ]]
-
-// COMMENT KEY
-// 🔎 WHAT DOES THIS DO? heading
-// 🔎 body
-// ✏️ LETS CHANGE THIS: heading
-// ✏️ body`
+`
     },
     {
       "name": "song",
@@ -487,28 +462,19 @@ featCall rankChart.Touches monitor 'song' b2b
 # TAG isPozyxControllable false
 # TAG isPTrackControllable false
 
-// 🔎 WHAT DOES THIS CHARACTER DO?
-// 🔎 This is a timer character so that we can see how much time has passed in our model
-// 🔎 We can use that time to think about how long the ecosystem survives if we want
-
 # PROGRAM INIT
 addFeature Graphing
 addFeature Costume
 
-// Hide the actual art since we just want the text to displaay
 featProp Timer.Costume.costumeName setTo 'GEN_onexone.json'
 featProp Timer.Costume.scale setTo 1
 
-// A property to track the time
 addProp time number 0
 
-// set the initial label and then update it below during update
 exprPush {{ 'Time: ' + Timer.getProp('time').value }}
 featPropPop Timer.Graphing.text
 
 # PROGRAM UPDATE
-// Every second, add one to the time and then update the text on the timer character to say Time: #
-// timer stops when the test_sorting phase begins
 every 1 runAtStart [[
   ifProp global.test_sorting equal false [[
     prop Timer.time add 1
@@ -536,14 +502,10 @@ featProp graph_comparisons.Graphing.isLargeGraphic setTo true
 featProp graph_comparisons.Graphing.graphProp setTo 'total_comparisons_count'
 featProp graph_comparisons.Graphing.graphMinY setTo 0
 featProp graph_comparisons.Graphing.graphMaxY setTo 50
-//featProp graph_comparisons.Graphing.graphMinX setTo 0
-//featProp graph_comparisons.Graphing.graphMaxX setTo 50
 featProp graph_comparisons.Graphing.text setTo 'comparisons count'
 featProp graph_comparisons.Graphing.meterColor setTo 65280
 featProp graph_comparisons.Graphing.wordWrapWidth setTo 150
 
-
-// what row are we in on the screen (4 total, incremented at end of round)
 addProp row number 1
 
 addProp fieldType string ''
