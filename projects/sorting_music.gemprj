@@ -134,7 +134,7 @@ addFeature Costume
 addFeature Population
 
 // set the costume
-featProp song.Costume.costumeName setTo 'SM_APT.png'
+featProp song.Costume.costumeName setTo 'SM_default.png'
 // ✏️ CHANGE players can change costume
 featProp song.Costume.scale setTo 0.35
 
