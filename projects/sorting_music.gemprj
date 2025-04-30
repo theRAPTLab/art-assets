@@ -47,43 +47,43 @@ addProp count_num_comparisons number 0
 addProp index_sort_by number 5
 addProp sort_by string 'plays'
 
-featProp global.IU.joyceArray add 'Song Attributes'
+featProp global.IU.globalArray add 'Song Attributes'
 
-featProp global.IU.joyceArray add 'SM_APT.png'
-featProp global.IU.joyceArray add 'APT'
-featProp global.IU.joyceArray add 'Rosé and Bruno Mars'
-featProp global.IU.joyceArray add 2024
-featProp global.IU.joyceArray add 15
+featProp global.IU.globalArray add 'SM_APT.png'
+featProp global.IU.globalArray add 'APT'
+featProp global.IU.globalArray add 'Rosé and Bruno Mars'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 15
 
-featProp global.IU.joyceArray add 'SM_die_with_a_smile.png'
-featProp global.IU.joyceArray add 'Die With a Smile'
-featProp global.IU.joyceArray add 'Lady Gaga and Bruno Mars'
-featProp global.IU.joyceArray add 2024
-featProp global.IU.joyceArray add 22
+featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
+featProp global.IU.globalArray add 'Die With a Smile'
+featProp global.IU.globalArray add 'Lady Gaga and Bruno Mars'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 22
 
-featProp global.IU.joyceArray add 'SM_thats_so_true.png'
-featProp global.IU.joyceArray add 'Thats So True'
-featProp global.IU.joyceArray add 'Gracie Abrams'
-featProp global.IU.joyceArray add 2024
-featProp global.IU.joyceArray add 37
+featProp global.IU.globalArray add 'SM_thats_so_true.png'
+featProp global.IU.globalArray add 'Thats So True'
+featProp global.IU.globalArray add 'Gracie Abrams'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 37
 
-featProp global.IU.joyceArray add 'SM_birds_of_a_feather.png'
-featProp global.IU.joyceArray add 'Birds of a Feather'
-featProp global.IU.joyceArray add 'Billie Eilish'
-featProp global.IU.joyceArray add 2024
-featProp global.IU.joyceArray add 150
+featProp global.IU.globalArray add 'SM_birds_of_a_feather.png'
+featProp global.IU.globalArray add 'Birds of a Feather'
+featProp global.IU.globalArray add 'Billie Eilish'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 150
 
-featProp global.IU.joyceArray add 'SM_DtMF.png'
-featProp global.IU.joyceArray add 'DtMF'
-featProp global.IU.joyceArray add 'Bad Bunny'
-featProp global.IU.joyceArray add 2025
-featProp global.IU.joyceArray add 45
+featProp global.IU.globalArray add 'SM_DtMF.png'
+featProp global.IU.globalArray add 'DtMF'
+featProp global.IU.globalArray add 'Bad Bunny'
+featProp global.IU.globalArray add 2025
+featProp global.IU.globalArray add 45
 
-featProp global.IU.joyceArray add 'SM_luther.png'
-featProp global.IU.joyceArray add 'Luther'
-featProp global.IU.joyceArray add 'Kendrick Lamar and SZA'
-featProp global.IU.joyceArray add 2024
-featProp global.IU.joyceArray add 28
+featProp global.IU.globalArray add 'SM_luther.png'
+featProp global.IU.globalArray add 'Luther'
+featProp global.IU.globalArray add 'Kendrick Lamar and SZA'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 28
 
 // ADD SONGS HERE ^^^
 // </editable>
@@ -177,20 +177,20 @@ addProp correct_position boolean false
 
 onEvent START [[
   ifExpr {{ song.getProp('song_name').value === 'teste' }} [[
-    ifExpr {{ global.getProp('stack_counter').value < global.getFeatProp('IU', 'joyceArray').size() }} [[
-      exprPush {{ global.getFeatProp('IU', 'joyceArray').get(global.getProp('stack_counter').value) }}
+    ifExpr {{ global.getProp('stack_counter').value < global.getFeatProp('IU', 'globalArray').size() }} [[
+      exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
       featPropPop song.Costume.costumeName
       prop global.stack_counter add 1
-      exprPush {{ global.getFeatProp('IU', 'joyceArray').get(global.getProp('stack_counter').value) }}
+      exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
       propPop song.song_name
       prop global.stack_counter add 1
-      exprPush {{ global.getFeatProp('IU', 'joyceArray').get(global.getProp('stack_counter').value) }}
+      exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
       propPop song.artists
       prop global.stack_counter add 1
-      exprPush {{ global.getFeatProp('IU', 'joyceArray').get(global.getProp('stack_counter').value) }}
+      exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
       propPop song.year
       prop global.stack_counter add 1
-      exprPush {{ global.getFeatProp('IU', 'joyceArray').get(global.getProp('stack_counter').value) }}
+      exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
       propPop song.plays
       prop global.stack_counter add 1
     ]]
@@ -392,15 +392,15 @@ every 1 runAtStart [[
       prop song.position_in_rank setTo 6
     ]]
     // dbgOut {{ song.getProp('trackerId').value + ': Y + 57 = ' + (song.getProp('y').value + 57) + ' and position = '+ song.getProp('position_in_rank').value}}
-    // dbgOut{{global.getFeatProp('IU', 'joyceArray').size() }}
+    // dbgOut{{global.getFeatProp('IU', 'globalArray').size() }}
     // ifExpr{{song.getProp('correct_position').value != true}} [[
-    ifExpr {{ global.getFeatProp('IU', 'joyceArray').size() > 6 }} [[
-      exprPush {{ (global.getFeatProp('IU', 'joyceArray').filterByPosition(5, 5).sortNumericDescending().get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
+    ifExpr {{ global.getFeatProp('IU', 'globalArray').size() > 6 }} [[
+      exprPush {{ (global.getFeatProp('IU', 'globalArray').filterByPosition(5, 5).sortNumericDescending().get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
       propPop song.correct_position
     ]]
 
-    ifExpr {{ global.getFeatProp('IU', 'joyceArray').size() <= 6 }} [[
-      exprPush {{ (global.getFeatProp('IU', 'joyceArray').get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
+    ifExpr {{ global.getFeatProp('IU', 'globalArray').size() <= 6 }} [[
+      exprPush {{ (global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
       propPop song.correct_position
     ]]
     ifExpr {{ song.getProp('correct_position').value != true }} [[
