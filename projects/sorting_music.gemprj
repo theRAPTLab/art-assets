@@ -39,7 +39,6 @@ addFeature IU
 addFeature Graphing
 addFeature Timer
 addProp song_name string ''
-addProp stack_counter number 1
 addProp countReady number 0
 addProp test_sorting boolean false
 addProp count_num_comparisons number 0
@@ -54,36 +53,42 @@ featProp global.IU.globalArray add 'APT'
 featProp global.IU.globalArray add 'Rosé and Bruno Mars'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 15
+featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
 featProp global.IU.globalArray add 'Die With a Smile'
 featProp global.IU.globalArray add 'Lady Gaga and Bruno Mars'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 22
+featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_thats_so_true.png'
 featProp global.IU.globalArray add 'Thats So True'
 featProp global.IU.globalArray add 'Gracie Abrams'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 37
+featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_birds_of_a_feather.png'
 featProp global.IU.globalArray add 'Birds of a Feather'
 featProp global.IU.globalArray add 'Billie Eilish'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 150
+featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_DtMF.png'
 featProp global.IU.globalArray add 'DtMF'
 featProp global.IU.globalArray add 'Bad Bunny'
 featProp global.IU.globalArray add 2025
 featProp global.IU.globalArray add 45
+featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_luther.png'
 featProp global.IU.globalArray add 'Luther'
 featProp global.IU.globalArray add 'Kendrick Lamar and SZA'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add false
 
 // ADD SONGS HERE ^^^
 // </editable>
@@ -99,9 +104,7 @@ ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Populatio
 
 ifExpr {{ global.getProp('countReady').value != global.callFeatMethod('Population', 'getActiveCharactersCount', 'song') }} [[
   prop global.test_sorting setTo false
-]]
-
-`
+]]`
     },
     {
       "name": "Background",
@@ -174,28 +177,34 @@ addProp has_partner number 0
 addProp sort_by_attribute string
 addProp position_in_rank number 0
 addProp correct_position boolean false
+//joyce
+addProp randomIndex number 0
 
 # PROGRAM UPDATE
 
 onEvent START [[
   ifExpr {{ song.getProp('song_name').value === '' }} [[
-    ifExpr {{ global.getProp('stack_counter').value < global.getFeatProp('IU', 'globalArray').size() }} [[
-      exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
+    exprPush {{ (global.getFeatProp('IU', 'globalArray').getRandomIndex(1,6)) }}
+\tpropPop randomIndex
+\t//dbgOut {{song.getProp('randomIndex').value}}
+      exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
       featPropPop song.Costume.costumeName
-      prop global.stack_counter add 1
-      exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
+      prop randomIndex add 1
+      exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
       propPop song.song_name
-      prop global.stack_counter add 1
-      exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
+      prop randomIndex add 1
+      exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
       propPop song.artists
-      prop global.stack_counter add 1
-      exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
+      prop randomIndex add 1
+      exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
       propPop song.year
-      prop global.stack_counter add 1
-      exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
+      prop randomIndex add 1
+      exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
       propPop song.plays
-      prop global.stack_counter add 1
-    ]]
+      prop randomIndex add 1
+      ifExpr {{ (global.getFeatProp('IU', 'globalArray').setAndCheck(song.getProp('randomIndex').value,true)) }} [[
+        prop randomIndex add 1
+      ]]
     ifExpr {{ global.getProp('sort_by').value === 'plays' }} [[
       propPush plays
       propPop sort_by_value
@@ -388,7 +397,7 @@ every 1 runAtStart [[
     // dbgOut{{global.getFeatProp('IU', 'globalArray').size() }}
     // ifExpr{{song.getProp('correct_position').value != true}} [[
     ifExpr {{ global.getFeatProp('IU', 'globalArray').size() > 6 }} [[
-      exprPush {{ (global.getFeatProp('IU', 'globalArray').filterByPosition(5, 5).sortNumericDescending().get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
+      exprPush {{ (global.getFeatProp('IU', 'globalArray').filterByPosition(5, 6).sortNumericDescending().get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
       propPop song.correct_position
     ]]
 
