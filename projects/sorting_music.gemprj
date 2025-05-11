@@ -37,9 +37,9 @@ prop global.visible setTo false
 addFeature Population
 addFeature IU
 addFeature Graphing
+addFeature Timer
 addProp song_name string ''
 addProp stack_counter number 1
-addProp num_players number 0
 addProp countReady number 0
 addProp test_sorting boolean false
 addProp count_num_comparisons number 0
@@ -90,14 +90,18 @@ featProp global.IU.globalArray add 28
 
 # PROGRAM UPDATE
 
-ifExpr {{ global.getProp('num_players').value!=0 && global.getProp('countReady').value == global.getProp('num_players').value }} [[
+ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Population', 'getActiveCharactersCount', 'song') }} [[
   prop global.test_sorting setTo true
+  every 2 [[
+    featCall global.Timer stopRound
+  ]]
 ]]
 
-ifExpr {{ global.getProp('num_players').value!=0 && global.getProp('countReady').value != global.getProp('num_players').value }} [[
-  
+ifExpr {{ global.getProp('countReady').value != global.callFeatMethod('Population', 'getActiveCharactersCount', 'song') }} [[
   prop global.test_sorting setTo false
-]]`
+]]
+
+`
     },
     {
       "name": "Background",
@@ -166,8 +170,6 @@ addProp compare_to_song_name string
 addProp check_order boolean false
 // ✏️ Checking that we are comparing with maximum 1 agent at a time
 addProp has_partner number 0
-// ✏️ boolean used to ensure song arent counted as more than one player on init
-addProp player boolean false
 // ✏️ saves for the record what kind of attribute are we sorting by
 addProp sort_by_attribute string
 addProp position_in_rank number 0
@@ -210,15 +212,6 @@ onEvent START [[
       propPush artists
       propPop sort_by_value_string
     ]]
-  ]]
-]]
-
-onEvent ROUNDINIT [[
-  ifProp song.player equal false [[
-    prop global.num_players add 1
-    dbgOut {{ 'num of active players: ' + global.getProp('num_players').value }}
-    prop song.player setTo true
-
   ]]
 ]]
 
