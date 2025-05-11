@@ -134,7 +134,7 @@ addFeature Costume
 addFeature Population
 
 // set the costume
-featProp song.Costume.costumeName setTo 'SM_default.png'
+featProp song.Costume.costumeName setTo 'SM_music.png'
 // ✏️ CHANGE players can change costume
 featProp song.Costume.scale setTo 0.35
 
@@ -150,16 +150,16 @@ featCall song.Touches monitor 'rankChart' b2b
 // add any properties specific to the PC
 
 // ✏️ Intended to capture the song name. Each agent is going to have a different song_name and accordingly a different sort_by value and a different costume
-addProp song_name string 'teste'
-addProp artists string 'joyce'
-addProp year number 2012
-addProp plays number 1
+addProp song_name string ''
+addProp artists string ''
+addProp year number 0
+addProp plays number 0
 // ✏️ a number that indicate the rank of the songs ( can change based on year, number of listening etc. If alphabetically please use the relevant number that is in reference to the first letter (1=a, z=26)
 addProp sort_by_value number 0
-addProp sort_by_value_string string 'none'
+addProp sort_by_value_string string ''
 // ✏️ A variable to save the value to sort by of the other song temporarly
 addProp value_to_compare number -100
-addProp value_to_compare_string string 'none'
+addProp value_to_compare_string string ''
 // ✏️ saves a temp value of the song name I am comparing with
 addProp compare_to_song_name string
 // ✏️ check_order is set to true if the player is interacting with the ranking_chart
@@ -176,7 +176,7 @@ addProp correct_position boolean false
 # PROGRAM UPDATE
 
 onEvent START [[
-  ifExpr {{ song.getProp('song_name').value === 'teste' }} [[
+  ifExpr {{ song.getProp('song_name').value === '' }} [[
     ifExpr {{ global.getProp('stack_counter').value < global.getFeatProp('IU', 'globalArray').size() }} [[
       exprPush {{ global.getFeatProp('IU', 'globalArray').get(global.getProp('stack_counter').value) }}
       featPropPop song.Costume.costumeName
@@ -237,7 +237,7 @@ when song touches song [[
         prop song.has_partner setTo 1
         prop character.has_partner setTo 1
         dbgOut {{ 'Comparing by '+global.getProp('sort_by').value }}
-        ifExpr {{ song.getProp('sort_by_value_string').value === 'none' }} [[
+        ifExpr {{ song.getProp('sort_by_value_string').value === '' }} [[
           dbgOut 'comparing numeric'
           // push the sort by value property of the agent and put it in a temporary beak length property of the song and vise versa
           propPush character.sort_by_value
@@ -289,7 +289,7 @@ when song touches song [[
 
         ]]
 
-        ifExpr {{ song.getProp('sort_by_value_string').value != 'none' }} [[
+        ifExpr {{ song.getProp('sort_by_value_string').value != '' }} [[
           propPush character.sort_by_value_string
           propPop song.value_to_compare_string
           propPush song.sort_by_value_string
