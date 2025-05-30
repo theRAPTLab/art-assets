@@ -45,6 +45,7 @@ addProp count_num_comparisons number 0
 // <editable>
 addProp index_sort_by number 5
 addProp sort_by string 'plays'
+addProp number_of_attributes_for_a_song number 6
 
 featProp global.IU.globalArray add 'Song Attributes'
 
@@ -365,12 +366,12 @@ every 1 runAtStart [[
       prop song.position_in_rank setTo 6
     ]]
     // tests if globalArray has more than one song (remember that each element in the array corresponds to one attribute of one song)
-    ifExpr {{ global.getFeatProp('IU', 'globalArray').size() > 6 }} [[
-      exprPush {{ (global.getFeatProp('IU', 'globalArray').filterByPosition(5, 6).sortNumericDescending().get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
+    ifExpr {{ global.getFeatProp('IU', 'globalArray').size() > global.getProp('number_of_attributes_for_a_song').value }} [[
+      exprPush {{ (global.getFeatProp('IU', 'globalArray').filterByPosition(5, global.getProp('number_of_attributes_for_a_song').value).sortNumericDescending().get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
       propPop song.correct_position
     ]]
     // tests if elements in the globalArray are <= 6 which would indicate it only has one song (remember that each element in the array corresponds to one attribute of one song)
-    ifExpr {{ global.getFeatProp('IU', 'globalArray').size() <= 6 }} [[
+    ifExpr {{ global.getFeatProp('IU', 'globalArray').size() <= global.getProp('number_of_attributes_for_a_song').value }} [[
       exprPush {{ (global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
       propPop song.correct_position
     ]]
