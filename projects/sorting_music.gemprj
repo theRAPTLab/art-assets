@@ -128,13 +128,6 @@ featProp Background.Costume.scale setTo 0.82
 # TAG isCharControllable true
 # TAG isPTrackControllable false
 
-// COMMENT KEY
-// 🔎 WHAT DOES THIS DO? heading
-// 🔎 body
-// ✏️ LETS CHANGE THIS: heading
-// ✏️ body
-
-
 # PROGRAM INIT
 // add the features we are likely to use
 addFeature Costume
@@ -142,7 +135,7 @@ addFeature Population
 
 // set the costume
 featProp song.Costume.costumeName setTo 'SM_music.png'
-// ✏️ CHANGE players can change costume
+// players can change costume size
 featProp song.Costume.scale setTo 0.35
 
 // add other features
@@ -154,30 +147,28 @@ addFeature Touches
 featCall song.Touches monitor 'song' b2b
 featCall song.Touches monitor 'rankChart' b2b
 
-// add any properties specific to the PC
 
-// ✏️ Intended to capture the song name. Each agent is going to have a different song_name and accordingly a different sort_by value and a different costume
+//Intended to capture the song name. Each agent is going to have a different song_name and accordingly a different sort_by value and a different costume
 addProp song_name string ''
 addProp artists string ''
 addProp year number 0
 addProp plays number 0
-// ✏️ a number that indicate the rank of the songs ( can change based on year, number of listening etc. If alphabetically please use the relevant number that is in reference to the first letter (1=a, z=26)
+//a number that indicate the rank of the songs ( can change based on year, number of listening etc. If alphabetically please use the relevant number that is in reference to the first letter (1=a, z=26)
 addProp sort_by_value number 0
 addProp sort_by_value_string string ''
-// ✏️ A variable to save the value to sort by of the other song temporarly
+//A variable to save the value to sort by of the other song temporarly
 addProp value_to_compare number -100
 addProp value_to_compare_string string ''
-// ✏️ saves a temp value of the song name I am comparing with
+//saves a temp value of the song name I am comparing with
 addProp compare_to_song_name string
-// ✏️ check_order is set to true if the player is interacting with the ranking_chart
+//check_order is set to true if the player is interacting with the ranking_chart
 addProp check_order boolean false
-// ✏️ Checking that we are comparing with maximum 1 agent at a time
+//Checking that we are comparing with maximum 1 agent at a time
 addProp has_partner number 0
-// ✏️ saves for the record what kind of attribute are we sorting by
+//saves for the record what kind of attribute are we sorting by
 addProp sort_by_attribute string
 addProp position_in_rank number 0
 addProp correct_position boolean false
-//joyce
 addProp randomIndex number 0
 
 # PROGRAM UPDATE
@@ -185,8 +176,6 @@ addProp randomIndex number 0
 onEvent START [[
   ifExpr {{ song.getProp('song_name').value === '' }} [[
     exprPush {{ (global.getFeatProp('IU', 'globalArray').getRandomIndex(1,6)) }}
-\tpropPop randomIndex
-\t//dbgOut {{song.getProp('randomIndex').value}}
       exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
       featPropPop song.Costume.costumeName
       prop randomIndex add 1
@@ -241,15 +230,13 @@ when song touches song [[
         dbgOut {{ 'Comparing by '+global.getProp('sort_by').value }}
         ifExpr {{ song.getProp('sort_by_value_string').value === '' }} [[
           dbgOut 'comparing numeric'
-          // push the sort by value property of the agent and put it in a temporary beak length property of the song and vise versa
+          // push the sort by value property of the agent and put it in a temporary property of the song and vise versa
           propPush character.sort_by_value
           dbgStack
           propPop song.value_to_compare
-          // dbgOut {{ 'added a value to compare to song: ' + song.getProp('song_name').value + ' and set the following value: ' + song.getProp('value_to_compare').value }}
           propPush song.sort_by_value
           dbgStack
           propPop character.value_to_compare
-          // dbgOut {{ 'added a value to compare to song: ' + character.getProp('song_name').value + ' and set the following value: ' + character.getProp('value_to_compare').value }}
           // making sure value to compare updates correctly
           ifExpr {{ song.getProp('value_to_compare').value != -100 && character.getProp('value_to_compare').value != -100 }} [[
             // compare the sort by value and temporary (compared to) sort by value properties of the song. If song is larger, change the song costume to larger and the agent costume to smaller
@@ -261,8 +248,6 @@ when song touches song [[
               featProp character.Costume.glow setTo 1
               // Count and log the number of comparisons between songs
               prop global.count_num_comparisons add 1
-              // dbgOut {{ 'num of comparisons so far: ' + global.getProp('count_num_comparisons').value }}
-              // dbgOut {{ 'Comaprison event between ' + song.getProp('song_name').value + ' and ' + character.getProp('song_name').valu + ' with results: ' + song.getProp('song_name').value + ' is bigger ' }}
             ]]
             ifExpr {{ song.getProp('sort_by_value').value < song.getProp('value_to_compare').value }} [[
               dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' < ' + song.getProp('value_to_compare').value }}
@@ -272,9 +257,6 @@ when song touches song [[
               featProp character.Costume.glow setTo 1
               // Count and log the number of comparisons between songs
               prop global.count_num_comparisons add 1
-              // dbgOut {{ 'num of comparisons so far: ' + global.getProp('count_num_comparisons').value }}
-              // dbgOut {{ 'Comaprison event between ' + song.getProp('song_name').value + ' and ' + character.getProp('song_name').valu + ' with results: ' + song.getProp('song_name').value + ' is smaller ' }}
-
             ]]
             ifExpr {{ song.getProp('sort_by_value').value == song.getProp('value_to_compare').value }} [[
               dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' = ' + song.getProp('value_to_compare').value }}
@@ -284,8 +266,6 @@ when song touches song [[
               featProp character.Costume.glow setTo 1
               // Count and log the number of comparisons between songs
               prop global.count_num_comparisons add 1
-              // dbgOut {{ 'num of comparisons so far: ' + global.getProp('count_num_comparisons').value }}
-              // dbgOut {{ 'Comaprison event between ' + song.getProp('song_name').value + ' and ' + character.getProp('song_name').valu + ' with results: equal ' }}
             ]]
           ]]
 
@@ -298,7 +278,6 @@ when song touches song [[
           propPop character.value_to_compare_string
           ifExpr {{ song.getProp('value_to_compare_string').value != 'none' && character.getProp('value_to_compare_string').value != 'none' }} [[
             ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) > 0 }} [[
-              dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value_string').value +' > ' + song.getProp('value_to_compare_string').value }}
               featProp song.Costume.scale setTo 0.55
               featProp character.Costume.scale setTo 0.15
               featProp song.Costume.glow setTo 1
@@ -306,7 +285,6 @@ when song touches song [[
               prop global.count_num_comparisons add 1
             ]]
             ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) < 0 }} [[
-              dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value_string').value +' < ' + song.getProp('value_to_compare_string').value }}
               featProp song.Costume.scale setTo 0.15
               featProp character.Costume.scale setTo 0.55
               featProp song.Costume.glow setTo 1
@@ -314,7 +292,6 @@ when song touches song [[
               prop global.count_num_comparisons add 1
             ]]
             ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) == 0 }} [[
-              dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value_string').value +' = ' + song.getProp('value_to_compare_string').value }}
               featProp song.Costume.scale setTo 0.35
               featProp character.Costume.scale setTo 0.35
               featProp song.Costume.glow setTo 1
@@ -322,9 +299,7 @@ when song touches song [[
               prop global.count_num_comparisons add 1
             ]]
           ]]
-
         ]]
-
       ]]
     ]]
   ]]
@@ -341,7 +316,6 @@ when song lasttouches song [[
   prop character.value_to_compare setTo -100
   prop song.compare_to_song_name setTo
   prop character.compare_to_song_name setTo
-  // dbgOut {{ 'end of comparison event between ' + song.getProp('song_name').value + ' and ' + character.getProp('song_name').value }}
 ]]
 
 // when a song actively interacts with the rank chart, set the player status as ready to make a prediction and add one to the global property to count ready players
@@ -350,7 +324,6 @@ when song touches rankChart [[
     featProp song.Costume.glow setTo 1
     prop song.check_order setTo true
     prop global.countReady add 1
-    // dbgOut {{ 'song: ' + song.getProp('song_name').value + ' is on the rank chart with total songs ready to test sorting of: ' + global.getProp('countReady').value }}
   ]]
 ]]
 
@@ -362,7 +335,6 @@ when song lasttouches rankChart [[
   prop song.check_order setTo false
   prop song.correct_position setTo false
   prop song.position_in_rank setTo 0
-  // dbgOut {{ 'song: ' + song.getProp('song_name').value + ' just left the rank chart with total songs ready to test sorting of: ' + global.getProp('countReady').value }}
 ]]
 
 
@@ -370,11 +342,10 @@ when song lasttouches rankChart [[
 // For example every 1 runAtStart will run every time this is called, including the first, whereas every 5 will happen less offten and not the first time
 
 every 1 runAtStart [[
-  // test sorting
+  // test sorting when global variable is true (which means all songs are touching the rank chart)
   ifProp global.test_sorting equal true [[
     dbgOut {{ 'test of sorting in progress' }}
     prop song.isInert setTo true
-    // dbgOut {{ 'for song name: ' + song.getProp('song_name').value + ' Y value is: ' + song.getProp('y').value }}
     ifExpr {{ ((song.getProp('y').value + 57) > -293) && ((song.getProp('y').value + 57) < -171) }} [[
       prop song.position_in_rank setTo 1
     ]]
@@ -393,14 +364,12 @@ every 1 runAtStart [[
     ifExpr {{ ((song.getProp('y').value + 57) > 293) }} [[
       prop song.position_in_rank setTo 6
     ]]
-    // dbgOut {{ song.getProp('trackerId').value + ': Y + 57 = ' + (song.getProp('y').value + 57) + ' and position = '+ song.getProp('position_in_rank').value}}
-    // dbgOut{{global.getFeatProp('IU', 'globalArray').size() }}
-    // ifExpr{{song.getProp('correct_position').value != true}} [[
+    // tests if globalArray has more than one song (remember that each element in the array corresponds to one attribute of one song)
     ifExpr {{ global.getFeatProp('IU', 'globalArray').size() > 6 }} [[
       exprPush {{ (global.getFeatProp('IU', 'globalArray').filterByPosition(5, 6).sortNumericDescending().get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
       propPop song.correct_position
     ]]
-
+    // tests if elements in the globalArray are <= 6 which would indicate it only has one song (remember that each element in the array corresponds to one attribute of one song)
     ifExpr {{ global.getFeatProp('IU', 'globalArray').size() <= 6 }} [[
       exprPush {{ (global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
       propPop song.correct_position
@@ -413,10 +382,6 @@ every 1 runAtStart [[
       dbgOut {{ song.getProp('artists').value + ': CORRECT ' }}
       featProp song.Costume.glow setTo 5
     ]]
-    // ]]
-    // dbgOut {{song.getProp('artists').value + ': at position = '+song.getProp('position_in_rank').value+', correct_position = '+song.getProp('correct_position').value}}
-
-
   ]]
 
 
@@ -429,11 +394,6 @@ every 1 runAtStart [[
 # TAG isCharControllable false
 # TAG isPTrackControllable false
 
-// COMMENT KEY
-// 🔎 WHAT DOES THIS DO? heading
-// 🔎 body
-// ✏️ LETS CHANGE THIS: heading
-// ✏️ body
 
 # PROGRAM INIT
 // setup the NPC costume
@@ -448,8 +408,6 @@ addFeature Physics
 addFeature Touches
 
 featCall rankChart.Touches monitor 'song' b2b
-
-// add any properties specific to the PC / NPC
 
 
 # PROGRAM UPDATE
