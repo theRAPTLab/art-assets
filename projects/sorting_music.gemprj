@@ -149,24 +149,24 @@ featCall song.Touches monitor 'song' b2b
 featCall song.Touches monitor 'rankChart' b2b
 
 
-//Intended to capture the song name. Each agent is going to have a different song_name and accordingly a different sort_by value and a different costume
+// Intended to capture the song name. Each agent is going to have a different song_name and accordingly a different sort_by value and a different costume
 addProp song_name string ''
 addProp artists string ''
 addProp year number 0
 addProp plays number 0
-//a number that indicate the rank of the songs ( can change based on year, number of listening etc. If alphabetically please use the relevant number that is in reference to the first letter (1=a, z=26)
+// a number that indicate the rank of the songs ( can change based on year, number of listening etc. If alphabetically please use the relevant number that is in reference to the first letter (1=a, z=26)
 addProp sort_by_value number 0
 addProp sort_by_value_string string ''
-//A variable to save the value to sort by of the other song temporarly
+// A variable to save the value to sort by of the other song temporarly
 addProp value_to_compare number -100
 addProp value_to_compare_string string ''
-//saves a temp value of the song name I am comparing with
+// saves a temp value of the song name I am comparing with
 addProp compare_to_song_name string
-//check_order is set to true if the player is interacting with the ranking_chart
+// check_order is set to true if the player is interacting with the ranking_chart
 addProp check_order boolean false
-//Checking that we are comparing with maximum 1 agent at a time
+// Checking that we are comparing with maximum 1 agent at a time
 addProp has_partner number 0
-//saves for the record what kind of attribute are we sorting by
+// saves for the record what kind of attribute are we sorting by
 addProp sort_by_attribute string
 addProp position_in_rank number 0
 addProp correct_position boolean false
@@ -177,24 +177,25 @@ addProp randomIndex number 0
 onEvent START [[
   ifExpr {{ song.getProp('song_name').value === '' }} [[
     exprPush {{ (global.getFeatProp('IU', 'globalArray').getRandomIndex(1,6)) }}
-      exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
-      featPropPop song.Costume.costumeName
+    propPop song.randomIndex
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    featPropPop song.Costume.costumeName
+    prop randomIndex add 1
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.song_name
+    prop randomIndex add 1
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.artists
+    prop randomIndex add 1
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.year
+    prop randomIndex add 1
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.plays
+    prop randomIndex add 1
+    ifExpr {{ (global.getFeatProp('IU', 'globalArray').setAndCheck(song.getProp('randomIndex').value,true)) }} [[
       prop randomIndex add 1
-      exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
-      propPop song.song_name
-      prop randomIndex add 1
-      exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
-      propPop song.artists
-      prop randomIndex add 1
-      exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
-      propPop song.year
-      prop randomIndex add 1
-      exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
-      propPop song.plays
-      prop randomIndex add 1
-      ifExpr {{ (global.getFeatProp('IU', 'globalArray').setAndCheck(song.getProp('randomIndex').value,true)) }} [[
-        prop randomIndex add 1
-      ]]
+    ]]
     ifExpr {{ global.getProp('sort_by').value === 'plays' }} [[
       propPush plays
       propPop sort_by_value
