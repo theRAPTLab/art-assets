@@ -22,7 +22,16 @@
     "mirrorX": false,
     "mirrorY": false
   },
-  "rounds": [],
+  "rounds": [
+{
+      "initScript": ``,
+      "endScript": `
+        featCall global.Population charactersForEach rankChart [[
+          prop rankChart.y setTo -0.18
+        ]]
+`
+    }
+  ],
   "blueprints": [
     {
       "name": "global",
@@ -42,6 +51,7 @@ addProp song_name string ''
 addProp countReady number 0
 addProp test_sorting boolean false
 addProp count_num_comparisons number 0
+addProp chart_slot_height number 130
 // <editable>
 addProp index_sort_by number 5
 addProp sort_by string 'plays'
@@ -98,8 +108,16 @@ featProp global.IU.globalArray add false
 
 ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Population', 'getActiveCharactersCount', 'song') }} [[
   prop global.test_sorting setTo true
-  every 2 [[
+  every 1 [[
+
+    featCall global.Population charactersForEach rankChart [[
+      dbgOut 'vai'
+      prop rankChart.y setTo -0.18
+      dbgOut 'foi'
+    ]]
+    dbgOut 'global stop'
     featCall global.Timer stopRound
+
   ]]
 ]]
 
@@ -399,23 +417,43 @@ every 1 runAtStart [[
 
 # PROGRAM INIT
 // setup the NPC costume
-addFeature Population
 addFeature Costume
-featProp rankChart.Costume.costumeName setTo 'SM_ranking_chart.png'
-featProp rankChart.Costume.scale setTo 0.75
-
+featProp rankChart.Costume.costumeName setTo 'SM_ranking_chart_no_title.png'
+prop rankChart.y setTo -0.18
+// exprPush {{ global.getProp('chart_slot_height').value }}
+// featPropPop rankChart.Costume.height
+// featProp rankChart.Costume.height setTo 0.1
 // add other features
 addFeature Graphing
 addFeature Physics
 addFeature Touches
 
+featProp rankChart.Graphing.text setTo 'RANK CHART'
+featProp rankChart.Graphing.fontSize setTo 22
+featProp rankChart.Graphing.wordWrapWidth setTo 150
+
+featProp rankChart.Graphing.textAlign setTo 1
 featCall rankChart.Touches monitor 'song' b2b
 
 
 # PROGRAM UPDATE
 
+exprPush {{ (global.getProp('chart_slot_height').value) * (global.callFeatMethod('Population','getActiveCharactersCount','song')) }}
+featPropPop rankChart.Costume.height
+// dbgOut {{ 'height: ' + rankChart.getProp('y').value }}
+// dbgOut {{ 'image height: ' + rankChart.getFeatProp('Costume','height').value }}
+exprPush {{ -370 + (((global.getProp('chart_slot_height').value) / 2) * (global.callFeatMethod('Population','getActiveCharactersCount','song'))) }}
+propPop rankChart.y
 
-`
+// # PROGRAM EVENT
+
+// onEvent ROUNDSTOP [[
+// dbgOut 'roundStop rank'
+// exprPush {{ (global.getProp('chart_slot_height').value) * (global.callFeatMethod('Population','getActiveCharactersCount','song')) }}
+// featPropPop rankChart.Costume.height
+// exprPush {{ -370 + (((global.getProp('chart_slot_height').value) / 2) * (global.callFeatMethod('Population','getActiveCharactersCount','song'))) }}
+// propPop rankChart.y
+// ]]`
     },
     {
       "name": "Timer",
@@ -432,7 +470,7 @@ featProp Timer.Costume.costumeName setTo 'GEN_onexone.json'
 featProp Timer.Costume.scale setTo 1
 
 addProp time number 0
-
+featProp Timer.Graphing.fontSize setTo 28
 exprPush {{ 'Time: ' + Timer.getProp('time').value }}
 featPropPop Timer.Graphing.text
 
@@ -464,7 +502,7 @@ featProp graph_comparisons.Graphing.isLargeGraphic setTo true
 featProp graph_comparisons.Graphing.graphProp setTo 'total_comparisons_count'
 featProp graph_comparisons.Graphing.graphMinY setTo 0
 featProp graph_comparisons.Graphing.graphMaxY setTo 50
-featProp graph_comparisons.Graphing.text setTo 'comparisons count'
+featProp graph_comparisons.Graphing.text setTo 'Number of Comparisons'
 featProp graph_comparisons.Graphing.meterColor setTo 65280
 featProp graph_comparisons.Graphing.wordWrapWidth setTo 150
 
@@ -493,22 +531,22 @@ prop Background.y setTo 4.15`
       "id": "1",
       "label": "rankChart1",
       "bpid": "rankChart",
-      "initScript": `prop rankChart.x setTo 325.62
-prop rankChart.y setTo -4.36`
+      "initScript": `prop rankChart.x setTo 315.16
+prop rankChart.y setTo -0.18`
     },
     {
       "id": "6",
       "label": "graph_comparisons6",
       "bpid": "graph_comparisons",
-      "initScript": `prop graph_comparisons.x setTo -473.16
-prop graph_comparisons.y setTo -266.19`
+      "initScript": `prop graph_comparisons.x setTo -488.27
+prop graph_comparisons.y setTo -212.80`
     },
     {
       "id": "7",
       "label": "Timer7",
       "bpid": "Timer",
-      "initScript": `prop Timer.x setTo -454.54
-prop Timer.y setTo -397.29`
+      "initScript": `prop Timer.x setTo -492.15
+prop Timer.y setTo -372.22`
     }
   ]
 }
