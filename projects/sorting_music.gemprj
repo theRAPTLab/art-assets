@@ -23,11 +23,11 @@
     "mirrorY": false
   },
   "rounds": [
-{
+    {
       "initScript": ``,
       "endScript": `
         featCall global.Population charactersForEach rankChart [[
-          prop rankChart.y setTo -0.18
+          //prop rankChart.y setTo -0.18
         ]]
 `
     }
@@ -52,6 +52,7 @@ addProp countReady number 0
 addProp test_sorting boolean false
 addProp count_num_comparisons number 0
 addProp chart_slot_height number 130
+addProp chart_center_y number
 // <editable>
 addProp index_sort_by number 5
 addProp sort_by string 'plays'
@@ -109,13 +110,7 @@ featProp global.IU.globalArray add false
 ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Population', 'getActiveCharactersCount', 'song') }} [[
   prop global.test_sorting setTo true
   every 1 [[
-
-    featCall global.Population charactersForEach rankChart [[
-      dbgOut 'vai'
-      prop rankChart.y setTo -0.18
-      dbgOut 'foi'
-    ]]
-    dbgOut 'global stop'
+    featProp global.IU.globalArray print
     featCall global.Timer stopRound
 
   ]]
@@ -152,11 +147,15 @@ featProp Background.Costume.scale setTo 0.82
 addFeature Costume
 addFeature Population
 
+//variables to scale song costume size 
+addProp normal_scale number 0.35
+addProp up_scale number 0.55
+addProp down_scale number 0.25
+
 // set the costume
 featProp song.Costume.costumeName setTo 'SM_music.png'
-// players can change costume size
-featProp song.Costume.scale setTo 0.35
-
+propPush song.normal_scale
+featPropPop song.Costume.scale
 // add other features
 addFeature Graphing
 addFeature Physics
@@ -184,8 +183,6 @@ addProp compare_to_song_name string
 addProp check_order boolean false
 // Checking that we are comparing with maximum 1 agent at a time
 addProp has_partner number 0
-// saves for the record what kind of attribute are we sorting by
-addProp sort_by_attribute string
 addProp position_in_rank number 0
 addProp correct_position boolean false
 addProp randomIndex number 0
@@ -262,8 +259,10 @@ when song touches song [[
             // compare the sort by value and temporary (compared to) sort by value properties of the song. If song is larger, change the song costume to larger and the agent costume to smaller
             ifExpr {{ song.getProp('sort_by_value').value > song.getProp('value_to_compare').value }} [[
               dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' > ' + song.getProp('value_to_compare').value }}
-              featProp song.Costume.scale setTo 0.55
-              featProp character.Costume.scale setTo 0.25
+              propPush song.up_scale
+\t\t\t  featPropPop song.Costume.scale
+              propPush song.down_scale
+\t\t\t  featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               // Count and log the number of comparisons between songs
@@ -271,8 +270,10 @@ when song touches song [[
             ]]
             ifExpr {{ song.getProp('sort_by_value').value < song.getProp('value_to_compare').value }} [[
               dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' < ' + song.getProp('value_to_compare').value }}
-              featProp song.Costume.scale setTo 0.25
-              featProp character.Costume.scale setTo 0.55
+              propPush song.down_scale
+\t\t\t  featPropPop song.Costume.scale
+              propPush song.up_scale
+\t\t\t  featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               // Count and log the number of comparisons between songs
@@ -280,8 +281,10 @@ when song touches song [[
             ]]
             ifExpr {{ song.getProp('sort_by_value').value == song.getProp('value_to_compare').value }} [[
               dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' = ' + song.getProp('value_to_compare').value }}
-              featProp song.Costume.scale setTo 0.4
-              featProp character.Costume.scale setTo 0.4
+              propPush song.normal_scale
+\t\t\t  featPropPop song.Costume.scale
+              propPush song.normal_scale
+\t\t\t  featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               // Count and log the number of comparisons between songs
@@ -298,22 +301,28 @@ when song touches song [[
           propPop character.value_to_compare_string
           ifExpr {{ song.getProp('value_to_compare_string').value != 'none' && character.getProp('value_to_compare_string').value != 'none' }} [[
             ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) > 0 }} [[
-              featProp song.Costume.scale setTo 0.55
-              featProp character.Costume.scale setTo 0.15
+              propPush song.up_scale
+\t\t\t  featPropPop song.Costume.scale
+              propPush song.down_scale
+\t\t\t  featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               prop global.count_num_comparisons add 1
             ]]
             ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) < 0 }} [[
-              featProp song.Costume.scale setTo 0.15
-              featProp character.Costume.scale setTo 0.55
+              propPush song.down_scale
+\t\t\t  featPropPop song.Costume.scale
+              propPush song.up_scale
+\t\t\t  featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               prop global.count_num_comparisons add 1
             ]]
             ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) == 0 }} [[
-              featProp song.Costume.scale setTo 0.35
-              featProp character.Costume.scale setTo 0.35
+              propPush song.normal_scale
+\t\t\t  featPropPop song.Costume.scale
+              propPush song.normal_scale
+\t\t\t  featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               prop global.count_num_comparisons add 1
@@ -364,8 +373,17 @@ when song lasttouches rankChart [[
 every 1 runAtStart [[
   // test sorting when global variable is true (which means all songs are touching the rank chart)
   ifProp global.test_sorting equal true [[
-    dbgOut {{ 'test of sorting in progress' }}
-    prop song.isInert setTo true
+    // dbgOut {{ (song.getProp('y').value) }}
+    // dbgOut {{ (global.getProp('chart_center_y').value) }}
+    // dbgOut {{ (global.getProp('chart_slot_height').value) }}
+    // dbgOut {{ (global.callFeatMethod('Population','getActiveCharactersCount','song')) }}
+    // dbgOut {{ (global.getProp('chart_slot_height').value) }}
+
+    // exprPush{{ (((song.getProp('y').value) - ((global.getProp('chart_center_y').value) - ((global.getProp('chart_slot_height').value) * (global.callFeatMethod('Population','getActiveCharactersCount','song')))/ 2)) / (global.getProp('chart_slot_height').value)) | 0 }}
+
+    // propPop song.position_in_rank
+    // dbgOut {{ 'setou posicao para '+song.getProp('position_in_rank').value }}
+
     ifExpr {{ ((song.getProp('y').value + 57) > -293) && ((song.getProp('y').value + 57) < -171) }} [[
       prop song.position_in_rank setTo 1
     ]]
@@ -384,6 +402,9 @@ every 1 runAtStart [[
     ifExpr {{ ((song.getProp('y').value + 57) > 293) }} [[
       prop song.position_in_rank setTo 6
     ]]
+
+    dbgOut {{ 'SETOU posicao para '+song.getProp('position_in_rank').value }}
+
     // tests if globalArray has more than one song (remember that each element in the array corresponds to one attribute of one song)
     ifExpr {{ global.getFeatProp('IU', 'globalArray').size() > global.getProp('number_of_attributes_for_a_song').value }} [[
       exprPush {{ (global.getFeatProp('IU', 'globalArray').filterByPosition(5, global.getProp('number_of_attributes_for_a_song').value).sortNumericDescending().get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
@@ -416,14 +437,12 @@ every 1 runAtStart [[
 
 
 # PROGRAM INIT
-// setup the NPC costume
 addFeature Costume
 featProp rankChart.Costume.costumeName setTo 'SM_ranking_chart_no_title.png'
 prop rankChart.y setTo -0.18
 // exprPush {{ global.getProp('chart_slot_height').value }}
 // featPropPop rankChart.Costume.height
 // featProp rankChart.Costume.height setTo 0.1
-// add other features
 addFeature Graphing
 addFeature Physics
 addFeature Touches
@@ -440,20 +459,15 @@ featCall rankChart.Touches monitor 'song' b2b
 
 exprPush {{ (global.getProp('chart_slot_height').value) * (global.callFeatMethod('Population','getActiveCharactersCount','song')) }}
 featPropPop rankChart.Costume.height
+exprPush {{ (global.getProp('chart_slot_height').value) * (global.callFeatMethod('Population','getActiveCharactersCount','song')) }}
+propPop global.chart_center_y
 // dbgOut {{ 'height: ' + rankChart.getProp('y').value }}
 // dbgOut {{ 'image height: ' + rankChart.getFeatProp('Costume','height').value }}
 exprPush {{ -370 + (((global.getProp('chart_slot_height').value) / 2) * (global.callFeatMethod('Population','getActiveCharactersCount','song'))) }}
 propPop rankChart.y
-
-// # PROGRAM EVENT
-
-// onEvent ROUNDSTOP [[
-// dbgOut 'roundStop rank'
-// exprPush {{ (global.getProp('chart_slot_height').value) * (global.callFeatMethod('Population','getActiveCharactersCount','song')) }}
-// featPropPop rankChart.Costume.height
-// exprPush {{ -370 + (((global.getProp('chart_slot_height').value) / 2) * (global.callFeatMethod('Population','getActiveCharactersCount','song'))) }}
-// propPop rankChart.y
-// ]]`
+every 1 runAtStart [[
+  // insert code here
+]]`
     },
     {
       "name": "Timer",
@@ -532,7 +546,7 @@ prop Background.y setTo 4.15`
       "label": "rankChart1",
       "bpid": "rankChart",
       "initScript": `prop rankChart.x setTo 315.16
-prop rankChart.y setTo -0.18`
+prop rankChart.y setTo -0.17`
     },
     {
       "id": "6",
