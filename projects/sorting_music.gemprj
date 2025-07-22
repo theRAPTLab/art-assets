@@ -147,7 +147,7 @@ featProp Background.Costume.scale setTo 0.82
 addFeature Costume
 addFeature Population
 
-//variables to scale song costume size 
+// variables to scale song costume size
 addProp normal_scale number 0.35
 addProp up_scale number 0.55
 addProp down_scale number 0.25
@@ -198,6 +198,8 @@ onEvent START [[
     prop randomIndex add 1
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.song_name
+    propPush song.song_name
+    featPropPop song.Graphing.text
     prop randomIndex add 1
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.artists
@@ -260,9 +262,9 @@ when song touches song [[
             ifExpr {{ song.getProp('sort_by_value').value > song.getProp('value_to_compare').value }} [[
               dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' > ' + song.getProp('value_to_compare').value }}
               propPush song.up_scale
-\t\t\t  featPropPop song.Costume.scale
+              featPropPop song.Costume.scale
               propPush song.down_scale
-\t\t\t  featPropPop character.Costume.scale
+              featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               // Count and log the number of comparisons between songs
@@ -271,9 +273,9 @@ when song touches song [[
             ifExpr {{ song.getProp('sort_by_value').value < song.getProp('value_to_compare').value }} [[
               dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' < ' + song.getProp('value_to_compare').value }}
               propPush song.down_scale
-\t\t\t  featPropPop song.Costume.scale
+              featPropPop song.Costume.scale
               propPush song.up_scale
-\t\t\t  featPropPop character.Costume.scale
+              featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               // Count and log the number of comparisons between songs
@@ -282,9 +284,9 @@ when song touches song [[
             ifExpr {{ song.getProp('sort_by_value').value == song.getProp('value_to_compare').value }} [[
               dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' = ' + song.getProp('value_to_compare').value }}
               propPush song.normal_scale
-\t\t\t  featPropPop song.Costume.scale
+              featPropPop song.Costume.scale
               propPush song.normal_scale
-\t\t\t  featPropPop character.Costume.scale
+              featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               // Count and log the number of comparisons between songs
@@ -302,27 +304,27 @@ when song touches song [[
           ifExpr {{ song.getProp('value_to_compare_string').value != 'none' && character.getProp('value_to_compare_string').value != 'none' }} [[
             ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) > 0 }} [[
               propPush song.up_scale
-\t\t\t  featPropPop song.Costume.scale
+              featPropPop song.Costume.scale
               propPush song.down_scale
-\t\t\t  featPropPop character.Costume.scale
+              featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               prop global.count_num_comparisons add 1
             ]]
             ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) < 0 }} [[
               propPush song.down_scale
-\t\t\t  featPropPop song.Costume.scale
+              featPropPop song.Costume.scale
               propPush song.up_scale
-\t\t\t  featPropPop character.Costume.scale
+              featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               prop global.count_num_comparisons add 1
             ]]
             ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) == 0 }} [[
               propPush song.normal_scale
-\t\t\t  featPropPop song.Costume.scale
+              featPropPop song.Costume.scale
               propPush song.normal_scale
-\t\t\t  featPropPop character.Costume.scale
+              featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
               prop global.count_num_comparisons add 1
