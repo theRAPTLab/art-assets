@@ -167,6 +167,8 @@ featCall song.Touches monitor 'rankChart' b2b
 
 
 // Intended to capture the song name. Each agent is going to have a different song_name and accordingly a different sort_by value and a different costume
+
+// <comparison attributes>
 addProp song_name string ''
 addProp artists string ''
 addProp year number 0
