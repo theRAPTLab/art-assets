@@ -229,7 +229,7 @@ onEvent START [[
       propPush artists
       propPop sort_by_value_string
     ]]
-    //set the label below the image to a specific text, here it is song name but could be something else
+    //<set the label below the image to a specific text, here it is song name but could be something else>
     propPush song.song_name
     featPropPop song.Graphing.text
   ]]
