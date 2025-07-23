@@ -200,8 +200,6 @@ onEvent START [[
     prop randomIndex add 1
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.song_name
-    propPush song.song_name
-    featPropPop song.Graphing.text
     prop randomIndex add 1
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.artists
@@ -231,6 +229,9 @@ onEvent START [[
       propPush artists
       propPop sort_by_value_string
     ]]
+    //set the label below the image to a specific text, here it is song name but could be something else
+    propPush song.song_name
+    featPropPop song.Graphing.text
   ]]
 ]]
 
