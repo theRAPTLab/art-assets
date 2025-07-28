@@ -54,17 +54,37 @@ addProp count_num_comparisons number 0
 addProp chart_slot_height number 130
 addProp chart_center_y number
 // <editable>
-addProp index_sort_by number 5
-addProp sort_by string 'plays'
+// first sorting parameter 
+addProp index_primary_sort number 4
+addProp name_primary_sort string 'year'
+addProp type_primary_sort string 'number'
+// false = descending (e.g., newest first)            
+addProp is_primary_sort_asc boolean false
+//second sorting parameter      
+addProp index_secondary_sort number 3
+addProp name_secondary_sort string 'artists'
+addProp type_secondary_sort string 'string'
+// true = ascending (e.g., A → Z)          
+addProp is_secondary_sort_asc boolean false
+
+//addProp index_sort_by number 5
+//addProp sort_by string 'plays'
 addProp number_of_attributes_for_a_song number 6
 
+//index 0
 featProp global.IU.globalArray add 'Song Attributes'
 
+//index 1
 featProp global.IU.globalArray add 'SM_APT.png'
+//index 2
 featProp global.IU.globalArray add 'APT'
+//index 3
 featProp global.IU.globalArray add 'Rosé and Bruno Mars'
+//index 4
 featProp global.IU.globalArray add 2024
+//index 5
 featProp global.IU.globalArray add 15
+//index 6
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
@@ -108,17 +128,17 @@ featProp global.IU.globalArray add false
 # PROGRAM UPDATE
 
 ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Population', 'getActiveCharactersCount', 'song') }} [[
+  exprPush {{ global.getFeatProp('IU','globalArray').filterAndSortSongs(global.getProp('number_of_attributes_for_a_song').value,global.getProp('number_of_attributes_for_a_song').value,global.getProp('index_primary_sort').value,global.getProp('is_primary_sort_asc').value,global.getProp('index_secondary_sort').value,global.getProp('is_secondary_sort_asc').value) }}
   prop global.test_sorting setTo true
   every 1 [[
     featProp global.IU.globalArray print
+    
     featCall global.Timer stopRound
 
   ]]
 ]]
 
-ifExpr {{ global.getProp('countReady').value != global.callFeatMethod('Population', 'getActiveCharactersCount', 'song') }} [[
-  prop global.test_sorting setTo false
-]]`
+`
     },
     {
       "name": "Background",
@@ -174,11 +194,15 @@ addProp artists string ''
 addProp year number 0
 addProp plays number 0
 // a number that indicate the rank of the songs ( can change based on year, number of listening etc. If alphabetically please use the relevant number that is in reference to the first letter (1=a, z=26)
-addProp sort_by_value number 0
-addProp sort_by_value_string string ''
+addProp primary_sort_by_value_number number 0
+addProp primary_sort_by_value_string string ''
+addProp secondary_sort_by_value_number number 0
+addProp secondary_sort_by_value_string string ''
 // A variable to save the value to sort by of the other song temporarly
-addProp value_to_compare number -100
-addProp value_to_compare_string string ''
+addProp primary_value_to_compare_number number -100
+addProp primary_value_to_compare_string string ''
+addProp secondary_value_to_compare_number number -100
+addProp secondary_value_to_compare_string string ''
 // saves a temp value of the song name I am comparing with
 addProp compare_to_song_name string
 // check_order is set to true if the player is interacting with the ranking_chart
@@ -213,21 +237,37 @@ onEvent START [[
     ifExpr {{ (global.getFeatProp('IU', 'globalArray').setAndCheck(song.getProp('randomIndex').value,true)) }} [[
       prop randomIndex add 1
     ]]
-    ifExpr {{ global.getProp('sort_by').value === 'plays' }} [[
+    ifExpr {{ global.getProp('name_primary_sort').value === 'plays' }} [[
       propPush plays
-      propPop sort_by_value
+      propPop primary_sort_by_value_number
     ]]
-    ifExpr {{ global.getProp('sort_by').value === 'year' }} [[
+    ifExpr {{ global.getProp('name_primary_sort').value === 'year' }} [[
       propPush year
-      propPop sort_by_value
+      propPop primary_sort_by_value_number
     ]]
-    ifExpr {{ global.getProp('sort_by').value === 'name' }} [[
+    ifExpr {{ global.getProp('name_primary_sort').value === 'name' }} [[
       propPush song_name
-      propPop sort_by_value_string
+      propPop primary_sort_by_value_string
     ]]
-    ifExpr {{ global.getProp('sort_by').value === 'artists' }} [[
+    ifExpr {{ global.getProp('name_primary_sort').value === 'artists' }} [[
       propPush artists
-      propPop sort_by_value_string
+      propPop primary_sort_by_value_string
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'plays' }} [[
+      propPush plays
+      propPop secondary_sort_by_value_number
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'year' }} [[
+      propPush year
+      propPop secondary_sort_by_value_number
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'name' }} [[
+      propPush song_name
+      propPop secondary_sort_by_value_string
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'artists' }} [[
+      propPush artists
+      propPop secondary_sort_by_value_string
     ]]
     //<set the label below the image to a specific text, here it is song name but could be something else>
     propPush song.song_name
@@ -249,21 +289,19 @@ when song touches song [[
         // set the song and agent as having a partner
         prop song.has_partner setTo 1
         prop character.has_partner setTo 1
-        dbgOut {{ 'Comparing by '+global.getProp('sort_by').value }}
-        ifExpr {{ song.getProp('sort_by_value_string').value === '' }} [[
-          dbgOut 'comparing numeric'
-          // push the sort by value property of the agent and put it in a temporary property of the song and vise versa
-          propPush character.sort_by_value
-          dbgStack
-          propPop song.value_to_compare
-          propPush song.sort_by_value
-          dbgStack
-          propPop character.value_to_compare
+        dbgOut {{ 'Comparing by '+global.getProp('name_primary_sort').value }}
+
+        // JOYCE
+        ifExpr {{global.getProp('type_primary_sort').value === 'number'}} [[
+          propPush character.primary_sort_by_value_number
+          propPop song.primary_value_to_compare_number
+          propPush song.primary_sort_by_value_number
+          propPop character.primary_value_to_compare_number
           // making sure value to compare updates correctly
-          ifExpr {{ song.getProp('value_to_compare').value != -100 && character.getProp('value_to_compare').value != -100 }} [[
-            // compare the sort by value and temporary (compared to) sort by value properties of the song. If song is larger, change the song costume to larger and the agent costume to smaller
-            ifExpr {{ song.getProp('sort_by_value').value > song.getProp('value_to_compare').value }} [[
-              dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' > ' + song.getProp('value_to_compare').value }}
+          ifExpr {{ song.getProp('primary_value_to_compare_number').value != -100 && character.getProp('primary_value_to_compare_number').value != -100 }} [[
+            // > If song is larger, change the song costume to larger and the agent costume to smaller
+            ifExpr {{ song.getProp('primary_sort_by_value_number').value > song.getProp('primary_value_to_compare_number').value }} [[
+              dbgOut {{ 'Numeric comparison => '+ song.getProp('primary_sort_by_value_number').value +' > ' + song.getProp('primary_value_to_compare_number').value }}
               propPush song.up_scale
               featPropPop song.Costume.scale
               propPush song.down_scale
@@ -273,8 +311,9 @@ when song touches song [[
               // Count and log the number of comparisons between songs
               prop global.count_num_comparisons add 1
             ]]
-            ifExpr {{ song.getProp('sort_by_value').value < song.getProp('value_to_compare').value }} [[
-              dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' < ' + song.getProp('value_to_compare').value }}
+            // < If song is smaller, change the song costume to smaller and the agent costume to larger
+            ifExpr {{ song.getProp('primary_sort_by_value_number').value < song.getProp('primary_value_to_compare_number').value }} [[
+              dbgOut {{ 'Numeric comparison => '+ song.getProp('primary_sort_by_value_number').value +' < ' + song.getProp('primary_value_to_compare_number').value }}
               propPush song.down_scale
               featPropPop song.Costume.scale
               propPush song.up_scale
@@ -284,56 +323,204 @@ when song touches song [[
               // Count and log the number of comparisons between songs
               prop global.count_num_comparisons add 1
             ]]
-            ifExpr {{ song.getProp('sort_by_value').value == song.getProp('value_to_compare').value }} [[
-              dbgOut {{ 'String comparison => '+ song.getProp('sort_by_value').value +' = ' + song.getProp('value_to_compare').value }}
-              propPush song.normal_scale
-              featPropPop song.Costume.scale
-              propPush song.normal_scale
-              featPropPop character.Costume.scale
-              featProp song.Costume.glow setTo 1
-              featProp character.Costume.glow setTo 1
-              // Count and log the number of comparisons between songs
-              prop global.count_num_comparisons add 1
+            // = If song is equal, check secondary sort by value
+            ifExpr {{ song.getProp('primary_sort_by_value_number').value == song.getProp('primary_value_to_compare_number').value }} [[
+              dbgOut {{ 'Numeric comparison => '+ song.getProp('primary_sort_by_value_number').value +' = ' + song.getProp('primary_value_to_compare_number').value }}
+              // If secondary type is number
+              ifExpr {{global.getProp('type_secondary_sort').value === 'number'}} [[
+                propPush character.secondary_sort_by_value_number
+                propPop song.secondary_value_to_compare_number
+                propPush song.secondary_sort_by_value_number
+                propPop character.secondary_value_to_compare_number
+                //greater than        
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value > song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' > ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.up_scale
+                  featPropPop song.Costume.scale
+                  propPush song.down_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //less than
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value < song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' < ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.down_scale
+                  featPropPop song.Costume.scale
+                  propPush song.up_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //equal to
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value == song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' = ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.normal_scale
+                  featPropPop song.Costume.scale
+                  propPush song.normal_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]  
+                // Count and log the number of comparisons between songs
+                prop global.count_num_comparisons add 1
+              ]]  
+              ifExpr {{global.getProp('type_secondary_sort').value === 'string'}} [[
+                propPush character.secondary_sort_by_value_string
+                propPop song.secondary_value_to_compare_string
+                propPush song.secondary_sort_by_value_string
+                propPop character.secondary_value_to_compare_string
+                //greater than        
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value > song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' > ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.up_scale
+                  featPropPop song.Costume.scale
+                  propPush song.down_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //less than
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value < song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' < ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.down_scale
+                  featPropPop song.Costume.scale
+                  propPush song.up_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //equal to
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value == song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' = ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.normal_scale
+                  featPropPop song.Costume.scale
+                  propPush song.normal_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]  
+                // Count and log the number of comparisons between songs
+                prop global.count_num_comparisons add 1
+              ]]
             ]]
-          ]]
-
+          ]]    
         ]]
-
-        ifExpr {{ song.getProp('sort_by_value_string').value != '' }} [[
-          propPush character.sort_by_value_string
-          propPop song.value_to_compare_string
-          propPush song.sort_by_value_string
-          propPop character.value_to_compare_string
-          ifExpr {{ song.getProp('value_to_compare_string').value != 'none' && character.getProp('value_to_compare_string').value != 'none' }} [[
-            ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) > 0 }} [[
+        ifExpr {{global.getProp('type_primary_sort').value === 'string'}} [[
+          propPush character.primary_sort_by_value_string
+          propPop song.primary_value_to_compare_string
+          propPush song.primary_sort_by_value_string
+          propPop character.primary_value_to_compare_string
+          // making sure value to compare updates correctly
+          ifExpr {{ song.getProp('primary_value_to_compare_string').value != '' && character.getProp('primary_value_to_compare_string').value != '' }} [[
+            // > If song is larger, change the song costume to larger and the agent costume to smaller
+            ifExpr {{ song.getProp('primary_sort_by_value_string').value > song.getProp('primary_value_to_compare_string').value }} [[
+              dbgOut {{ 'String comparison => '+ song.getProp('primary_sort_by_value_string').value +' > ' + song.getProp('primary_value_to_compare_string').value }}
               propPush song.up_scale
               featPropPop song.Costume.scale
               propPush song.down_scale
               featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
+              // Count and log the number of comparisons between songs
               prop global.count_num_comparisons add 1
             ]]
-            ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) < 0 }} [[
+            // < If song is smaller, change the song costume to smaller and the agent costume to larger
+            ifExpr {{ song.getProp('primary_sort_by_value_string').value < song.getProp('primary_value_to_compare_string').value }} [[
+              dbgOut {{ 'String comparison => '+ song.getProp('primary_sort_by_value_string').value +' < ' + song.getProp('primary_value_to_compare_string').value }}
               propPush song.down_scale
               featPropPop song.Costume.scale
               propPush song.up_scale
               featPropPop character.Costume.scale
               featProp song.Costume.glow setTo 1
               featProp character.Costume.glow setTo 1
+              // Count and log the number of comparisons between songs
               prop global.count_num_comparisons add 1
             ]]
-            ifExpr {{ song.getProp('sort_by_value_string').value.localeCompare(song.getProp('value_to_compare_string').value) == 0 }} [[
-              propPush song.normal_scale
-              featPropPop song.Costume.scale
-              propPush song.normal_scale
-              featPropPop character.Costume.scale
-              featProp song.Costume.glow setTo 1
-              featProp character.Costume.glow setTo 1
-              prop global.count_num_comparisons add 1
+            // = If song is equal, check secondary sort by value
+            ifExpr {{ song.getProp('primary_sort_by_value_string').value == song.getProp('primary_value_to_compare_string').value }} [[
+              dbgOut {{ 'String comparison => '+ song.getProp('primary_sort_by_value_string').value +' = ' + song.getProp('primary_value_to_compare_string').value }}
+              // If secondary type is number
+              ifExpr {{global.getProp('type_secondary_sort').value === 'number'}} [[
+                propPush character.secondary_sort_by_value_number
+                propPop song.secondary_value_to_compare_number
+                propPush song.secondary_sort_by_value_number
+                propPop character.secondary_value_to_compare_number
+                //greater than        
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value > song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' > ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.up_scale
+                  featPropPop song.Costume.scale
+                  propPush song.down_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //less than
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value < song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' < ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.down_scale
+                  featPropPop song.Costume.scale
+                  propPush song.up_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //equal to
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value == song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' = ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.normal_scale
+                  featPropPop song.Costume.scale
+                  propPush song.normal_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]  
+                // Count and log the number of comparisons between songs
+                prop global.count_num_comparisons add 1
+              ]]  
+              ifExpr {{global.getProp('type_secondary_sort').value === 'string'}} [[
+                propPush character.secondary_sort_by_value_string
+                propPop song.secondary_value_to_compare_string
+                propPush song.secondary_sort_by_value_string
+                propPop character.secondary_value_to_compare_string
+                //greater than        
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value > song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' > ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.up_scale
+                  featPropPop song.Costume.scale
+                  propPush song.down_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //less than
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value < song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' < ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.down_scale
+                  featPropPop song.Costume.scale
+                  propPush song.up_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //equal to
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value == song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' = ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.normal_scale
+                  featPropPop song.Costume.scale
+                  propPush song.normal_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]  
+                // Count and log the number of comparisons between songs
+                prop global.count_num_comparisons add 1
+              ]]
             ]]
-          ]]
+          ]]    
         ]]
+        
       ]]
     ]]
   ]]
@@ -344,10 +531,18 @@ when song lasttouches song [[
   // resetting values for both songs
   prop song.has_partner setTo 0
   prop character.has_partner setTo 0
-  featProp song.Costume.scale setTo 0.35
-  featProp character.Costume.scale setTo 0.35
-  prop song.value_to_compare setTo 0
-  prop character.value_to_compare setTo -100
+  propPush song.normal_scale
+  featPropPop song.Costume.scale
+  propPush song.normal_scale
+  featPropPop character.Costume.scale
+  prop song.primary_value_to_compare_number setTo -100
+  prop song.primary_value_to_compare_string setTo ''
+  prop song.secondary_value_to_compare_number setTo -100
+  prop song.secondary_value_to_compare_string setTo ''
+  prop character.primary_value_to_compare_number setTo -100
+  prop character.primary_value_to_compare_string setTo ''
+  prop character.secondary_value_to_compare_number setTo -100
+  prop character.secondary_value_to_compare_string setTo ''
   prop song.compare_to_song_name setTo
   prop character.compare_to_song_name setTo
 ]]
@@ -378,17 +573,6 @@ when song lasttouches rankChart [[
 every 1 runAtStart [[
   // test sorting when global variable is true (which means all songs are touching the rank chart)
   ifProp global.test_sorting equal true [[
-    // dbgOut {{ (song.getProp('y').value) }}
-    // dbgOut {{ (global.getProp('chart_center_y').value) }}
-    // dbgOut {{ (global.getProp('chart_slot_height').value) }}
-    // dbgOut {{ (global.callFeatMethod('Population','getActiveCharactersCount','song')) }}
-    // dbgOut {{ (global.getProp('chart_slot_height').value) }}
-
-    // exprPush{{ (((song.getProp('y').value) - ((global.getProp('chart_center_y').value) - ((global.getProp('chart_slot_height').value) * (global.callFeatMethod('Population','getActiveCharactersCount','song')))/ 2)) / (global.getProp('chart_slot_height').value)) | 0 }}
-
-    // propPop song.position_in_rank
-    // dbgOut {{ 'setou posicao para '+song.getProp('position_in_rank').value }}
-
     ifExpr {{ ((song.getProp('y').value + 57) > -293) && ((song.getProp('y').value + 57) < -171) }} [[
       prop song.position_in_rank setTo 1
     ]]
@@ -408,26 +592,44 @@ every 1 runAtStart [[
       prop song.position_in_rank setTo 6
     ]]
 
-    dbgOut {{ 'SETOU posicao para '+song.getProp('position_in_rank').value }}
+// JOYCE
+// Primary sort = number
+ifExpr {{ global.getProp('type_primary_sort').value === 'number' }} [[
+  exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value * 2 - 2) === song.getProp('primary_sort_by_value_number').value }}
+  propPop song.correct_position
+]]
 
-    // tests if globalArray has more than one song (remember that each element in the array corresponds to one attribute of one song)
-    ifExpr {{ global.getFeatProp('IU', 'globalArray').size() > global.getProp('number_of_attributes_for_a_song').value }} [[
-      exprPush {{ (global.getFeatProp('IU', 'globalArray').filterByPosition(5, global.getProp('number_of_attributes_for_a_song').value).sortNumericDescending().get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
-      propPop song.correct_position
-    ]]
-    // tests if elements in the globalArray are <= 6 which would indicate it only has one song (remember that each element in the array corresponds to one attribute of one song)
-    ifExpr {{ global.getFeatProp('IU', 'globalArray').size() <= global.getProp('number_of_attributes_for_a_song').value }} [[
-      exprPush {{ (global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value - 1)) === (song.getProp('sort_by_value').value) }}
-      propPop song.correct_position
-    ]]
-    ifExpr {{ song.getProp('correct_position').value != true }} [[
-      dbgOut {{ song.getProp('artists').value + ': INCORRECT ' }}
-      prop song.alpha setTo 0.3
-    ]]
-    ifExpr {{ song.getProp('correct_position').value === true }} [[
-      dbgOut {{ song.getProp('artists').value + ': CORRECT ' }}
-      featProp song.Costume.glow setTo 5
-    ]]
+// Primary sort = string
+ifExpr {{ global.getProp('type_primary_sort').value === 'string' }} [[
+  exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value * 2 - 2) === song.getProp('primary_sort_by_value_string').value }}
+  propPop song.correct_position
+]]
+
+// Only check secondary if primary matched
+ifExpr {{ song.getProp('correct_position').value === true }} [[
+  // Secondary sort = number
+  ifExpr {{ global.getProp('type_secondary_sort').value === 'number' }} [[
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value * 2 - 1) === song.getProp('secondary_sort_by_value_number').value }}
+    propPop song.correct_position
+  ]]
+
+  // Secondary sort = string
+  ifExpr {{ global.getProp('type_secondary_sort').value === 'string' }} [[
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value * 2 - 1) === song.getProp('secondary_sort_by_value_string').value }}
+    propPop song.correct_position
+  ]]
+]]
+
+// Final result display
+ifExpr {{ song.getProp('correct_position').value != true }} [[
+  dbgOut {{ song.getProp('artists').value + ': INCORRECT ' }}
+  prop song.alpha setTo 0.3
+]]
+ifExpr {{ song.getProp('correct_position').value === true }} [[
+  dbgOut {{ song.getProp('artists').value + ': CORRECT ' }}
+  featProp song.Costume.glow setTo 5
+]]
+
   ]]
 
 
