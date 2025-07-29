@@ -53,6 +53,7 @@ addProp test_sorting boolean false
 addProp count_num_comparisons number 0
 addProp chart_slot_height number 130
 addProp chart_center_y number
+
 // <editable>
 // first sorting parameter block
 addProp index_primary_sort number 4
@@ -64,6 +65,7 @@ addProp index_secondary_sort number 3
 addProp name_secondary_sort string 'artists'
 addProp type_secondary_sort string 'string'
 addProp is_secondary_sort_asc boolean false
+
 // this prop needs the reflect the number of attributes for each song, including image and boolean
 addProp number_of_attributes_for_a_song number 6
 
@@ -128,7 +130,7 @@ ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Populatio
 
   ]]
 ]]
-</DO_NOT_CHANGE>
+//</DO_NOT_CHANGE>
 `
     },
     {
@@ -176,20 +178,17 @@ addFeature Touches
 featCall song.Touches monitor 'song' b2b
 featCall song.Touches monitor 'rankChart' b2b
 
-
-// Intended to capture the song name. Each agent is going to have a different song_name and accordingly a different sort_by value and a different costume
-
 // <comparison attributes>
 addProp song_name string ''
 addProp artists string ''
 addProp year number 0
 addProp plays number 0
-// a number that indicate the rank of the songs ( can change based on year, number of listening etc. If alphabetically please use the relevant number that is in reference to the first letter (1=a, z=26)
+// since sort now has two layers (defined in global) a song has these attributes to store them for comparison when touching other songs
 addProp primary_sort_by_value_number number 0
 addProp primary_sort_by_value_string string ''
 addProp secondary_sort_by_value_number number 0
 addProp secondary_sort_by_value_string string ''
-// A variable to save the value to sort by of the other song temporarly
+// since comparison to another song now has two layers, these attributes are used to store the other song's values temporarily
 addProp primary_value_to_compare_number number -100
 addProp primary_value_to_compare_string string ''
 addProp secondary_value_to_compare_number number -100
@@ -200,34 +199,53 @@ addProp compare_to_song_name string
 addProp check_order boolean false
 // Checking that we are comparing with maximum 1 agent at a time
 addProp has_partner number 0
+// This prop stores which slot in the rank chart the song is placed in, when touching it
 addProp position_in_rank number 0
+// This boolean is used to store if the song is in the correct slot of the rank chart, based on the sorting parameters previously chosen (in global)
 addProp correct_position boolean false
+// This index is used during the start of the game, for a song to populate its attributes by randomly picking one song from the globalArray  
 addProp randomIndex number 0
 
 # PROGRAM UPDATE
 
 onEvent START [[
   ifExpr {{ song.getProp('song_name').value === '' }} [[
-    exprPush {{ (global.getFeatProp('IU', 'globalArray').getRandomIndex(1,6)) }}
+    
+    // This calls a special function that will randomly select an index for the first attribute of a song in the global globalArray
+    // <DO_NOT_CHANGE>
+    exprPush {{ (global.getFeatProp('IU', 'globalArray').getRandomIndex(1,global.getProp('number_of_attributes_for_a_song').value)) }}
     propPop song.randomIndex
+    //</DO_NOT_CHANGE>
+
+    // <The order of the attributes being set in this song matters and must be the same order that the attributes were set in the globalArray. If a new attribute is created in the global array and in the song blueprint, it needs to be added here.>
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     featPropPop song.Costume.costumeName
     prop randomIndex add 1
+    
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.song_name
     prop randomIndex add 1
+    
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.artists
     prop randomIndex add 1
+    
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.year
     prop randomIndex add 1
+    
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.plays
     prop randomIndex add 1
+
+    //This sets the boolean in globalArray to true to indicate that song is being used in the current game
+    // <DO_NOT_CHANGE>
     ifExpr {{ (global.getFeatProp('IU', 'globalArray').setAndCheck(song.getProp('randomIndex').value,true)) }} [[
       prop randomIndex add 1
     ]]
+    // </DO_NOT_CHANGE>
+
+    //<This checks which variables are being used for sorting (previously set in global) and put it in the song attributes used when a song touches another song. If a new attribute is created in the global array (and in the song blueprint) as one of the sorting properties, it needs to be added here to be used properly during comparison with another song.>
     ifExpr {{ global.getProp('name_primary_sort').value === 'plays' }} [[
       propPush plays
       propPop primary_sort_by_value_number
@@ -244,6 +262,8 @@ onEvent START [[
       propPush artists
       propPop primary_sort_by_value_string
     ]]
+    
+
     ifExpr {{ global.getProp('name_secondary_sort').value === 'plays' }} [[
       propPush plays
       propPop secondary_sort_by_value_number
@@ -260,12 +280,14 @@ onEvent START [[
       propPush artists
       propPop secondary_sort_by_value_string
     ]]
+
     //<set the label below the image to a specific text, here it is song name but could be something else>
     propPush song.song_name
     featPropPop song.Graphing.text
   ]]
 ]]
 
+//<DO_NOT_CHANGE>
 when song touches song [[
   ifProp song.has_partner equal 0 [[
     // push the song_name property of the other agent and put it into a temporary property on the song
@@ -282,7 +304,6 @@ when song touches song [[
         prop character.has_partner setTo 1
         dbgOut {{ 'Comparing by '+global.getProp('name_primary_sort').value }}
 
-        // JOYCE
         ifExpr {{global.getProp('type_primary_sort').value === 'number'}} [[
           propPush character.primary_sort_by_value_number
           propPop song.primary_value_to_compare_number
@@ -583,7 +604,6 @@ every 1 runAtStart [[
       prop song.position_in_rank setTo 6
     ]]
 
-// JOYCE
 // Primary sort = number
 ifExpr {{ global.getProp('type_primary_sort').value === 'number' }} [[
   exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value * 2 - 2) === song.getProp('primary_sort_by_value_number').value }}
@@ -622,7 +642,7 @@ ifExpr {{ song.getProp('correct_position').value === true }} [[
 ]]
 
   ]]
-
+//</DO_NOT_CHANGE>
 
 ]]`
     },
