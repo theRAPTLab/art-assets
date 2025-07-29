@@ -54,37 +54,28 @@ addProp count_num_comparisons number 0
 addProp chart_slot_height number 130
 addProp chart_center_y number
 // <editable>
-// first sorting parameter 
+// first sorting parameter block
 addProp index_primary_sort number 4
 addProp name_primary_sort string 'year'
-addProp type_primary_sort string 'number'
-// false = descending (e.g., newest first)            
+addProp type_primary_sort string 'number'           
 addProp is_primary_sort_asc boolean false
-//second sorting parameter      
+// second sorting parameter block     
 addProp index_secondary_sort number 3
 addProp name_secondary_sort string 'artists'
 addProp type_secondary_sort string 'string'
-// true = ascending (e.g., A → Z)          
 addProp is_secondary_sort_asc boolean false
-
-//addProp index_sort_by number 5
-//addProp sort_by string 'plays'
+// this prop needs the reflect the number of attributes for each song, including image and boolean
 addProp number_of_attributes_for_a_song number 6
 
 //index 0
 featProp global.IU.globalArray add 'Song Attributes'
 
-//index 1
+//songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
 featProp global.IU.globalArray add 'SM_APT.png'
-//index 2
 featProp global.IU.globalArray add 'APT'
-//index 3
 featProp global.IU.globalArray add 'Rosé and Bruno Mars'
-//index 4
 featProp global.IU.globalArray add 2024
-//index 5
 featProp global.IU.globalArray add 15
-//index 6
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
@@ -127,17 +118,17 @@ featProp global.IU.globalArray add false
 
 # PROGRAM UPDATE
 
+// <DO_NOT_CHANGE>
 ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Population', 'getActiveCharactersCount', 'song') }} [[
   exprPush {{ global.getFeatProp('IU','globalArray').filterAndSortSongs(global.getProp('number_of_attributes_for_a_song').value,global.getProp('number_of_attributes_for_a_song').value,global.getProp('index_primary_sort').value,global.getProp('is_primary_sort_asc').value,global.getProp('index_secondary_sort').value,global.getProp('is_secondary_sort_asc').value) }}
   prop global.test_sorting setTo true
   every 1 [[
     featProp global.IU.globalArray print
-    
     featCall global.Timer stopRound
 
   ]]
 ]]
-
+</DO_NOT_CHANGE>
 `
     },
     {
