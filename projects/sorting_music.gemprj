@@ -246,6 +246,7 @@ onEvent START [[
     // </DO_NOT_CHANGE>
 
     //<This checks which variables are being used for sorting (previously set in global) and put it in the song attributes used when a song touches another song. If a new attribute is created in the global array (and in the song blueprint) as one of the sorting properties, it needs to be added here to be used properly during comparison with another song.>
+    //<primary_att>
     ifExpr {{ global.getProp('name_primary_sort').value === 'plays' }} [[
       propPush plays
       propPop primary_sort_by_value_number
@@ -254,7 +255,7 @@ onEvent START [[
       propPush year
       propPop primary_sort_by_value_number
     ]]
-    ifExpr {{ global.getProp('name_primary_sort').value === 'name' }} [[
+    ifExpr {{ global.getProp('name_primary_sort').value === 'song_name' }} [[
       propPush song_name
       propPop primary_sort_by_value_string
     ]]
@@ -263,7 +264,7 @@ onEvent START [[
       propPop primary_sort_by_value_string
     ]]
     
-
+    //<secondary_att>
     ifExpr {{ global.getProp('name_secondary_sort').value === 'plays' }} [[
       propPush plays
       propPop secondary_sort_by_value_number
@@ -272,7 +273,7 @@ onEvent START [[
       propPush year
       propPop secondary_sort_by_value_number
     ]]
-    ifExpr {{ global.getProp('name_secondary_sort').value === 'name' }} [[
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'song_name' }} [[
       propPush song_name
       propPop secondary_sort_by_value_string
     ]]
