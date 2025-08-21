@@ -744,12 +744,13 @@ addProp row number 1
 addProp fieldType string ''
 
 # PROGRAM UPDATE
-ifExpr {{ global.getProp('count_num_comparisons').value != graph_comparisons.getProp('total_comparisons_count').value }} [[
-  ifProp graph_comparisons.row equal 1 [[
-    propPush global.count_num_comparisons
-    propPop graph_comparisons.total_comparisons_count
-  ]]
-]]`
+onEvent TICK [[
+ // ifProp graph_comparisons.row equal 1 [[
+   propPush global.count_num_comparisons
+   propPop graph_comparisons.total_comparisons_count
+]]
+//ifExpr {{ global.getProp('count_num_comparisons').value != graph_comparisons.getProp('total_comparisons_count').value }} [[
+`
     }
   ],
   "instances": [
@@ -772,7 +773,7 @@ prop rankChart.y setTo -0.17`
       "label": "graph_comparisons6",
       "bpid": "graph_comparisons",
       "initScript": `prop graph_comparisons.x setTo -488.27
-prop graph_comparisons.y setTo -212.80`
+prop graph_comparisons.y setTo -212.8`
     },
     {
       "id": "7",
