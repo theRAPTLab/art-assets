@@ -703,7 +703,7 @@ featProp Timer.Costume.costumeName setTo 'GEN_onexone.json'
 featProp Timer.Costume.scale setTo 1
 
 addProp time number 0
-featProp Timer.Graphing.fontSize setTo 28
+featProp Timer.Graphing.fontSize setTo 44
 exprPush {{ 'Time: ' + Timer.getProp('time').value }}
 featPropPop Timer.Graphing.text
 
@@ -734,7 +734,7 @@ featProp graph_comparisons.Costume.costumeName setTo 'GEN_onexone.json'
 featProp graph_comparisons.Graphing.isLargeGraphic setTo true
 featProp graph_comparisons.Graphing.graphProp setTo 'total_comparisons_count'
 featProp graph_comparisons.Graphing.graphMinY setTo 0
-featProp graph_comparisons.Graphing.graphMaxY setTo 50
+featProp graph_comparisons.Graphing.graphMaxY setTo 200
 featProp graph_comparisons.Graphing.text setTo 'Number of Comparisons'
 featProp graph_comparisons.Graphing.meterColor setTo 65280
 featProp graph_comparisons.Graphing.wordWrapWidth setTo 150
@@ -745,11 +745,41 @@ addProp fieldType string ''
 
 # PROGRAM UPDATE
 onEvent TICK [[
- // ifProp graph_comparisons.row equal 1 [[
-   propPush global.count_num_comparisons
-   propPop graph_comparisons.total_comparisons_count
+  // ifProp graph_comparisons.row equal 1 [[
+  propPush global.count_num_comparisons
+  propPop graph_comparisons.total_comparisons_count
 ]]
-//ifExpr {{ global.getProp('count_num_comparisons').value != graph_comparisons.getProp('total_comparisons_count').value }} [[
+// ifExpr {{ global.getProp('count_num_comparisons').value != graph_comparisons.getProp('total_comparisons_count').value }} [[`
+    },
+    {
+      "name": "Value_comparisons",
+      "scriptText": `# BLUEPRINT Value_comparisons
+# TAG isCharControllable false
+# TAG isPozyxControllable false
+# TAG isPTrackControllable false
+
+# PROGRAM INIT
+addFeature Graphing
+addFeature Costume
+addFeature Population
+
+//<DO_NOT_CHANGE>
+featProp Value_comparisons.Costume.costumeName setTo 'GEN_onexone.json'
+featProp Value_comparisons.Costume.scale setTo 1
+
+// addProp comparison number 0
+featProp Value_comparisons.Graphing.fontSize setTo 44
+propPush global.count_num_comparisons
+featPropPop Value_comparisons.Graphing.text
+
+# PROGRAM UPDATE
+every 1 runAtStart [[
+  ifProp global.test_sorting equal false [[
+    propPush global.count_num_comparisons
+    featPropPop Value_comparisons.Graphing.text
+  ]]
+]]
+//</DO_NOT_CHANGE>
 `
     }
   ],
@@ -758,7 +788,7 @@ onEvent TICK [[
       "id": "0",
       "label": "Background0",
       "bpid": "Background",
-      "initScript": `prop Background.x setTo 4.31
+      "initScript": `prop Background.x setTo 4.53
 prop Background.y setTo 4.15`
     },
     {
@@ -772,15 +802,22 @@ prop rankChart.y setTo -0.17`
       "id": "6",
       "label": "graph_comparisons6",
       "bpid": "graph_comparisons",
-      "initScript": `prop graph_comparisons.x setTo -488.27
-prop graph_comparisons.y setTo -212.8`
+      "initScript": `prop graph_comparisons.x setTo -468.4
+prop graph_comparisons.y setTo -144.46`
     },
     {
       "id": "7",
       "label": "Timer7",
       "bpid": "Timer",
-      "initScript": `prop Timer.x setTo -492.15
-prop Timer.y setTo -372.22`
+      "initScript": `prop Timer.x setTo -474.71
+prop Timer.y setTo -372.34`
+    },
+    {
+      "id": "8",
+      "label": "Value_comparisons8",
+      "bpid": "Value_comparisons",
+      "initScript": `prop Value_comparisons.x setTo -462.9
+prop Value_comparisons.y setTo -90.09`
     }
   ]
 }
