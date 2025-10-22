@@ -290,7 +290,7 @@ onEvent START [[
 
 //<DO_NOT_CHANGE>
 when song touches song [[
-  ifProp song.has_partner equal 0 [[
+  ifExpr {{ song.getProp('has_partner').value === 0 && character.getProp('has_partner').value === 0 }} [[
     // push the song_name property of the other agent and put it into a temporary property on the song
     propPush character.song_name
     propPop song.compare_to_song_name
@@ -562,6 +562,7 @@ when song lasttouches song [[
 
 // when a song actively interacts with the rank chart, set the player status as ready to make a prediction and add one to the global property to count ready players
 when song touches rankChart [[
+  prop song.has_partner setTo 2
   ifProp song.check_order equal false [[
     featProp song.Costume.glow setTo 1
     prop song.check_order setTo true
@@ -571,6 +572,7 @@ when song touches rankChart [[
 
 // when song leave the rank chart, set the player status as not ready to make a prediction and remove their count from the global property to count ready players
 when song lasttouches rankChart [[
+  prop song.has_partner setTo 0
   ifProp global.countReady greaterThan 0 [[
     prop global.countReady sub 1
   ]]
@@ -795,7 +797,7 @@ prop Background.y setTo 4.15`
       "id": "1",
       "label": "rankChart1",
       "bpid": "rankChart",
-      "initScript": `prop rankChart.x setTo 315.16
+      "initScript": `prop rankChart.x setTo 300.00
 prop rankChart.y setTo -0.17`
     },
     {
