@@ -74,10 +74,15 @@ featProp global.IU.globalArray add 'Song Attributes'
 
 //songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
 
+featProp global.IU.globalArray add 'SM_APT.png'
+featProp global.IU.globalArray add 'APT'
+featProp global.IU.globalArray add 'Rosé and Bruno Mars'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 15
+featProp global.IU.globalArray add false
 
-
-
-
+// ADD SONGS HERE ^^^
+// </editable>
 
 featProp global.IU.globalArray add 'SM_sg_Bildschirmfoto_2025-06-30_um_10.17.22 (1).png'
 featProp global.IU.globalArray add 'Soda Pop'
@@ -107,8 +112,34 @@ featProp global.IU.globalArray add 2025
 featProp global.IU.globalArray add 14000000
 featProp global.IU.globalArray add false
 
-// ADD SONGS HERE ^^^
-// </editable>
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Happy Birthday'
+featProp global.IU.globalArray add 'CoComelon'
+featProp global.IU.globalArray add 2018
+featProp global.IU.globalArray add 1000000
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Las Mañanitas'
+featProp global.IU.globalArray add 'Vicente Fernandes'
+featProp global.IU.globalArray add 1981
+featProp global.IU.globalArray add 3000000
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Let It Go'
+featProp global.IU.globalArray add 'Idina Menzel'
+featProp global.IU.globalArray add 2014
+featProp global.IU.globalArray add 104000000
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Bluey Theme'
+featProp global.IU.globalArray add 'Bluey Official Channel'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 85000000
+featProp global.IU.globalArray add false
+
 
 # PROGRAM UPDATE
 
