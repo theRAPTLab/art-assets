@@ -73,46 +73,38 @@ addProp number_of_attributes_for_a_song number 6
 featProp global.IU.globalArray add 'Song Attributes'
 
 //songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
-featProp global.IU.globalArray add 'SM_APT.png'
-featProp global.IU.globalArray add 'APT'
-featProp global.IU.globalArray add 'Rosé and Bruno Mars'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 15
-featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
-featProp global.IU.globalArray add 'Die With a Smile'
-featProp global.IU.globalArray add 'Lady Gaga and Bruno Mars'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 22
-featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_thats_so_true.png'
-featProp global.IU.globalArray add 'Thats So True'
-featProp global.IU.globalArray add 'Gracie Abrams'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 37
-featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_birds_of_a_feather.png'
-featProp global.IU.globalArray add 'Birds of a Feather'
-featProp global.IU.globalArray add 'Billie Eilish'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 150
-featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_DtMF.png'
-featProp global.IU.globalArray add 'DtMF'
-featProp global.IU.globalArray add 'Bad Bunny'
+
+
+featProp global.IU.globalArray add 'SM_sg_Bildschirmfoto_2025-06-30_um_10.17.22 (1).png'
+featProp global.IU.globalArray add 'Soda Pop'
+featProp global.IU.globalArray add 'KPOP demon hunters'
 featProp global.IU.globalArray add 2025
-featProp global.IU.globalArray add 45
+featProp global.IU.globalArray add 482055531
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_luther.png'
-featProp global.IU.globalArray add 'Luther'
-featProp global.IU.globalArray add 'Kendrick Lamar and SZA'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 'SM_sg_Huntr-x_-_Golden.png'
+featProp global.IU.globalArray add 'Golden'
+featProp global.IU.globalArray add 'HUNTR/X'
+featProp global.IU.globalArray add 2025
+featProp global.IU.globalArray add 72000000
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_I_Am_Your_Gummy_Bear.png'
+featProp global.IU.globalArray add 'I Am Your Gummy Bear'
+featProp global.IU.globalArray add 'Gummibär'
+featProp global.IU.globalArray add 2007
+featProp global.IU.globalArray add 3700000000
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Labubu Phonk'
+featProp global.IU.globalArray add 'SXLLX'
+featProp global.IU.globalArray add 2025
+featProp global.IU.globalArray add 14000000
 featProp global.IU.globalArray add false
 
 // ADD SONGS HERE ^^^
