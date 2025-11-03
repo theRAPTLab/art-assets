@@ -73,46 +73,73 @@ addProp number_of_attributes_for_a_song number 6
 featProp global.IU.globalArray add 'Song Attributes'
 
 //songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
-featProp global.IU.globalArray add 'SM_APT.png'
-featProp global.IU.globalArray add 'APT'
-featProp global.IU.globalArray add 'Rosé and Bruno Mars'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 15
+
+
+
+
+
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Good Days'
+featProp global.IU.globalArray add 'SZA'
+featProp global.IU.globalArray add 2022
+featProp global.IU.globalArray add 1300000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
-featProp global.IU.globalArray add 'Die With a Smile'
-featProp global.IU.globalArray add 'Lady Gaga and Bruno Mars'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 22
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'All Mine'
+featProp global.IU.globalArray add 'Brent Faiyaz'
+featProp global.IU.globalArray add 2022
+featProp global.IU.globalArray add 469000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_thats_so_true.png'
-featProp global.IU.globalArray add 'Thats So True'
-featProp global.IU.globalArray add 'Gracie Abrams'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 37
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Somebody who loves me'
+featProp global.IU.globalArray add 'PARTYNEXTDOOR and Drake'
+featProp global.IU.globalArray add 2026
+featProp global.IU.globalArray add 124000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_birds_of_a_feather.png'
-featProp global.IU.globalArray add 'Birds of a Feather'
-featProp global.IU.globalArray add 'Billie Eilish'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 150
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Come and See Me'
+featProp global.IU.globalArray add 'PARTYNEXTDOOR'
+featProp global.IU.globalArray add 2016
+featProp global.IU.globalArray add 711000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_DtMF.png'
-featProp global.IU.globalArray add 'DtMF'
-featProp global.IU.globalArray add 'Bad Bunny'
-featProp global.IU.globalArray add 2025
-featProp global.IU.globalArray add 45
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Ivy'
+featProp global.IU.globalArray add 'Frank Ocean'
+featProp global.IU.globalArray add 2016
+featProp global.IU.globalArray add 1180000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_luther.png'
-featProp global.IU.globalArray add 'Luther'
-featProp global.IU.globalArray add 'Kendrick Lamar and SZA'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Love'
+featProp global.IU.globalArray add 'Keyshia Cole'
+featProp global.IU.globalArray add 2005
+featProp global.IU.globalArray add 839000000
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Headlines'
+featProp global.IU.globalArray add 'Drake'
+featProp global.IU.globalArray add 2011
+featProp global.IU.globalArray add 948000000
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'The Box'
+featProp global.IU.globalArray add 'Roddy Ricch'
+featProp global.IU.globalArray add 2019
+featProp global.IU.globalArray add 2000000000
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Wake Up in the Sky'
+featProp global.IU.globalArray add 'Bruno Mars and Gucci Mane'
+featProp global.IU.globalArray add 2018
+featProp global.IU.globalArray add 1200000000
 featProp global.IU.globalArray add false
 
 // ADD SONGS HERE ^^^
