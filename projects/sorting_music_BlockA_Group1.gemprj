@@ -58,62 +58,26 @@ addProp chart_center_y number
 // first sorting parameter block
 addProp index_primary_sort number 4
 addProp name_primary_sort string 'year'
-addProp type_primary_sort string 'number'           
+addProp type_primary_sort string 'number'
 addProp is_primary_sort_asc boolean false
-// second sorting parameter block     
+// second sorting parameter block
 addProp index_secondary_sort number 3
 addProp name_secondary_sort string 'artists'
 addProp type_secondary_sort string 'string'
 addProp is_secondary_sort_asc boolean false
 
 // this prop needs the reflect the number of attributes for each song, including image and boolean
-addProp number_of_attributes_for_a_song number 6
+addProp number_of_attributes_for_a_song number 7
 
-//index 0
+// index 0
 featProp global.IU.globalArray add 'Song Attributes'
 
-//songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
-featProp global.IU.globalArray add 'SM_APT.png'
-featProp global.IU.globalArray add 'APT'
-featProp global.IU.globalArray add 'Rosé and Bruno Mars'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 15
-featProp global.IU.globalArray add false
+// songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
 
-featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
-featProp global.IU.globalArray add 'Die With a Smile'
-featProp global.IU.globalArray add 'Lady Gaga and Bruno Mars'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 22
-featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_thats_so_true.png'
-featProp global.IU.globalArray add 'Thats So True'
-featProp global.IU.globalArray add 'Gracie Abrams'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 37
-featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_birds_of_a_feather.png'
-featProp global.IU.globalArray add 'Birds of a Feather'
-featProp global.IU.globalArray add 'Billie Eilish'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 150
-featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_DtMF.png'
-featProp global.IU.globalArray add 'DtMF'
-featProp global.IU.globalArray add 'Bad Bunny'
-featProp global.IU.globalArray add 2025
-featProp global.IU.globalArray add 45
-featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_luther.png'
-featProp global.IU.globalArray add 'Luther'
-featProp global.IU.globalArray add 'Kendrick Lamar and SZA'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add false
 
 // ADD SONGS HERE ^^^
 // </editable>
@@ -130,8 +94,7 @@ ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Populatio
 
   ]]
 ]]
-//</DO_NOT_CHANGE>
-`
+// </DO_NOT_CHANGE>`
     },
     {
       "name": "Background",
@@ -183,6 +146,7 @@ addProp song_name string ''
 addProp artists string ''
 addProp year number 0
 addProp plays number 0
+addProp BPM number 0
 // since sort now has two layers (defined in global) a song has these attributes to store them for comparison when touching other songs
 addProp primary_sort_by_value_number number 0
 addProp primary_sort_by_value_string string ''
@@ -236,6 +200,10 @@ onEvent START [[
 
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.plays
+    prop randomIndex add 1
+
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.BPM
     prop randomIndex add 1
 
     // This sets the boolean in globalArray to true to indicate that song is being used in the current game
@@ -794,20 +762,6 @@ every 1 runAtStart [[
 prop Background.y setTo 4.15`
     },
     {
-      "id": "1",
-      "label": "rankChart1",
-      "bpid": "rankChart",
-      "initScript": `prop rankChart.x setTo 300.00
-prop rankChart.y setTo -0.17`
-    },
-    {
-      "id": "6",
-      "label": "graph_comparisons6",
-      "bpid": "graph_comparisons",
-      "initScript": `prop graph_comparisons.x setTo -468.4
-prop graph_comparisons.y setTo -144.46`
-    },
-    {
       "id": "7",
       "label": "Timer7",
       "bpid": "Timer",
@@ -820,6 +774,27 @@ prop Timer.y setTo -372.34`
       "bpid": "Value_comparisons",
       "initScript": `prop Value_comparisons.x setTo -462.9
 prop Value_comparisons.y setTo -90.09`
+    },
+    {
+      "id": "9",
+      "label": "Value_comparisons9",
+      "bpid": "Value_comparisons",
+      "initScript": `prop Value_comparisons.x setTo 29
+prop Value_comparisons.y setTo 30`
+    },
+    {
+      "id": "10",
+      "label": "Value_comparisons10",
+      "bpid": "Value_comparisons",
+      "initScript": `prop Value_comparisons.x setTo -23
+prop Value_comparisons.y setTo 45`
+    },
+    {
+      "id": "13",
+      "label": "rankChart13",
+      "bpid": "rankChart",
+      "initScript": `prop rankChart.x setTo 272.54
+prop rankChart.y setTo -1.04`
     }
   ]
 }
