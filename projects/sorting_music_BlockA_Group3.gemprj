@@ -58,9 +58,9 @@ addProp chart_center_y number
 // first sorting parameter block
 addProp index_primary_sort number 4
 addProp name_primary_sort string 'year'
-addProp type_primary_sort string 'number'           
+addProp type_primary_sort string 'number'
 addProp is_primary_sort_asc boolean false
-// second sorting parameter block     
+// second sorting parameter block
 addProp index_secondary_sort number 3
 addProp name_secondary_sort string 'artists'
 addProp type_secondary_sort string 'string'
@@ -69,51 +69,81 @@ addProp is_secondary_sort_asc boolean false
 // this prop needs the reflect the number of attributes for each song, including image and boolean
 addProp number_of_attributes_for_a_song number 6
 
-//index 0
+// index 0
 featProp global.IU.globalArray add 'Song Attributes'
 
-//songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
-featProp global.IU.globalArray add 'SM_APT.png'
-featProp global.IU.globalArray add 'APT'
-featProp global.IU.globalArray add 'Rosé and Bruno Mars'
-featProp global.IU.globalArray add 2024
+// songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'I cant feel my face'
+featProp global.IU.globalArray add 'weekned'
+featProp global.IU.globalArray add 2015
 featProp global.IU.globalArray add 15
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
-featProp global.IU.globalArray add 'Die With a Smile'
-featProp global.IU.globalArray add 'Lady Gaga and Bruno Mars'
-featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 'SM_sg_images.png'
+featProp global.IU.globalArray add 'drunk in love'
+featProp global.IU.globalArray add 'beyonce'
+featProp global.IU.globalArray add 2013
 featProp global.IU.globalArray add 22
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_thats_so_true.png'
-featProp global.IU.globalArray add 'Thats So True'
-featProp global.IU.globalArray add 'Gracie Abrams'
-featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'crazy in love'
+featProp global.IU.globalArray add 'beyonce'
+featProp global.IU.globalArray add 2003
 featProp global.IU.globalArray add 37
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_birds_of_a_feather.png'
-featProp global.IU.globalArray add 'Birds of a Feather'
-featProp global.IU.globalArray add 'Billie Eilish'
-featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'oye mi amor'
+featProp global.IU.globalArray add 'ana gabriel'
+featProp global.IU.globalArray add 1982
 featProp global.IU.globalArray add 150
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_DtMF.png'
-featProp global.IU.globalArray add 'DtMF'
-featProp global.IU.globalArray add 'Bad Bunny'
-featProp global.IU.globalArray add 2025
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'uptown funk'
+featProp global.IU.globalArray add 'Bruno mars'
+featProp global.IU.globalArray add 2014
 featProp global.IU.globalArray add 45
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_luther.png'
-featProp global.IU.globalArray add 'Luther'
-featProp global.IU.globalArray add 'Kendrick Lamar and SZA'
-featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 'SM_sg_ab67616d0000b27343294cfa2688055c9d821bf3.png'
+featProp global.IU.globalArray add 'Shut up and dance'
+featProp global.IU.globalArray add 'Walk the Moon'
+featProp global.IU.globalArray add 2014
+featProp global.IU.globalArray add 400000
 featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'I Will Always Love You'
+featProp global.IU.globalArray add 'Dolly Parton'
+featProp global.IU.globalArray add 1923
+featProp global.IU.globalArray add 22
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'I Wanna Dance With Somebody'
+featProp global.IU.globalArray add 'Whitney Houston'
+featProp global.IU.globalArray add 1987
+featProp global.IU.globalArray add 37
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Fireworks'
+featProp global.IU.globalArray add 'Katie Perry'
+featProp global.IU.globalArray add 2010
+featProp global.IU.globalArray add 150
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'To All the Girls Ive Loved Before'
+featProp global.IU.globalArray add 'Julio Iglesias'
+featProp global.IU.globalArray add 1984
+featProp global.IU.globalArray add 45
+featProp global.IU.globalArray add false
+
 
 // ADD SONGS HERE ^^^
 // </editable>
@@ -130,8 +160,7 @@ ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Populatio
 
   ]]
 ]]
-//</DO_NOT_CHANGE>
-`
+// </DO_NOT_CHANGE>`
     },
     {
       "name": "Background",

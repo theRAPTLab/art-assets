@@ -115,6 +115,69 @@ featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
 featProp global.IU.globalArray add false
 
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Call Me Maybe'
+featProp global.IU.globalArray add 'Carly Rae Jepsen'
+featProp global.IU.globalArray add 2011
+featProp global.IU.globalArray add 1824982870
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Love'
+featProp global.IU.globalArray add 'Keyshia Cole'
+featProp global.IU.globalArray add 2005
+featProp global.IU.globalArray add 850645129
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Best Day of My Life'
+featProp global.IU.globalArray add 'American Authors'
+featProp global.IU.globalArray add 2013
+featProp global.IU.globalArray add 1230423728
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Last Friday Night (T.G.I.F.)'
+featProp global.IU.globalArray add 'Katy Perry'
+featProp global.IU.globalArray add 2011
+featProp global.IU.globalArray add 1657811629
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'God’s Plan'
+featProp global.IU.globalArray add 'Drake'
+featProp global.IU.globalArray add 2018
+featProp global.IU.globalArray add 2896862961
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'What You Need'
+featProp global.IU.globalArray add 'The Weeknd'
+featProp global.IU.globalArray add 2011
+featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'All the Stars'
+featProp global.IU.globalArray add 'SZA'
+featProp global.IU.globalArray add 2018
+featProp global.IU.globalArray add 2626870736
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Flashing Lights'
+featProp global.IU.globalArray add 'Kanye West'
+featProp global.IU.globalArray add 2007
+featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'Good Riddance (Time of Your Life)'
+featProp global.IU.globalArray add 'Green Day'
+featProp global.IU.globalArray add 1997
+featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add false
+
 // ADD SONGS HERE ^^^
 // </editable>
 
