@@ -180,11 +180,10 @@ ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Populatio
 
 # PROGRAM INIT
 addFeature Costume
-featProp Background.Costume.costumeName setTo 'SM_background.png'
+featProp Background.Costume.costumeName setTo 'SM_A2_bg_vibrant-dance-party-stockcake.jpg'
 featProp Background.Costume.scale setTo 0.82
 
-# PROGRAM UPDATE
-`
+# PROGRAM UPDATE`
     },
     {
       "name": "song",
