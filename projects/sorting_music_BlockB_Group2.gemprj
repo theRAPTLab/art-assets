@@ -79,63 +79,63 @@ featProp global.IU.globalArray add 'Song Attributes'
 
 
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_sg_SZA_-_Good_Days.png'
 featProp global.IU.globalArray add 'Good Days'
 featProp global.IU.globalArray add 'SZA'
 featProp global.IU.globalArray add 2022
 featProp global.IU.globalArray add 1300000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_sg_1900x1900-000000-80-0-0 (1).png'
 featProp global.IU.globalArray add 'All Mine'
 featProp global.IU.globalArray add 'Brent Faiyaz'
 featProp global.IU.globalArray add 2022
 featProp global.IU.globalArray add 469000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_sg_51lH8dv5iXL._UXNaN_FMjpg_QL85_.png'
 featProp global.IU.globalArray add 'Somebody who loves me'
 featProp global.IU.globalArray add 'PARTYNEXTDOOR and Drake'
 featProp global.IU.globalArray add 2026
 featProp global.IU.globalArray add 124000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_sg_download (1).png'
 featProp global.IU.globalArray add 'Come and See Me'
 featProp global.IU.globalArray add 'PARTYNEXTDOOR'
 featProp global.IU.globalArray add 2016
 featProp global.IU.globalArray add 711000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_sg_download (2).png'
 featProp global.IU.globalArray add 'Ivy'
 featProp global.IU.globalArray add 'Frank Ocean'
 featProp global.IU.globalArray add 2016
 featProp global.IU.globalArray add 1180000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_sg_download.png'
 featProp global.IU.globalArray add 'Love'
 featProp global.IU.globalArray add 'Keyshia Cole'
 featProp global.IU.globalArray add 2005
 featProp global.IU.globalArray add 839000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_sg_1900x1900-000000-80-0-0.png'
 featProp global.IU.globalArray add 'Headlines'
 featProp global.IU.globalArray add 'Drake'
 featProp global.IU.globalArray add 2011
 featProp global.IU.globalArray add 948000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_sg_artworks-MycnmwYfcfla-0-t500x500.png'
 featProp global.IU.globalArray add 'The Box'
 featProp global.IU.globalArray add 'Roddy Ricch'
 featProp global.IU.globalArray add 2019
 featProp global.IU.globalArray add 2000000000
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_sg_Gucci_Mane,_Bruno_Mars,_Kodak_Black_-_Wake_Up_in_the_Sky.png'
 featProp global.IU.globalArray add 'Wake Up in the Sky'
 featProp global.IU.globalArray add 'Bruno Mars and Gucci Mane'
 featProp global.IU.globalArray add 2018
@@ -169,11 +169,10 @@ ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Populatio
 
 # PROGRAM INIT
 addFeature Costume
-featProp Background.Costume.costumeName setTo 'SM_background.png'
+featProp Background.Costume.costumeName setTo 'prom.png'
 featProp Background.Costume.scale setTo 0.82
 
-# PROGRAM UPDATE
-`
+# PROGRAM UPDATE`
     },
     {
       "name": "song",

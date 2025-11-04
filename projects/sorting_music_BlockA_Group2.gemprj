@@ -73,52 +73,84 @@ addProp number_of_attributes_for_a_song number 7
 featProp global.IU.globalArray add 'Song Attributes'
 
 //songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
-featProp global.IU.globalArray add 'SM_APT.png'
-featProp global.IU.globalArray add 'APT'
-featProp global.IU.globalArray add 'Rosé and Bruno Mars'
+featProp global.IU.globalArray add 'SM_sg_who let the dogs out.png'
+featProp global.IU.globalArray add 'Who let the dogs out'
+featProp global.IU.globalArray add 'Baha men'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 9
+featProp global.IU.globalArray add 187348265 
+featProp global.IU.globalArray add 'hard'
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_only girl.jpeg'
+featProp global.IU.globalArray add 'Only girl'
+featProp global.IU.globalArray add 'Rihanna'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 1600000
+featProp global.IU.globalArray add 'medium'
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_cupd shuffle.jpeg'
+featProp global.IU.globalArray add 'Cupid shuffle'
+featProp global.IU.globalArray add 'Cupid'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 119500000
 featProp global.IU.globalArray add 'easy'
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
-featProp global.IU.globalArray add 'Die With a Smile'
-featProp global.IU.globalArray add 'Lady Gaga and Bruno Mars'
+featProp global.IU.globalArray add 'SM_sg_cake by the ocean.jpeg'
+featProp global.IU.globalArray add 'Cake by the ocean'
+featProp global.IU.globalArray add 'DNCE'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 9
+featProp global.IU.globalArray add 19000000
+featProp global.IU.globalArray add 'hard'
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_wobble.jpeg'
+featProp global.IU.globalArray add 'Wobble'
+featProp global.IU.globalArray add 'V.I.C'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 129000000
 featProp global.IU.globalArray add 'easy'
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_thats_so_true.png'
-featProp global.IU.globalArray add 'Thats So True'
-featProp global.IU.globalArray add 'Gracie Abrams'
+featProp global.IU.globalArray add 'SM_sg_nae nae.jpeg'
+featProp global.IU.globalArray add 'Watch Me'
+featProp global.IU.globalArray add 'Silento'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 9
+featProp global.IU.globalArray add 418000000
 featProp global.IU.globalArray add 'easy'
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_birds_of_a_feather.png'
-featProp global.IU.globalArray add 'Birds of a Feather'
-featProp global.IU.globalArray add 'Billie Eilish'
+featProp global.IU.globalArray add 'SM_sg_flex.jpeg'
+featProp global.IU.globalArray add 'Flex'
+featProp global.IU.globalArray add 'Cupid'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 9
+featProp global.IU.globalArray add 15128658000
 featProp global.IU.globalArray add 'easy'
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_DtMF.png'
-featProp global.IU.globalArray add 'DtMF'
-featProp global.IU.globalArray add 'Bad Bunny'
-featProp global.IU.globalArray add 2025
-featProp global.IU.globalArray add 9
-featProp global.IU.globalArray add 'easy'
+featProp global.IU.globalArray add 'SM_sg_boots-on-the-ground.jpg'
+featProp global.IU.globalArray add 'Boots on the Ground'
+featProp global.IU.globalArray add '308fresh'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 12800000000
+featProp global.IU.globalArray add 'medium'
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_luther.png'
-featProp global.IU.globalArray add 'Luther'
-featProp global.IU.globalArray add 'Kendrick Lamar and SZA'
+featProp global.IU.globalArray add 'SM_sg_what do you mean.jpeg'
+featProp global.IU.globalArray add 'What do you mean'
+featProp global.IU.globalArray add 'Justin Bieber'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 9
-featProp global.IU.globalArray add 'easy'
+featProp global.IU.globalArray add 1930000000
+featProp global.IU.globalArray add 'hard'
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_hot-line-bling.png'
+featProp global.IU.globalArray add 'Hotline Bling'
+featProp global.IU.globalArray add 'Justin Bieber'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 2100000000
+featProp global.IU.globalArray add 'medium'
 featProp global.IU.globalArray add false
 
 // ADD SONGS HERE ^^^
