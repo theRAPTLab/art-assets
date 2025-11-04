@@ -67,59 +67,19 @@ addProp type_secondary_sort string 'string'
 addProp is_secondary_sort_asc boolean false
 
 // this prop needs the reflect the number of attributes for each song, including image and boolean
-addProp number_of_attributes_for_a_song number 6
+addProp number_of_attributes_for_a_song number 7
 
 //index 0
 featProp global.IU.globalArray add 'Song Attributes'
 
 //songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
-//featProp global.IU.globalArray add 'SM_APT.png'
-//featProp global.IU.globalArray add 'APT'
-//featProp global.IU.globalArray add 'Rosé and Bruno Mars'
-//featProp global.IU.globalArray add 2024
-//featProp global.IU.globalArray add 15
-//featProp global.IU.globalArray add false
 
-//featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
-//featProp global.IU.globalArray add 'Die With a Smile'
-//featProp global.IU.globalArray add 'Lady Gaga and Bruno Mars'
-//featProp global.IU.globalArray add 2024
-//featProp global.IU.globalArray add 22
-//featProp global.IU.globalArray add false
-
-//featProp global.IU.globalArray add 'SM_thats_so_true.png'
-//featProp global.IU.globalArray add 'Thats So True'
-//featProp global.IU.globalArray add 'Gracie Abrams'
-//featProp global.IU.globalArray add 2024
-//featProp global.IU.globalArray add 37
-//featProp global.IU.globalArray add false
-
-//featProp global.IU.globalArray add 'SM_birds_of_a_feather.png'
-//featProp global.IU.globalArray add 'Birds of a Feather'
-//featProp global.IU.globalArray add 'Billie Eilish'
-//featProp global.IU.globalArray add 2024
-//featProp global.IU.globalArray add 150
-//featProp global.IU.globalArray add false
-
-//featProp global.IU.globalArray add 'SM_DtMF.png'
-//featProp global.IU.globalArray add 'DtMF'
-//featProp global.IU.globalArray add 'Bad Bunny'
-//featProp global.IU.globalArray add 2025
-//featProp global.IU.globalArray add 45
-//featProp global.IU.globalArray add false
-
-//featProp global.IU.globalArray add 'SM_luther.png'
-//featProp global.IU.globalArray add 'Luther'
-//featProp global.IU.globalArray add 'Kendrick Lamar and SZA'
-//featProp global.IU.globalArray add 2024
-//featProp global.IU.globalArray add 28
-//featProp global.IU.globalArray add false
-
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_sg_last_christmas'
 featProp global.IU.globalArray add 'Last Christmas'
 featProp global.IU.globalArray add 'Wham'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_music.png'
@@ -127,6 +87,7 @@ featProp global.IU.globalArray add 'All I Want for Christmas'
 featProp global.IU.globalArray add 'Mariah Carey'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_music.png'
@@ -134,6 +95,7 @@ featProp global.IU.globalArray add 'Jingle Bell Rock'
 featProp global.IU.globalArray add 'Bobby Helms'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_music.png'
@@ -141,6 +103,7 @@ featProp global.IU.globalArray add 'Lei It Snow'
 featProp global.IU.globalArray add 'Dean Martin'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_music.png'
@@ -148,6 +111,7 @@ featProp global.IU.globalArray add 'Beginning to Look a Lot Like Christmas'
 featProp global.IU.globalArray add 'Bing Crosby'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_music.png'
@@ -155,6 +119,7 @@ featProp global.IU.globalArray add 'Feliz Navidad'
 featProp global.IU.globalArray add 'Jose Feliciano'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_music.png'
@@ -162,6 +127,7 @@ featProp global.IU.globalArray add 'Santas Claus is Coming to Town'
 featProp global.IU.globalArray add 'Mariah Carey'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_music.png'
@@ -169,6 +135,7 @@ featProp global.IU.globalArray add 'Mi Burrito Sabanero'
 featProp global.IU.globalArray add 'Canticuentos'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_music.png'
@@ -176,6 +143,7 @@ featProp global.IU.globalArray add 'Rundolph the Red-Nosed Reindeer'
 featProp global.IU.globalArray add 'Gene Autry and The Pinafores'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_music.png'
@@ -183,6 +151,7 @@ featProp global.IU.globalArray add 'Rocking Around the Christmas Tree'
 featProp global.IU.globalArray add 'Brenda Lee'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 // ADD SONGS HERE ^^^
@@ -253,6 +222,7 @@ addProp song_name string ''
 addProp artists string ''
 addProp year number 0
 addProp plays number 0
+addProp likes number 0
 // since sort now has two layers (defined in global) a song has these attributes to store them for comparison when touching other songs
 addProp primary_sort_by_value_number number 0
 addProp primary_sort_by_value_string string ''
@@ -306,6 +276,10 @@ onEvent START [[
 
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.plays
+    prop randomIndex add 1
+
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.likes
     prop randomIndex add 1
 
     // This sets the boolean in globalArray to true to indicate that song is being used in the current game
