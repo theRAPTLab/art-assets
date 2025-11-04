@@ -56,14 +56,14 @@ addProp chart_center_y number
 
 // <editable>
 // first sorting parameter block
-addProp index_primary_sort number 4
-addProp name_primary_sort string 'year'
+addProp index_primary_sort number 5
+addProp name_primary_sort string 'bpm'
 addProp type_primary_sort string 'number'
 addProp is_primary_sort_asc boolean false
 // second sorting parameter block
-addProp index_secondary_sort number 3
-addProp name_secondary_sort string 'artists'
-addProp type_secondary_sort string 'string'
+addProp index_secondary_sort number 4
+addProp name_secondary_sort string 'plays'
+addProp type_secondary_sort string 'number'
 addProp is_secondary_sort_asc boolean false
 
 // this prop needs the reflect the number of attributes for each song, including image and boolean
@@ -73,13 +73,13 @@ addProp number_of_attributes_for_a_song number 7
 featProp global.IU.globalArray add 'Song Attributes'
 
 // songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
-//songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
+// songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
 featProp global.IU.globalArray add 'SM_A1_sg_LizzoTruthHurts.jpg'
 featProp global.IU.globalArray add 'Truth hurts'
 featProp global.IU.globalArray add 'Lizzo'
 featProp global.IU.globalArray add 2017
-featProp global.IU.globalArray add 001
-featProp global.IU.globalArray add 10
+featProp global.IU.globalArray add 1
+featProp global.IU.globalArray add 140
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_A1_sg_good4u.png'
@@ -87,7 +87,7 @@ featProp global.IU.globalArray add 'Good 4 u'
 featProp global.IU.globalArray add 'Olivia Rodrigo'
 featProp global.IU.globalArray add 2021
 featProp global.IU.globalArray add 25
-featProp global.IU.globalArray add 10
+featProp global.IU.globalArray add 169
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_A1_sg_Thank_U_Next.png'
@@ -95,7 +95,7 @@ featProp global.IU.globalArray add 'Thank u next'
 featProp global.IU.globalArray add 'Ariana Grande'
 featProp global.IU.globalArray add 2018
 featProp global.IU.globalArray add 21
-featProp global.IU.globalArray add 10
+featProp global.IU.globalArray add 107
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_A1_sgGirls_just_wanta_have_fun.jpg'
@@ -103,55 +103,55 @@ featProp global.IU.globalArray add 'Girls just wanna have fun'
 featProp global.IU.globalArray add 'Cyndi Lauper'
 featProp global.IU.globalArray add 1983
 featProp global.IU.globalArray add 15
-featProp global.IU.globalArray add 10
+featProp global.IU.globalArray add 120
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_A1_sg_Single_Ladies.png'
-featProp global.IU.globalArray add 'Single Lady'
-featProp global.IU.globalArray add 'Byonce'
-featProp global.IU.globalArray add 2025
+featProp global.IU.globalArray add 'Single Ladies'
+featProp global.IU.globalArray add 'Beyonce'
+featProp global.IU.globalArray add 2008
 featProp global.IU.globalArray add 45
-featProp global.IU.globalArray add 10
+featProp global.IU.globalArray add 96.9
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_A1_sg_bye bye bye.png'
 featProp global.IU.globalArray add 'Bye Bye Bye'
 featProp global.IU.globalArray add 'NSYNC'
-featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 2000
 featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 10
+featProp global.IU.globalArray add 86
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_A1_sg_man_I _feel_like_a_woman.jpg'
 featProp global.IU.globalArray add 'Man I feel like a woman'
 featProp global.IU.globalArray add 'Shanis Twain'
-featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 1997
 featProp global.IU.globalArray add 37
-featProp global.IU.globalArray add 10
+featProp global.IU.globalArray add 126
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_A1_sg_Im_goona_wash_ella.jpg'
-featProp global.IU.globalArray add 'I am going to wash that man righ out of my hair'
-featProp global.IU.globalArray add 'Ella Fitzgereld'
-featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 'I Am Going To Wash That Man Right Out Of My Hair'
+featProp global.IU.globalArray add 'Ella Fitzgerald'
+featProp global.IU.globalArray add 1949
 featProp global.IU.globalArray add 150
-featProp global.IU.globalArray add 10
+featProp global.IU.globalArray add 158
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_A1_sg_youre-So-Vain.jpeg'
 featProp global.IU.globalArray add 'Your so vain'
 featProp global.IU.globalArray add 'Carly Simon'
-featProp global.IU.globalArray add 2025
+featProp global.IU.globalArray add 1972
 featProp global.IU.globalArray add 45
-featProp global.IU.globalArray add 10
+featProp global.IU.globalArray add 107
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_A1_sg_Happier_Than_Ever.png'
 featProp global.IU.globalArray add 'Happier Than ever'
-featProp global.IU.globalArray add 'Billie'
+featProp global.IU.globalArray add 'Billie Eilish'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 10
+featProp global.IU.globalArray add 81
 featProp global.IU.globalArray add false
 
 // ADD SONGS HERE ^^^
@@ -702,7 +702,7 @@ every 1 runAtStart [[
 
 # PROGRAM INIT
 addFeature Costume
-featProp rankChart.Costume.costumeName setTo 'SM_ranking_chart_no_title.png'
+featProp rankChart.Costume.costumeName setTo 'SM_A1_rc.png'
 prop rankChart.y setTo -0.18
 // exprPush {{ global.getProp('chart_slot_height').value }}
 // featPropPop rankChart.Costume.height
