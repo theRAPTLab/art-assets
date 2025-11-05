@@ -56,102 +56,102 @@ addProp chart_center_y number
 
 // <editable>
 // first sorting parameter block
-addProp index_primary_sort number 4
-addProp name_primary_sort string 'year'
-addProp type_primary_sort string 'number'           
-addProp is_primary_sort_asc boolean false
-// second sorting parameter block     
-addProp index_secondary_sort number 3
-addProp name_secondary_sort string 'artists'
-addProp type_secondary_sort string 'string'
-addProp is_secondary_sort_asc boolean false
+addProp index_primary_sort number 5
+addProp name_primary_sort string 'plays'
+addProp type_primary_sort string 'number'
+addProp is_primary_sort_asc boolean False
+// second sorting parameter block
+addProp index_secondary_sort number 6
+addProp name_secondary_sort string 'likes'
+addProp type_secondary_sort string 'number'
+addProp is_secondary_sort_asc boolean False
 
 // this prop needs the reflect the number of attributes for each song, including image and boolean
 addProp number_of_attributes_for_a_song number 7
 
-//index 0
+// index 0
 featProp global.IU.globalArray add 'Song Attributes'
 
-//songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
+// songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
 
-featProp global.IU.globalArray add 'SM_sg_last_christmas'
+featProp global.IU.globalArray add 'SM_B4_sg_last_christmas.jpeg'
 featProp global.IU.globalArray add 'Last Christmas'
 featProp global.IU.globalArray add 'Wham'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add 3.16
+featProp global.IU.globalArray add 5.5
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_B4_sg_all i want for christmas.jpeg'
 featProp global.IU.globalArray add 'All I Want for Christmas'
 featProp global.IU.globalArray add 'Mariah Carey'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add 2
+featProp global.IU.globalArray add 6.6
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_B4_sg_jingle bell rock.jpg'
 featProp global.IU.globalArray add 'Jingle Bell Rock'
 featProp global.IU.globalArray add 'Bobby Helms'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add 1.23
+featProp global.IU.globalArray add 0.15
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
-featProp global.IU.globalArray add 'Lei It Snow'
+featProp global.IU.globalArray add 'SM_B4_sg_let it snow.jpg'
+featProp global.IU.globalArray add 'Let It Snow'
 featProp global.IU.globalArray add 'Dean Martin'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add 0.825
+featProp global.IU.globalArray add 0.08
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_B4_sg_lot like christmas.jpeg'
 featProp global.IU.globalArray add 'Beginning to Look a Lot Like Christmas'
 featProp global.IU.globalArray add 'Bing Crosby'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add 0.382
+featProp global.IU.globalArray add 0.634
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_B4_sg_feliz navidad.jpeg'
 featProp global.IU.globalArray add 'Feliz Navidad'
 featProp global.IU.globalArray add 'Jose Feliciano'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add 0.306
+featProp global.IU.globalArray add 0.594
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_B4_sg_santa claus is coming to town.jpg'
 featProp global.IU.globalArray add 'Santas Claus is Coming to Town'
 featProp global.IU.globalArray add 'Mariah Carey'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add 0.3
+featProp global.IU.globalArray add 0.127
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_B4_sg_mi burrito sabanero.png'
 featProp global.IU.globalArray add 'Mi Burrito Sabanero'
 featProp global.IU.globalArray add 'Canticuentos'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add 0.129
+featProp global.IU.globalArray add 0.93
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
-featProp global.IU.globalArray add 'Rundolph the Red-Nosed Reindeer'
+featProp global.IU.globalArray add 'SM_sg_rudolph the red nose reindeer.png'
+featProp global.IU.globalArray add 'Rudolph the Red-Nosed Reindeer'
 featProp global.IU.globalArray add 'Gene Autry and The Pinafores'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add 0.116
+featProp global.IU.globalArray add 0.035
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM_B4_sg_rockin around the christmas tree.png'
 featProp global.IU.globalArray add 'Rocking Around the Christmas Tree'
 featProp global.IU.globalArray add 'Brenda Lee'
 featProp global.IU.globalArray add 2024
-featProp global.IU.globalArray add 28
-featProp global.IU.globalArray add 0
+featProp global.IU.globalArray add 0.087
+featProp global.IU.globalArray add 0.484
 featProp global.IU.globalArray add false
 
 // ADD SONGS HERE ^^^
@@ -169,8 +169,7 @@ ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Populatio
 
   ]]
 ]]
-//</DO_NOT_CHANGE>
-`
+// </DO_NOT_CHANGE>`
     },
     {
       "name": "Background",
@@ -181,11 +180,10 @@ ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Populatio
 
 # PROGRAM INIT
 addFeature Costume
-featProp Background.Costume.costumeName setTo 'SM_background.png'
+featProp Background.Costume.costumeName setTo 'SM_B4_BG_christmas background.png'
 featProp Background.Costume.scale setTo 0.82
 
-# PROGRAM UPDATE
-`
+# PROGRAM UPDATE`
     },
     {
       "name": "song",
