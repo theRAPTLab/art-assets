@@ -56,12 +56,12 @@ addProp chart_center_y number
 
 // <editable>
 // first sorting parameter block
-addProp index_primary_sort number 5
+addProp index_primary_sort number 6
 addProp name_primary_sort string 'bpm'
 addProp type_primary_sort string 'number'
 addProp is_primary_sort_asc boolean false
 // second sorting parameter block
-addProp index_secondary_sort number 4
+addProp index_secondary_sort number 5
 addProp name_secondary_sort string 'plays'
 addProp type_secondary_sort string 'number'
 addProp is_secondary_sort_asc boolean false
@@ -72,7 +72,6 @@ addProp number_of_attributes_for_a_song number 7
 // index 0
 featProp global.IU.globalArray add 'Song Attributes'
 
-// songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
 // songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
 featProp global.IU.globalArray add 'SM_A1_sg_LizzoTruthHurts.jpg'
 featProp global.IU.globalArray add 'Truth hurts'
@@ -306,6 +305,10 @@ onEvent START [[
       propPush artists
       propPop primary_sort_by_value_string
     ]]
+    ifExpr {{ global.getProp('name_primary_sort').value === 'bpm' }} [[
+      propPush bpm
+      propPop primary_sort_by_value_number
+    ]]
 
     // <secondary_att>
     ifExpr {{ global.getProp('name_secondary_sort').value === 'plays' }} [[
@@ -323,6 +326,10 @@ onEvent START [[
     ifExpr {{ global.getProp('name_secondary_sort').value === 'artists' }} [[
       propPush artists
       propPop secondary_sort_by_value_string
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'bpm' }} [[
+      propPush bpm
+      propPop secondary_sort_by_value_number
     ]]
 
     // <set the label below the image to a specific text, here it is song name but could be something else>
