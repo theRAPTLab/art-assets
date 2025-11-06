@@ -56,15 +56,15 @@ addProp chart_center_y number
 
 // <editable>
 // first sorting parameter block
-addProp index_primary_sort number 4
-addProp name_primary_sort string 'year'
-addProp type_primary_sort string 'number'           
-addProp is_primary_sort_asc boolean false
+addProp index_primary_sort number 6
+addProp name_primary_sort string 'rank'
+addProp type_primary_sort string 'string'           
+addProp is_primary_sort_asc boolean true
 // second sorting parameter block     
-addProp index_secondary_sort number 3
-addProp name_secondary_sort string 'artists'
-addProp type_secondary_sort string 'string'
-addProp is_secondary_sort_asc boolean false
+addProp index_secondary_sort number 5
+addProp name_secondary_sort string 'plays'
+addProp type_secondary_sort string 'number'
+addProp is_secondary_sort_asc boolean true
 
 // this prop needs the reflect the number of attributes for each song, including image and boolean
 addProp number_of_attributes_for_a_song number 7
@@ -305,6 +305,10 @@ onEvent START [[
       propPush artists
       propPop primary_sort_by_value_string
     ]]
+    ifExpr {{ global.getProp('name_primary_sort').value === 'rank' }} [[
+      propPush rank
+      propPop primary_sort_by_value_string
+    ]]
 
     // <secondary_att>
     ifExpr {{ global.getProp('name_secondary_sort').value === 'plays' }} [[
@@ -321,6 +325,10 @@ onEvent START [[
     ]]
     ifExpr {{ global.getProp('name_secondary_sort').value === 'artists' }} [[
       propPush artists
+      propPop secondary_sort_by_value_string
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'rank' }} [[
+      propPush rank
       propPop secondary_sort_by_value_string
     ]]
 
