@@ -56,18 +56,18 @@ addProp chart_center_y number
 
 // <editable>
 // first sorting parameter block
-addProp index_primary_sort number 4
-addProp name_primary_sort string 'year'
+addProp index_primary_sort number 6
+addProp name_primary_sort string 'excitement'
 addProp type_primary_sort string 'number'           
-addProp is_primary_sort_asc boolean false
+addProp is_primary_sort_asc boolean true
 // second sorting parameter block     
-addProp index_secondary_sort number 3
-addProp name_secondary_sort string 'artists'
-addProp type_secondary_sort string 'string'
-addProp is_secondary_sort_asc boolean false
+addProp index_secondary_sort number 5
+addProp name_secondary_sort string 'plays'
+addProp type_secondary_sort string 'number'
+addProp is_secondary_sort_asc boolean true
 
 // this prop needs the reflect the number of attributes for each song, including image and boolean
-addProp number_of_attributes_for_a_song number 6
+addProp number_of_attributes_for_a_song number 7
 
 //index 0
 featProp global.IU.globalArray add 'Song Attributes'
@@ -79,16 +79,15 @@ featProp global.IU.globalArray add 'APT'
 featProp global.IU.globalArray add 'Rosé and Bruno Mars'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 15
+featProp global.IU.globalArray add 9
 featProp global.IU.globalArray add false
-
-// ADD SONGS HERE ^^^
-// </editable>
 
 featProp global.IU.globalArray add 'SM_sg_Bildschirmfoto_2025-06-30_um_10.17.22 (1).png'
 featProp global.IU.globalArray add 'Soda Pop'
 featProp global.IU.globalArray add 'KPOP demon hunters'
 featProp global.IU.globalArray add 2025
 featProp global.IU.globalArray add 482055531
+featProp global.IU.globalArray add 8
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_sg_Huntr-x_-_Golden.png'
@@ -96,6 +95,7 @@ featProp global.IU.globalArray add 'Golden'
 featProp global.IU.globalArray add 'HUNTR/X'
 featProp global.IU.globalArray add 2025
 featProp global.IU.globalArray add 72000000
+featProp global.IU.globalArray add 7
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_sg_I_Am_Your_Gummy_Bear.png'
@@ -103,42 +103,60 @@ featProp global.IU.globalArray add 'I Am Your Gummy Bear'
 featProp global.IU.globalArray add 'Gummibär'
 featProp global.IU.globalArray add 2007
 featProp global.IU.globalArray add 3700000000
+featProp global.IU.globalArray add 7
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM-sgb1-labubu-phonk.jpg'
 featProp global.IU.globalArray add 'Labubu Phonk'
 featProp global.IU.globalArray add 'SXLLX'
 featProp global.IU.globalArray add 2025
 featProp global.IU.globalArray add 14000000
+featProp global.IU.globalArray add 10
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM-sgb1-happy-birthday.jpg'
 featProp global.IU.globalArray add 'Happy Birthday'
 featProp global.IU.globalArray add 'CoComelon'
 featProp global.IU.globalArray add 2018
 featProp global.IU.globalArray add 1000000
+featProp global.IU.globalArray add 4
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM-sgb1-las-mananas.jpeg'
 featProp global.IU.globalArray add 'Las Mañanitas'
 featProp global.IU.globalArray add 'Vicente Fernandes'
 featProp global.IU.globalArray add 1981
 featProp global.IU.globalArray add 3000000
+featProp global.IU.globalArray add 2
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM-sgb1-lei-it-go.jpg'
 featProp global.IU.globalArray add 'Let It Go'
 featProp global.IU.globalArray add 'Idina Menzel'
 featProp global.IU.globalArray add 2014
 featProp global.IU.globalArray add 104000000
+featProp global.IU.globalArray add 4
 featProp global.IU.globalArray add false
 
-featProp global.IU.globalArray add 'SM_music.png'
+featProp global.IU.globalArray add 'SM-sgb1-bluey.jpg'
 featProp global.IU.globalArray add 'Bluey Theme'
 featProp global.IU.globalArray add 'Bluey Official Channel'
 featProp global.IU.globalArray add 2024
 featProp global.IU.globalArray add 85000000
+featProp global.IU.globalArray add 1
 featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_img_0991.png'
+featProp global.IU.globalArray add 'Youre Welcome'
+featProp global.IU.globalArray add 'The Rock'
+featProp global.IU.globalArray add 2016
+featProp global.IU.globalArray add 1700000000
+featProp global.IU.globalArray add 5
+featProp global.IU.globalArray add false
+
+
+// ADD SONGS HERE ^^^
+// </editable>
 
 
 # PROGRAM UPDATE
@@ -165,11 +183,10 @@ ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Populatio
 
 # PROGRAM INIT
 addFeature Costume
-featProp Background.Costume.costumeName setTo 'SM_background.png'
-featProp Background.Costume.scale setTo 0.82
+featProp Background.Costume.costumeName setTo 'SM_groupB1_background.jpg'
+featProp Background.Costume.scale setTo 2.35
 
-# PROGRAM UPDATE
-`
+# PROGRAM UPDATE`
     },
     {
       "name": "song",
@@ -206,6 +223,7 @@ addProp song_name string ''
 addProp artists string ''
 addProp year number 0
 addProp plays number 0
+addProp excitement number 0
 // since sort now has two layers (defined in global) a song has these attributes to store them for comparison when touching other songs
 addProp primary_sort_by_value_number number 0
 addProp primary_sort_by_value_string string ''
@@ -259,6 +277,10 @@ onEvent START [[
 
     exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
     propPop song.plays
+    prop randomIndex add 1
+
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.excitement
     prop randomIndex add 1
 
     // This sets the boolean in globalArray to true to indicate that song is being used in the current game
