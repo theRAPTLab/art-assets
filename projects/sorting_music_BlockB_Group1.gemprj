@@ -308,6 +308,10 @@ onEvent START [[
       propPush artists
       propPop primary_sort_by_value_string
     ]]
+    ifExpr {{ global.getProp('name_primary_sort').value === 'excitement' }} [[
+      propPush excitement
+      propPop primary_sort_by_value_number
+    ]]
 
     // <secondary_att>
     ifExpr {{ global.getProp('name_secondary_sort').value === 'plays' }} [[
@@ -325,6 +329,10 @@ onEvent START [[
     ifExpr {{ global.getProp('name_secondary_sort').value === 'artists' }} [[
       propPush artists
       propPop secondary_sort_by_value_string
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'excitement' }} [[
+      propPush excitement
+      propPop secondary_sort_by_value_number
     ]]
 
     // <set the label below the image to a specific text, here it is song name but could be something else>
