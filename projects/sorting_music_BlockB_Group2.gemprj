@@ -56,34 +56,30 @@ addProp chart_center_y number
 
 // <editable>
 // first sorting parameter block
-addProp index_primary_sort number 4
-addProp name_primary_sort string 'year'
-addProp type_primary_sort string 'number'           
-addProp is_primary_sort_asc boolean false
-// second sorting parameter block     
-addProp index_secondary_sort number 3
-addProp name_secondary_sort string 'artists'
-addProp type_secondary_sort string 'string'
-addProp is_secondary_sort_asc boolean false
+addProp index_primary_sort number 6
+addProp name_primary_sort string 'BPM'
+addProp type_primary_sort string 'number'
+addProp is_primary_sort_asc boolean False
+// second sorting parameter block
+addProp index_secondary_sort number 5
+addProp name_secondary_sort string 'plays'
+addProp type_secondary_sort string 'number'
+addProp is_secondary_sort_asc boolean False
 
 // this prop needs the reflect the number of attributes for each song, including image and boolean
-addProp number_of_attributes_for_a_song number 6
+addProp number_of_attributes_for_a_song number 7
 
-//index 0
+// index 0
 featProp global.IU.globalArray add 'Song Attributes'
 
-//songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
-
-
-
-
-
+// songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
 
 featProp global.IU.globalArray add 'SM_sg_SZA_-_Good_Days.png'
 featProp global.IU.globalArray add 'Good Days'
 featProp global.IU.globalArray add 'SZA'
 featProp global.IU.globalArray add 2022
 featProp global.IU.globalArray add 1300000000
+featProp global.IU.globalArray add 121
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_sg_1900x1900-000000-80-0-0 (1).png'
@@ -91,6 +87,7 @@ featProp global.IU.globalArray add 'All Mine'
 featProp global.IU.globalArray add 'Brent Faiyaz'
 featProp global.IU.globalArray add 2022
 featProp global.IU.globalArray add 469000000
+featProp global.IU.globalArray add 71
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_sg_51lH8dv5iXL._UXNaN_FMjpg_QL85_.png'
@@ -98,6 +95,7 @@ featProp global.IU.globalArray add 'Somebody who loves me'
 featProp global.IU.globalArray add 'PARTYNEXTDOOR and Drake'
 featProp global.IU.globalArray add 2026
 featProp global.IU.globalArray add 124000000
+featProp global.IU.globalArray add 89
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_sg_download (1).png'
@@ -105,6 +103,7 @@ featProp global.IU.globalArray add 'Come and See Me'
 featProp global.IU.globalArray add 'PARTYNEXTDOOR'
 featProp global.IU.globalArray add 2016
 featProp global.IU.globalArray add 711000000
+featProp global.IU.globalArray add 85
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_sg_download (2).png'
@@ -112,6 +111,7 @@ featProp global.IU.globalArray add 'Ivy'
 featProp global.IU.globalArray add 'Frank Ocean'
 featProp global.IU.globalArray add 2016
 featProp global.IU.globalArray add 1180000000
+featProp global.IU.globalArray add 116
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_sg_download.png'
@@ -119,6 +119,7 @@ featProp global.IU.globalArray add 'Love'
 featProp global.IU.globalArray add 'Keyshia Cole'
 featProp global.IU.globalArray add 2005
 featProp global.IU.globalArray add 839000000
+featProp global.IU.globalArray add 117
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_sg_1900x1900-000000-80-0-0.png'
@@ -126,6 +127,7 @@ featProp global.IU.globalArray add 'Headlines'
 featProp global.IU.globalArray add 'Drake'
 featProp global.IU.globalArray add 2011
 featProp global.IU.globalArray add 948000000
+featProp global.IU.globalArray add 152
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_sg_artworks-MycnmwYfcfla-0-t500x500.png'
@@ -133,6 +135,7 @@ featProp global.IU.globalArray add 'The Box'
 featProp global.IU.globalArray add 'Roddy Ricch'
 featProp global.IU.globalArray add 2019
 featProp global.IU.globalArray add 2000000000
+featProp global.IU.globalArray add 117
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM_sg_Gucci_Mane,_Bruno_Mars,_Kodak_Black_-_Wake_Up_in_the_Sky.png'
@@ -140,6 +143,15 @@ featProp global.IU.globalArray add 'Wake Up in the Sky'
 featProp global.IU.globalArray add 'Bruno Mars and Gucci Mane'
 featProp global.IU.globalArray add 2018
 featProp global.IU.globalArray add 1200000000
+featProp global.IU.globalArray add 124
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_B2_SG_Die With A Smile.jpeg'
+featProp global.IU.globalArray add 'Die With a Smile'
+featProp global.IU.globalArray add 'Bruno Mars and lADY GAGA'
+featProp global.IU.globalArray add 2025
+featProp global.IU.globalArray add 3000000000
+featProp global.IU.globalArray add 0
 featProp global.IU.globalArray add false
 
 // ADD SONGS HERE ^^^
@@ -157,8 +169,7 @@ ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Populatio
 
   ]]
 ]]
-//</DO_NOT_CHANGE>
-`
+// </DO_NOT_CHANGE>`
     },
     {
       "name": "Background",
@@ -209,6 +220,7 @@ addProp song_name string ''
 addProp artists string ''
 addProp year number 0
 addProp plays number 0
+addProp BPM number 0
 // since sort now has two layers (defined in global) a song has these attributes to store them for comparison when touching other songs
 addProp primary_sort_by_value_number number 0
 addProp primary_sort_by_value_string string ''
@@ -264,6 +276,10 @@ onEvent START [[
     propPop song.plays
     prop randomIndex add 1
 
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.BPM
+    prop randomIndex add 1
+
     // This sets the boolean in globalArray to true to indicate that song is being used in the current game
     // <DO_NOT_CHANGE>
     ifExpr {{ (global.getFeatProp('IU', 'globalArray').setAndCheck(song.getProp('randomIndex').value,true)) }} [[
@@ -289,6 +305,10 @@ onEvent START [[
       propPush artists
       propPop primary_sort_by_value_string
     ]]
+    ifExpr {{ global.getProp('name_primary_sort').value === 'BPM' }} [[
+      propPush BPM
+      propPop primary_sort_by_value_number
+    ]]
 
     // <secondary_att>
     ifExpr {{ global.getProp('name_secondary_sort').value === 'plays' }} [[
@@ -306,6 +326,10 @@ onEvent START [[
     ifExpr {{ global.getProp('name_secondary_sort').value === 'artists' }} [[
       propPush artists
       propPop secondary_sort_by_value_string
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'BPM' }} [[
+      propPush BPM
+      propPop secondary_sort_by_value_number
     ]]
 
     // <set the label below the image to a specific text, here it is song name but could be something else>
