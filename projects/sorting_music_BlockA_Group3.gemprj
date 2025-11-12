@@ -109,7 +109,7 @@ featProp global.IU.globalArray add false
 featProp global.IU.globalArray add 'SM-sg-uptown-funk.png'
 featProp global.IU.globalArray add 'uptown funk'
 featProp global.IU.globalArray add 'Bruno mars'
-featProp global.IU.globalArray add 2014
+featProp global.IU.globalArray add 2013
 featProp global.IU.globalArray add 45
 featProp global.IU.globalArray add 'medium'
 featProp global.IU.globalArray add false
