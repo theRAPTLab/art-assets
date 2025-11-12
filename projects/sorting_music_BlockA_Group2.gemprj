@@ -850,10 +850,10 @@ featProp primary_ranked_info.Costume.costumeName setTo 'GEN_onexone.json'
 featProp primary_ranked_info.Costume.scale setTo 1
 
 featProp primary_ranked_info.Graphing.fontSize setTo 20
-featProp primary_ranked_info.Graphing.text setTo 'Primary: DESC ⬇️'
+featProp primary_ranked_info.Graphing.text setTo 'Primary: DESC ③→②→①'
 // if is_primary_sort_asc == true
 ifExpr {{ (global.getProp('is_primary_sort_asc').value == true) }} [[
-  featProp primary_ranked_info.Graphing.text setTo 'Primary: ASC ⬆️'
+  featProp primary_ranked_info.Graphing.text setTo 'Primary: ASC ①→②→③'
 ]]
 
 # PROGRAM UPDATE
@@ -875,10 +875,10 @@ featProp secondary_ranked_info.Costume.costumeName setTo 'GEN_onexone.json'
 featProp secondary_ranked_info.Costume.scale setTo 1
 
 featProp secondary_ranked_info.Graphing.fontSize setTo 20
-featProp secondary_ranked_info.Graphing.text setTo 'Second: DESC ⬇️'
+featProp secondary_ranked_info.Graphing.text setTo 'Second: DESC ③→②→①'
 
 ifExpr {{ (global.getProp('is_secondary_sort_asc').value == true) }} [[
-  featProp secondary_ranked_info.Graphing.text setTo 'Second: ASC ⬆️'
+  featProp secondary_ranked_info.Graphing.text setTo 'Second: ASC ①→②→③'
 ]]
 
 # PROGRAM UPDATE
@@ -933,7 +933,7 @@ prop primary_ranked_info.y setTo 41.89`
       "label": "secondary_ranked_info10",
       "bpid": "secondary_ranked_info",
       "initScript": `prop secondary_ranked_info.x setTo -466.65
-prop secondary_ranked_info.y setTo 109.80`
+prop secondary_ranked_info.y setTo 140.90`
     }
   ]
 }

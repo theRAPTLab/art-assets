@@ -836,6 +836,56 @@ every 1 runAtStart [[
 ]]
 //</DO_NOT_CHANGE>
 `
+    },
+    {
+      "name": "primary_ranked_info",
+      "scriptText": `# BLUEPRINT primary_ranked_info
+# TAG isCharControllable false
+# TAG isPozyxControllable false
+# TAG isPTrackControllable false
+
+# PROGRAM INIT
+addFeature Costume
+addFeature Graphing
+
+// <DO_NOT_CHANGE>
+featProp primary_ranked_info.Costume.costumeName setTo 'GEN_onexone.json'
+featProp primary_ranked_info.Costume.scale setTo 1
+
+featProp primary_ranked_info.Graphing.fontSize setTo 20
+featProp primary_ranked_info.Graphing.text setTo 'Primary: DESC ③→②→①'
+// if is_primary_sort_asc == true
+ifExpr {{ (global.getProp('is_primary_sort_asc').value == true) }} [[
+  featProp primary_ranked_info.Graphing.text setTo 'Primary: ASC ①→②→③'
+]]
+
+# PROGRAM UPDATE
+// </DO_NOT_CHANGE>`
+    },
+    {
+      "name": "secondary_ranked_info",
+      "scriptText": `# BLUEPRINT secondary_ranked_info
+# TAG isCharControllable false
+# TAG isPozyxControllable false
+# TAG isPTrackControllable false
+
+# PROGRAM INIT
+addFeature Costume
+addFeature Graphing
+
+// <DO_NOT_CHANGE>
+featProp secondary_ranked_info.Costume.costumeName setTo 'GEN_onexone.json'
+featProp secondary_ranked_info.Costume.scale setTo 1
+
+featProp secondary_ranked_info.Graphing.fontSize setTo 20
+featProp secondary_ranked_info.Graphing.text setTo 'Second: DESC ③→②→①'
+
+ifExpr {{ (global.getProp('is_secondary_sort_asc').value == true) }} [[
+  featProp secondary_ranked_info.Graphing.text setTo 'Second: ASC ①→②→③'
+]]
+
+# PROGRAM UPDATE
+// </DO_NOT_CHANGE>`
     }
   ],
   "instances": [
@@ -873,6 +923,20 @@ prop Timer.y setTo -372.34`
       "bpid": "Value_comparisons",
       "initScript": `prop Value_comparisons.x setTo -462.9
 prop Value_comparisons.y setTo -90.09`
+    },
+    {
+      "id": "9",
+      "label": "primary_ranked_info9",
+      "bpid": "primary_ranked_info",
+      "initScript": `prop primary_ranked_info.x setTo -468.86
+prop primary_ranked_info.y setTo 41.89`
+    },
+    {
+      "id": "10",
+      "label": "secondary_ranked_info10",
+      "bpid": "secondary_ranked_info",
+      "initScript": `prop secondary_ranked_info.x setTo -466.65
+prop secondary_ranked_info.y setTo 140.90`
     }
   ]
 }
