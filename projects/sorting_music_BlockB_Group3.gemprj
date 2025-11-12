@@ -58,13 +58,13 @@ addProp chart_center_y number
 // first sorting parameter block
 addProp index_primary_sort number 6
 addProp name_primary_sort string 'sentiment'
-addProp type_primary_sort string 'string'
-addProp is_primary_sort_asc boolean False
+addProp type_primary_sort string 'number'
+addProp is_primary_sort_asc boolean false
 // second sorting parameter block     
 addProp index_secondary_sort number 3
 addProp name_secondary_sort string 'artists'
 addProp type_secondary_sort string 'string'
-addProp is_secondary_sort_asc boolean True
+addProp is_secondary_sort_asc boolean true
 
 // this prop needs the reflect the number of attributes for each song, including image and boolean
 addProp number_of_attributes_for_a_song number 7
@@ -79,7 +79,7 @@ featProp global.IU.globalArray add 'DtMF'
 featProp global.IU.globalArray add 'Bad Bunny'
 featProp global.IU.globalArray add 2025
 featProp global.IU.globalArray add 45
-featProp global.IU.globalArray add 'medium'
+featProp global.IU.globalArray add 2
 featProp global.IU.globalArray add false
 
 
@@ -88,7 +88,7 @@ featProp global.IU.globalArray add 'Call Me Maybe'
 featProp global.IU.globalArray add 'Carly Rae Jepsen'
 featProp global.IU.globalArray add 2011
 featProp global.IU.globalArray add 1824982870
-featProp global.IU.globalArray add 'high'
+featProp global.IU.globalArray add 3
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM-sgb3-love.JPEG'
@@ -96,7 +96,7 @@ featProp global.IU.globalArray add 'Love'
 featProp global.IU.globalArray add 'Keyshia Cole'
 featProp global.IU.globalArray add 2005
 featProp global.IU.globalArray add 850645129
-featProp global.IU.globalArray add 'medium'
+featProp global.IU.globalArray add 2
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM-sgb3-best-day-of-my-life.JPEG'
@@ -104,7 +104,7 @@ featProp global.IU.globalArray add 'Best Day of My Life'
 featProp global.IU.globalArray add 'American Authors'
 featProp global.IU.globalArray add 2013
 featProp global.IU.globalArray add 1230423728
-featProp global.IU.globalArray add 'low'
+featProp global.IU.globalArray add 1
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM-sgb3-last-friday-night.jpg'
@@ -112,7 +112,7 @@ featProp global.IU.globalArray add 'Last Friday Night (T.G.I.F.)'
 featProp global.IU.globalArray add 'Katy Perry'
 featProp global.IU.globalArray add 2011
 featProp global.IU.globalArray add 1657811629
-featProp global.IU.globalArray add 'high'
+featProp global.IU.globalArray add 3
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM-sgb3-gods-plan.JPEG'
@@ -120,7 +120,7 @@ featProp global.IU.globalArray add 'God’s Plan'
 featProp global.IU.globalArray add 'Drake'
 featProp global.IU.globalArray add 2018
 featProp global.IU.globalArray add 2896862961
-featProp global.IU.globalArray add 'high'
+featProp global.IU.globalArray add 3
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM-sgb3-what-you-need.JPG'
@@ -128,7 +128,7 @@ featProp global.IU.globalArray add 'What You Need'
 featProp global.IU.globalArray add 'The Weeknd'
 featProp global.IU.globalArray add 2011
 featProp global.IU.globalArray add 0
-featProp global.IU.globalArray add 'low'
+featProp global.IU.globalArray add 1
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM-sgb3-all-the-stars.JPEG'
@@ -136,7 +136,7 @@ featProp global.IU.globalArray add 'All the Stars'
 featProp global.IU.globalArray add 'SZA'
 featProp global.IU.globalArray add 2018
 featProp global.IU.globalArray add 2626870736
-featProp global.IU.globalArray add 'low'
+featProp global.IU.globalArray add 1
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM-sgb3-flashing-light.JPEG'
@@ -144,7 +144,7 @@ featProp global.IU.globalArray add 'Flashing Lights'
 featProp global.IU.globalArray add 'Kanye West'
 featProp global.IU.globalArray add 2007
 featProp global.IU.globalArray add 0
-featProp global.IU.globalArray add 'high'
+featProp global.IU.globalArray add 3
 featProp global.IU.globalArray add false
 
 featProp global.IU.globalArray add 'SM-sgb3-time of your life.JPEG'
@@ -152,7 +152,7 @@ featProp global.IU.globalArray add 'Good Riddance (Time of Your Life)'
 featProp global.IU.globalArray add 'Green Day'
 featProp global.IU.globalArray add 1997
 featProp global.IU.globalArray add 0
-featProp global.IU.globalArray add 'low'
+featProp global.IU.globalArray add 1
 featProp global.IU.globalArray add false
 
 // ADD SONGS HERE ^^^
@@ -223,7 +223,7 @@ addProp song_name string ''
 addProp artists string ''
 addProp year number 0
 addProp plays number 0
-addProp sentiment string ''
+addProp sentiment number 0
 // since sort now has two layers (defined in global) a song has these attributes to store them for comparison when touching other songs
 addProp primary_sort_by_value_number number 0
 addProp primary_sort_by_value_string string ''
@@ -310,7 +310,7 @@ onEvent START [[
     ]]
     ifExpr {{ global.getProp('name_primary_sort').value === 'sentiment' }} [[
       propPush sentiment
-      propPop primary_sort_by_value_string
+      propPop primary_sort_by_value_number
     ]]
 
     // <secondary_att>
@@ -332,7 +332,7 @@ onEvent START [[
     ]]
     ifExpr {{ global.getProp('name_secondary_sort').value === 'sentiment' }} [[
       propPush sentiment
-      propPop secondary_sort_by_value_string
+      propPop secondary_sort_by_value_number
     ]]
 
     // <set the label below the image to a specific text, here it is song name but could be something else>
