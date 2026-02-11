@@ -1,0 +1,895 @@
+{
+  "id": "sorting_music_ssmv",
+  "label": "sorting_music_ssmv",
+  "metadata": {
+    "top": -400,
+    "right": 400,
+    "bottom": 400,
+    "left": -400,
+    "wrap": [
+      false,
+      false
+    ],
+    "bounce": true,
+    "bgcolor": 102,
+    "roundsCanLoop": true,
+    "showWebCam": false,
+    "scaleX": 1,
+    "scaleY": 1,
+    "translateX": 0,
+    "translateY": 0,
+    "rotate": 0,
+    "mirrorX": false,
+    "mirrorY": false
+  },
+  "rounds": [
+    {
+      "initScript": ``,
+      "endScript": `
+        featCall global.Population charactersForEach rankChart [[
+          //prop rankChart.y setTo -0.18
+        ]]
+`
+    }
+  ],
+  "blueprints": [
+    {
+      "name": "global",
+      "scriptText": `# BLUEPRINT global
+# TAG IsCharControllable false
+# TAG IsPozyxControllable false
+# TAG IsPtrackControllable false
+
+# PROGRAM INIT
+
+prop global.visible setTo false
+addFeature Population
+addFeature IU
+addFeature Graphing
+addFeature Timer
+addProp song_name string ''
+addProp countReady number 0
+addProp test_sorting boolean false
+addProp count_num_comparisons number 0
+addProp chart_slot_height number 130
+addProp chart_center_y number
+
+// <editable>
+// first sorting parameter block
+addProp index_primary_sort number 4
+addProp name_primary_sort string 'year'
+addProp type_primary_sort string 'number'           
+addProp is_primary_sort_asc boolean false
+// second sorting parameter block     
+addProp index_secondary_sort number 3
+addProp name_secondary_sort string 'artists'
+addProp type_secondary_sort string 'string'
+addProp is_secondary_sort_asc boolean true
+
+// this prop needs the reflect the number of attributes for each song, including image and boolean
+addProp number_of_attributes_for_a_song number 6
+
+//index 0
+featProp global.IU.globalArray add 'Song Attributes'
+
+//songs start at index 1 and each block of attributes for a song has the number set on prop number_of_attributes_for_a_song
+featProp global.IU.globalArray add 'SM_APT.png'
+featProp global.IU.globalArray add 'APT'
+featProp global.IU.globalArray add 'Rosé and Bruno Mars'
+featProp global.IU.globalArray add 2023
+featProp global.IU.globalArray add 15
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_die_with_a_smile.png'
+featProp global.IU.globalArray add 'Die With a Smile'
+featProp global.IU.globalArray add 'Lady Gaga and Bruno Mars'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 22
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_thats_so_true.png'
+featProp global.IU.globalArray add 'Thats So True'
+featProp global.IU.globalArray add 'Gracie Abrams'
+featProp global.IU.globalArray add 2023
+featProp global.IU.globalArray add 37
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_birds_of_a_feather.png'
+featProp global.IU.globalArray add 'Birds of a Feather'
+featProp global.IU.globalArray add 'Billie Eilish'
+featProp global.IU.globalArray add 2020
+featProp global.IU.globalArray add 150
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_DtMF.png'
+featProp global.IU.globalArray add 'DtMF'
+featProp global.IU.globalArray add 'Bad Bunny'
+featProp global.IU.globalArray add 2025
+featProp global.IU.globalArray add 45
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_luther.png'
+featProp global.IU.globalArray add 'Luther'
+featProp global.IU.globalArray add 'Kendrick Lamar and SZA'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 28
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_who let the dogs out.png'
+featProp global.IU.globalArray add 'Who let the dogs out'
+featProp global.IU.globalArray add 'Baha men'
+featProp global.IU.globalArray add 2021
+featProp global.IU.globalArray add 32 
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_only girl.jpeg'
+featProp global.IU.globalArray add 'Only girl'
+featProp global.IU.globalArray add 'Rihanna'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 16
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_cupd shuffle.jpeg'
+featProp global.IU.globalArray add 'Cupid shuffle'
+featProp global.IU.globalArray add 'Cupid'
+featProp global.IU.globalArray add 2022
+featProp global.IU.globalArray add 119
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_cake by the ocean.jpeg'
+featProp global.IU.globalArray add 'Cake by the ocean'
+featProp global.IU.globalArray add 'DNCE'
+featProp global.IU.globalArray add 2023
+featProp global.IU.globalArray add 190
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_wobble.jpeg'
+featProp global.IU.globalArray add 'Wobble'
+featProp global.IU.globalArray add 'V.I.C'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 12
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_nae nae.jpeg'
+featProp global.IU.globalArray add 'Watch Me'
+featProp global.IU.globalArray add 'Silento'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 41
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_flex.jpeg'
+featProp global.IU.globalArray add 'Flex'
+featProp global.IU.globalArray add 'Cupid'
+featProp global.IU.globalArray add 2017
+featProp global.IU.globalArray add 15
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_boots-on-the-ground.jpg'
+featProp global.IU.globalArray add 'Boots on the Ground'
+featProp global.IU.globalArray add '308fresh'
+featProp global.IU.globalArray add 2024
+featProp global.IU.globalArray add 12
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_what do you mean.jpeg'
+featProp global.IU.globalArray add 'What do you mean'
+featProp global.IU.globalArray add 'Justin Bieber'
+featProp global.IU.globalArray add 2018
+featProp global.IU.globalArray add 193
+featProp global.IU.globalArray add false
+
+featProp global.IU.globalArray add 'SM_sg_hot-line-bling.png'
+featProp global.IU.globalArray add 'Hotline Bling'
+featProp global.IU.globalArray add 'Justin Bieber'
+featProp global.IU.globalArray add 2022
+featProp global.IU.globalArray add 210
+featProp global.IU.globalArray add false
+
+// ADD SONGS HERE ^^^
+// </editable>
+
+# PROGRAM UPDATE
+
+// <DO_NOT_CHANGE>
+ifExpr {{ global.getProp('countReady').value == global.callFeatMethod('Population', 'getActiveCharactersCount', 'song') }} [[
+  exprPush {{ global.getFeatProp('IU','globalArray').filterAndSortSongs(global.getProp('number_of_attributes_for_a_song').value,global.getProp('number_of_attributes_for_a_song').value,global.getProp('index_primary_sort').value,global.getProp('is_primary_sort_asc').value,global.getProp('index_secondary_sort').value,global.getProp('is_secondary_sort_asc').value) }}
+  prop global.test_sorting setTo true
+  every 1 [[
+    featProp global.IU.globalArray print
+    featCall global.Timer stopRound
+
+  ]]
+]]
+//</DO_NOT_CHANGE>
+`
+    },
+    {
+      "name": "Background",
+      "scriptText": `# BLUEPRINT Background
+# TAG isCharControllable false
+# TAG isPozyxControllable false
+# TAG isPTrackControllable false
+
+# PROGRAM INIT
+addFeature Costume
+featProp Background.Costume.costumeName setTo 'SM_background.png'
+featProp Background.Costume.scale setTo 0.82
+
+# PROGRAM UPDATE
+`
+    },
+    {
+      "name": "song",
+      "scriptText": `# BLUEPRINT song
+# TAG isPozyxControllable true
+# TAG isCharControllable true
+# TAG isPTrackControllable false
+
+# PROGRAM INIT
+// add the features we are likely to use
+addFeature Costume
+addFeature Population
+
+// variables to scale song costume size
+addProp normal_scale number 0.35
+addProp up_scale number 0.55
+addProp down_scale number 0.25
+
+// set the costume
+featProp song.Costume.costumeName setTo 'SM_music.png'
+propPush song.normal_scale
+featPropPop song.Costume.scale
+// add other features
+addFeature Graphing
+addFeature Physics
+addFeature Touches
+
+// make sure we track interactions with the NPC
+featCall song.Touches monitor 'song' b2b
+featCall song.Touches monitor 'rankChart' b2b
+
+// <comparison attributes>
+addProp song_name string ''
+addProp artists string ''
+addProp year number 0
+addProp plays number 0
+// since sort now has two layers (defined in global) a song has these attributes to store them for comparison when touching other songs
+addProp primary_sort_by_value_number number 0
+addProp primary_sort_by_value_string string ''
+addProp secondary_sort_by_value_number number 0
+addProp secondary_sort_by_value_string string ''
+// since comparison to another song now has two layers, these attributes are used to store the other song's values temporarily
+addProp primary_value_to_compare_number number -100
+addProp primary_value_to_compare_string string ''
+addProp secondary_value_to_compare_number number -100
+addProp secondary_value_to_compare_string string ''
+// saves a temp value of the song name I am comparing with
+addProp compare_to_song_name string
+// check_order is set to true if the player is interacting with the ranking_chart
+addProp check_order boolean false
+// Checking that we are comparing with maximum 1 agent at a time
+addProp has_partner number 0
+// This prop stores which slot in the rank chart the song is placed in, when touching it
+addProp position_in_rank number 0
+// This boolean is used to store if the song is in the correct slot of the rank chart, based on the sorting parameters previously chosen (in global)
+addProp correct_position boolean false
+// This index is used during the start of the game, for a song to populate its attributes by randomly picking one song from the globalArray  
+addProp randomIndex number 0
+
+# PROGRAM UPDATE
+
+onEvent START [[
+  ifExpr {{ song.getProp('song_name').value === '' }} [[
+    
+    // This calls a special function that will randomly select an index for the first attribute of a song in the global globalArray
+    // <DO_NOT_CHANGE>
+    exprPush {{ (global.getFeatProp('IU', 'globalArray').getRandomIndex(1,global.getProp('number_of_attributes_for_a_song').value)) }}
+    propPop song.randomIndex
+    //</DO_NOT_CHANGE>
+
+    // <The order of the attributes being set in this song matters and must be the same order that the attributes were set in the globalArray. If a new attribute is created in the global array and in the song blueprint, it needs to be added here.>
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    featPropPop song.Costume.costumeName
+    prop randomIndex add 1
+    
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.song_name
+    prop randomIndex add 1
+    
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.artists
+    prop randomIndex add 1
+    
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.year
+    prop randomIndex add 1
+    
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('randomIndex').value) }}
+    propPop song.plays
+    prop randomIndex add 1
+
+    //This sets the boolean in globalArray to true to indicate that song is being used in the current game
+    // <DO_NOT_CHANGE>
+    ifExpr {{ (global.getFeatProp('IU', 'globalArray').setAndCheck(song.getProp('randomIndex').value,true)) }} [[
+      prop randomIndex add 1
+    ]]
+    // </DO_NOT_CHANGE>
+
+    //<This checks which variables are being used for sorting (previously set in global) and put it in the song attributes used when a song touches another song. If a new attribute is created in the global array (and in the song blueprint) as one of the sorting properties, it needs to be added here to be used properly during comparison with another song.>
+    //<primary_att>
+    ifExpr {{ global.getProp('name_primary_sort').value === 'plays' }} [[
+      propPush plays
+      propPop primary_sort_by_value_number
+    ]]
+    ifExpr {{ global.getProp('name_primary_sort').value === 'year' }} [[
+      propPush year
+      propPop primary_sort_by_value_number
+    ]]
+    ifExpr {{ global.getProp('name_primary_sort').value === 'song_name' }} [[
+      propPush song_name
+      propPop primary_sort_by_value_string
+    ]]
+    ifExpr {{ global.getProp('name_primary_sort').value === 'artists' }} [[
+      propPush artists
+      propPop primary_sort_by_value_string
+    ]]
+    
+    //<secondary_att>
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'plays' }} [[
+      propPush plays
+      propPop secondary_sort_by_value_number
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'year' }} [[
+      propPush year
+      propPop secondary_sort_by_value_number
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'song_name' }} [[
+      propPush song_name
+      propPop secondary_sort_by_value_string
+    ]]
+    ifExpr {{ global.getProp('name_secondary_sort').value === 'artists' }} [[
+      propPush artists
+      propPop secondary_sort_by_value_string
+    ]]
+
+    //<set the label below the image to a specific text, here it is song name but could be something else>
+    propPush song.song_name
+    featPropPop song.Graphing.text
+  ]]
+]]
+
+//<DO_NOT_CHANGE>
+when song touches song [[
+  ifExpr {{ song.getProp('has_partner').value === 0 && character.getProp('has_partner').value === 0 }} [[
+    // push the song_name property of the other agent and put it into a temporary property on the song
+    propPush character.song_name
+    propPop song.compare_to_song_name
+    propPush song.song_name
+    propPop character.compare_to_song_name
+    // compare a temporary property with the song_name property of the other song I am comparing with to check if the other agent is myself
+    ifExpr {{ song.getProp('song_name').value != song.getProp('compare_to_song_name').value }} [[
+      // if the other agent is not me, check if the other agent has a partner and if it is carrying finch properties.
+      ifProp character.has_partner equal 0 [[
+        // set the song and agent as having a partner
+        prop song.has_partner setTo 1
+        prop character.has_partner setTo 1
+        dbgOut {{ 'Comparing by '+global.getProp('name_primary_sort').value }}
+
+        ifExpr {{global.getProp('type_primary_sort').value === 'number'}} [[
+          propPush character.primary_sort_by_value_number
+          propPop song.primary_value_to_compare_number
+          propPush song.primary_sort_by_value_number
+          propPop character.primary_value_to_compare_number
+          // making sure value to compare updates correctly
+          ifExpr {{ song.getProp('primary_value_to_compare_number').value != -100 && character.getProp('primary_value_to_compare_number').value != -100 }} [[
+            // > If song is larger, change the song costume to larger and the agent costume to smaller
+            ifExpr {{ song.getProp('primary_sort_by_value_number').value > song.getProp('primary_value_to_compare_number').value }} [[
+              dbgOut {{ 'Numeric comparison => '+ song.getProp('primary_sort_by_value_number').value +' > ' + song.getProp('primary_value_to_compare_number').value }}
+              propPush song.up_scale
+              featPropPop song.Costume.scale
+              propPush song.down_scale
+              featPropPop character.Costume.scale
+              featProp song.Costume.glow setTo 1
+              featProp character.Costume.glow setTo 1
+              // Count and log the number of comparisons between songs
+              prop global.count_num_comparisons add 1
+            ]]
+            // < If song is smaller, change the song costume to smaller and the agent costume to larger
+            ifExpr {{ song.getProp('primary_sort_by_value_number').value < song.getProp('primary_value_to_compare_number').value }} [[
+              dbgOut {{ 'Numeric comparison => '+ song.getProp('primary_sort_by_value_number').value +' < ' + song.getProp('primary_value_to_compare_number').value }}
+              propPush song.down_scale
+              featPropPop song.Costume.scale
+              propPush song.up_scale
+              featPropPop character.Costume.scale
+              featProp song.Costume.glow setTo 1
+              featProp character.Costume.glow setTo 1
+              // Count and log the number of comparisons between songs
+              prop global.count_num_comparisons add 1
+            ]]
+            // = If song is equal, check secondary sort by value
+            ifExpr {{ song.getProp('primary_sort_by_value_number').value == song.getProp('primary_value_to_compare_number').value }} [[
+              dbgOut {{ 'Numeric comparison => '+ song.getProp('primary_sort_by_value_number').value +' = ' + song.getProp('primary_value_to_compare_number').value }}
+              // If secondary type is number
+              ifExpr {{global.getProp('type_secondary_sort').value === 'number'}} [[
+                propPush character.secondary_sort_by_value_number
+                propPop song.secondary_value_to_compare_number
+                propPush song.secondary_sort_by_value_number
+                propPop character.secondary_value_to_compare_number
+                //greater than        
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value > song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' > ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.up_scale
+                  featPropPop song.Costume.scale
+                  propPush song.down_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //less than
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value < song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' < ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.down_scale
+                  featPropPop song.Costume.scale
+                  propPush song.up_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //equal to
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value == song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' = ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.normal_scale
+                  featPropPop song.Costume.scale
+                  propPush song.normal_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]  
+                // Count and log the number of comparisons between songs
+                prop global.count_num_comparisons add 1
+              ]]  
+              ifExpr {{global.getProp('type_secondary_sort').value === 'string'}} [[
+                propPush character.secondary_sort_by_value_string
+                propPop song.secondary_value_to_compare_string
+                propPush song.secondary_sort_by_value_string
+                propPop character.secondary_value_to_compare_string
+                //greater than        
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value > song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' > ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.up_scale
+                  featPropPop song.Costume.scale
+                  propPush song.down_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //less than
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value < song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' < ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.down_scale
+                  featPropPop song.Costume.scale
+                  propPush song.up_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //equal to
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value == song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' = ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.normal_scale
+                  featPropPop song.Costume.scale
+                  propPush song.normal_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]  
+                // Count and log the number of comparisons between songs
+                prop global.count_num_comparisons add 1
+              ]]
+            ]]
+          ]]    
+        ]]
+        ifExpr {{global.getProp('type_primary_sort').value === 'string'}} [[
+          propPush character.primary_sort_by_value_string
+          propPop song.primary_value_to_compare_string
+          propPush song.primary_sort_by_value_string
+          propPop character.primary_value_to_compare_string
+          // making sure value to compare updates correctly
+          ifExpr {{ song.getProp('primary_value_to_compare_string').value != '' && character.getProp('primary_value_to_compare_string').value != '' }} [[
+            // > If song is larger, change the song costume to larger and the agent costume to smaller
+            ifExpr {{ song.getProp('primary_sort_by_value_string').value > song.getProp('primary_value_to_compare_string').value }} [[
+              dbgOut {{ 'String comparison => '+ song.getProp('primary_sort_by_value_string').value +' > ' + song.getProp('primary_value_to_compare_string').value }}
+              propPush song.up_scale
+              featPropPop song.Costume.scale
+              propPush song.down_scale
+              featPropPop character.Costume.scale
+              featProp song.Costume.glow setTo 1
+              featProp character.Costume.glow setTo 1
+              // Count and log the number of comparisons between songs
+              prop global.count_num_comparisons add 1
+            ]]
+            // < If song is smaller, change the song costume to smaller and the agent costume to larger
+            ifExpr {{ song.getProp('primary_sort_by_value_string').value < song.getProp('primary_value_to_compare_string').value }} [[
+              dbgOut {{ 'String comparison => '+ song.getProp('primary_sort_by_value_string').value +' < ' + song.getProp('primary_value_to_compare_string').value }}
+              propPush song.down_scale
+              featPropPop song.Costume.scale
+              propPush song.up_scale
+              featPropPop character.Costume.scale
+              featProp song.Costume.glow setTo 1
+              featProp character.Costume.glow setTo 1
+              // Count and log the number of comparisons between songs
+              prop global.count_num_comparisons add 1
+            ]]
+            // = If song is equal, check secondary sort by value
+            ifExpr {{ song.getProp('primary_sort_by_value_string').value == song.getProp('primary_value_to_compare_string').value }} [[
+              dbgOut {{ 'String comparison => '+ song.getProp('primary_sort_by_value_string').value +' = ' + song.getProp('primary_value_to_compare_string').value }}
+              // If secondary type is number
+              ifExpr {{global.getProp('type_secondary_sort').value === 'number'}} [[
+                propPush character.secondary_sort_by_value_number
+                propPop song.secondary_value_to_compare_number
+                propPush song.secondary_sort_by_value_number
+                propPop character.secondary_value_to_compare_number
+                //greater than        
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value > song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' > ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.up_scale
+                  featPropPop song.Costume.scale
+                  propPush song.down_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //less than
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value < song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' < ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.down_scale
+                  featPropPop song.Costume.scale
+                  propPush song.up_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //equal to
+                ifExpr {{ song.getProp('secondary_sort_by_value_number').value == song.getProp('secondary_value_to_compare_number').value }} [[
+                  dbgOut {{ 'Second Numeric comparison => '+ song.getProp('secondary_sort_by_value_number').value +' = ' + song.getProp('secondary_value_to_compare_number').value }}
+                  propPush song.normal_scale
+                  featPropPop song.Costume.scale
+                  propPush song.normal_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]  
+                // Count and log the number of comparisons between songs
+                prop global.count_num_comparisons add 1
+              ]]  
+              ifExpr {{global.getProp('type_secondary_sort').value === 'string'}} [[
+                propPush character.secondary_sort_by_value_string
+                propPop song.secondary_value_to_compare_string
+                propPush song.secondary_sort_by_value_string
+                propPop character.secondary_value_to_compare_string
+                //greater than        
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value > song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' > ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.up_scale
+                  featPropPop song.Costume.scale
+                  propPush song.down_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //less than
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value < song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' < ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.down_scale
+                  featPropPop song.Costume.scale
+                  propPush song.up_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]
+                //equal to
+                ifExpr {{ song.getProp('secondary_sort_by_value_string').value == song.getProp('secondary_value_to_compare_string').value }} [[
+                  dbgOut {{ 'Second String comparison => '+ song.getProp('secondary_sort_by_value_string').value +' = ' + song.getProp('secondary_value_to_compare_string').value }}
+                  propPush song.normal_scale
+                  featPropPop song.Costume.scale
+                  propPush song.normal_scale
+                  featPropPop character.Costume.scale
+                  featProp song.Costume.glow setTo 1
+                  featProp character.Costume.glow setTo 1
+                ]]  
+                // Count and log the number of comparisons between songs
+                prop global.count_num_comparisons add 1
+              ]]
+            ]]
+          ]]    
+        ]]
+        
+      ]]
+    ]]
+  ]]
+]]
+
+// change the costume of song after interacting with another song to compare sot by value properties
+when song lasttouches song [[
+  // resetting values for both songs
+  prop song.has_partner setTo 0
+  prop character.has_partner setTo 0
+  propPush song.normal_scale
+  featPropPop song.Costume.scale
+  propPush song.normal_scale
+  featPropPop character.Costume.scale
+  prop song.primary_value_to_compare_number setTo -100
+  prop song.primary_value_to_compare_string setTo ''
+  prop song.secondary_value_to_compare_number setTo -100
+  prop song.secondary_value_to_compare_string setTo ''
+  prop character.primary_value_to_compare_number setTo -100
+  prop character.primary_value_to_compare_string setTo ''
+  prop character.secondary_value_to_compare_number setTo -100
+  prop character.secondary_value_to_compare_string setTo ''
+  prop song.compare_to_song_name setTo
+  prop character.compare_to_song_name setTo
+]]
+
+// when a song actively interacts with the rank chart, set the player status as ready to make a prediction and add one to the global property to count ready players
+when song touches rankChart [[
+  prop song.has_partner setTo 2
+  ifProp song.check_order equal false [[
+    featProp song.Costume.glow setTo 1
+    prop song.check_order setTo true
+    prop global.countReady add 1
+  ]]
+]]
+
+// when song leave the rank chart, set the player status as not ready to make a prediction and remove their count from the global property to count ready players
+when song lasttouches rankChart [[
+  prop song.has_partner setTo 0
+  ifProp global.countReady greaterThan 0 [[
+    prop global.countReady sub 1
+  ]]
+  prop song.check_order setTo false
+  prop song.correct_position setTo false
+  prop song.position_in_rank setTo 0
+]]
+
+
+// This is stuff that happens constantly and you can also check certain conditions
+// For example every 1 runAtStart will run every time this is called, including the first, whereas every 5 will happen less offten and not the first time
+
+every 1 runAtStart [[
+  // test sorting when global variable is true (which means all songs are touching the rank chart)
+  ifProp global.test_sorting equal true [[
+    ifExpr {{ ((song.getProp('y').value + 57) > -293) && ((song.getProp('y').value + 57) < -171) }} [[
+      prop song.position_in_rank setTo 1
+    ]]
+    ifExpr {{ ((song.getProp('y').value + 57) > -171) && ((song.getProp('y').value + 57) < -57) }} [[
+      prop song.position_in_rank setTo 2
+    ]]
+    ifExpr {{ ((song.getProp('y').value + 57) > -57) && ((song.getProp('y').value + 57) < 61.5) }} [[
+      prop song.position_in_rank setTo 3
+    ]]
+    ifExpr {{ ((song.getProp('y').value + 57) > 61.5) && ((song.getProp('y').value + 57) < 176) }} [[
+      prop song.position_in_rank setTo 4
+    ]]
+    ifExpr {{ ((song.getProp('y').value + 57) > 176) && ((song.getProp('y').value + 57) < 293) }} [[
+      prop song.position_in_rank setTo 5
+    ]]
+    ifExpr {{ ((song.getProp('y').value + 57) > 293) }} [[
+      prop song.position_in_rank setTo 6
+    ]]
+
+// Primary sort = number
+ifExpr {{ global.getProp('type_primary_sort').value === 'number' }} [[
+  exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value * 2 - 2) === song.getProp('primary_sort_by_value_number').value }}
+  propPop song.correct_position
+]]
+
+// Primary sort = string
+ifExpr {{ global.getProp('type_primary_sort').value === 'string' }} [[
+  exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value * 2 - 2) === song.getProp('primary_sort_by_value_string').value }}
+  propPop song.correct_position
+]]
+
+// Only check secondary if primary matched
+ifExpr {{ song.getProp('correct_position').value === true }} [[
+  // Secondary sort = number
+  ifExpr {{ global.getProp('type_secondary_sort').value === 'number' }} [[
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value * 2 - 1) === song.getProp('secondary_sort_by_value_number').value }}
+    propPop song.correct_position
+  ]]
+
+  // Secondary sort = string
+  ifExpr {{ global.getProp('type_secondary_sort').value === 'string' }} [[
+    exprPush {{ global.getFeatProp('IU', 'globalArray').get(song.getProp('position_in_rank').value * 2 - 1) === song.getProp('secondary_sort_by_value_string').value }}
+    propPop song.correct_position
+  ]]
+]]
+
+// Final result display
+ifExpr {{ song.getProp('correct_position').value != true }} [[
+  dbgOut {{ song.getProp('artists').value + ': INCORRECT ' }}
+  prop song.alpha setTo 0.3
+]]
+ifExpr {{ song.getProp('correct_position').value === true }} [[
+  dbgOut {{ song.getProp('artists').value + ': CORRECT ' }}
+  featProp song.Costume.glow setTo 5
+]]
+
+  ]]
+//</DO_NOT_CHANGE>
+
+]]`
+    },
+    {
+      "name": "rankChart",
+      "scriptText": `# BLUEPRINT rankChart
+# TAG isPozyxControllable false
+# TAG isCharControllable false
+# TAG isPTrackControllable false
+
+
+# PROGRAM INIT
+addFeature Costume
+featProp rankChart.Costume.costumeName setTo 'SM_ranking_chart_no_title.png'
+prop rankChart.y setTo -0.18
+// exprPush {{ global.getProp('chart_slot_height').value }}
+// featPropPop rankChart.Costume.height
+// featProp rankChart.Costume.height setTo 0.1
+addFeature Graphing
+addFeature Physics
+addFeature Touches
+
+featProp rankChart.Graphing.text setTo 'RANK CHART'
+featProp rankChart.Graphing.fontSize setTo 22
+featProp rankChart.Graphing.wordWrapWidth setTo 150
+
+featProp rankChart.Graphing.textAlign setTo 1
+featCall rankChart.Touches monitor 'song' b2b
+
+
+# PROGRAM UPDATE
+
+exprPush {{ (global.getProp('chart_slot_height').value) * (global.callFeatMethod('Population','getActiveCharactersCount','song')) }}
+featPropPop rankChart.Costume.height
+exprPush {{ (global.getProp('chart_slot_height').value) * (global.callFeatMethod('Population','getActiveCharactersCount','song')) }}
+propPop global.chart_center_y
+// dbgOut {{ 'height: ' + rankChart.getProp('y').value }}
+// dbgOut {{ 'image height: ' + rankChart.getFeatProp('Costume','height').value }}
+exprPush {{ -370 + (((global.getProp('chart_slot_height').value) / 2) * (global.callFeatMethod('Population','getActiveCharactersCount','song'))) }}
+propPop rankChart.y
+every 1 runAtStart [[
+  // insert code here
+]]`
+    },
+    {
+      "name": "Timer",
+      "scriptText": `# BLUEPRINT Timer
+# TAG isCharControllable false
+# TAG isPozyxControllable false
+# TAG isPTrackControllable false
+
+# PROGRAM INIT
+addFeature Graphing
+addFeature Costume
+
+featProp Timer.Costume.costumeName setTo 'GEN_onexone.json'
+featProp Timer.Costume.scale setTo 1
+
+addProp time number 0
+featProp Timer.Graphing.fontSize setTo 44
+exprPush {{ 'Time: ' + Timer.getProp('time').value }}
+featPropPop Timer.Graphing.text
+
+# PROGRAM UPDATE
+every 1 runAtStart [[
+  ifProp global.test_sorting equal false [[
+    prop Timer.time add 1
+    exprPush {{ 'Time: ' + Timer.getProp('time').value }}
+    featPropPop Timer.Graphing.text
+  ]]
+]]`
+    },
+    {
+      "name": "graph_comparisons",
+      "scriptText": `# BLUEPRINT graph_comparisons
+# TAG isCharControllable false
+# TAG isPozyxControllable false
+# TAG isPTrackControllable false
+
+# PROGRAM INIT
+addFeature Costume
+addFeature Graphing
+addFeature Population
+
+addProp total_comparisons_count number 0
+
+featProp graph_comparisons.Costume.costumeName setTo 'GEN_onexone.json'
+featProp graph_comparisons.Graphing.isLargeGraphic setTo true
+featProp graph_comparisons.Graphing.graphProp setTo 'total_comparisons_count'
+featProp graph_comparisons.Graphing.graphMinY setTo 0
+featProp graph_comparisons.Graphing.graphMaxY setTo 200
+featProp graph_comparisons.Graphing.text setTo 'Number of Comparisons'
+featProp graph_comparisons.Graphing.meterColor setTo 65280
+featProp graph_comparisons.Graphing.wordWrapWidth setTo 150
+
+addProp row number 1
+
+addProp fieldType string ''
+
+# PROGRAM UPDATE
+onEvent TICK [[
+  // ifProp graph_comparisons.row equal 1 [[
+  propPush global.count_num_comparisons
+  propPop graph_comparisons.total_comparisons_count
+]]
+// ifExpr {{ global.getProp('count_num_comparisons').value != graph_comparisons.getProp('total_comparisons_count').value }} [[`
+    },
+    {
+      "name": "Value_comparisons",
+      "scriptText": `# BLUEPRINT Value_comparisons
+# TAG isCharControllable false
+# TAG isPozyxControllable false
+# TAG isPTrackControllable false
+
+# PROGRAM INIT
+addFeature Graphing
+addFeature Costume
+addFeature Population
+
+//<DO_NOT_CHANGE>
+featProp Value_comparisons.Costume.costumeName setTo 'GEN_onexone.json'
+featProp Value_comparisons.Costume.scale setTo 1
+
+// addProp comparison number 0
+featProp Value_comparisons.Graphing.fontSize setTo 44
+propPush global.count_num_comparisons
+featPropPop Value_comparisons.Graphing.text
+
+# PROGRAM UPDATE
+every 1 runAtStart [[
+  ifProp global.test_sorting equal false [[
+    propPush global.count_num_comparisons
+    featPropPop Value_comparisons.Graphing.text
+  ]]
+]]
+//</DO_NOT_CHANGE>
+`
+    }
+  ],
+  "instances": [
+    {
+      "id": "0",
+      "label": "Background0",
+      "bpid": "Background",
+      "initScript": `prop Background.x setTo 4.53
+prop Background.y setTo 4.15`
+    },
+    {
+      "id": "1",
+      "label": "rankChart1",
+      "bpid": "rankChart",
+      "initScript": `prop rankChart.x setTo 300.00
+prop rankChart.y setTo -0.17`
+    },
+    {
+      "id": "6",
+      "label": "graph_comparisons6",
+      "bpid": "graph_comparisons",
+      "initScript": `prop graph_comparisons.x setTo -468.4
+prop graph_comparisons.y setTo -144.46`
+    },
+    {
+      "id": "7",
+      "label": "Timer7",
+      "bpid": "Timer",
+      "initScript": `prop Timer.x setTo -474.71
+prop Timer.y setTo -372.34`
+    },
+    {
+      "id": "8",
+      "label": "Value_comparisons8",
+      "bpid": "Value_comparisons",
+      "initScript": `prop Value_comparisons.x setTo -462.9
+prop Value_comparisons.y setTo -90.09`
+    }
+  ]
+}
