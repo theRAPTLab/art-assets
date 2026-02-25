@@ -871,9 +871,15 @@ featProp primary_ranked_info.Costume.scale setTo 1
 
 featProp primary_ranked_info.Graphing.fontSize setTo 20
 featProp primary_ranked_info.Graphing.text setTo 'Primary: DESC ③→②→①'
+ifExpr {{ (global.getProp('type_primary_sort').value =='string') }} [[
+  \tfeatProp primary_ranked_info.Graphing.text setTo 'Primary: DESC Z→Y→X'
+]]
 // if is_primary_sort_asc == true
 ifExpr {{ (global.getProp('is_primary_sort_asc').value == true) }} [[
   featProp primary_ranked_info.Graphing.text setTo 'Primary: ASC ①→②→③'
+  ifExpr {{ (global.getProp('type_primary_sort').value =='string') }} [[
+  \tfeatProp primary_ranked_info.Graphing.text setTo 'Primary: ASC A→B→C'
+  ]]
 ]]
 
 # PROGRAM UPDATE
@@ -896,9 +902,15 @@ featProp secondary_ranked_info.Costume.scale setTo 1
 
 featProp secondary_ranked_info.Graphing.fontSize setTo 20
 featProp secondary_ranked_info.Graphing.text setTo 'Second: DESC ③→②→①'
+ifExpr {{ (global.getProp('type_secondary_sort').value =='string') }} [[
+  \tfeatProp secondary_ranked_info.Graphing.text setTo 'Second: DESC Z→Y→X'
+]]
 
 ifExpr {{ (global.getProp('is_secondary_sort_asc').value == true) }} [[
   featProp secondary_ranked_info.Graphing.text setTo 'Second: ASC ①→②→③'
+  ifExpr {{ (global.getProp('type_secondary_sort').value =='string') }} [[
+  \tfeatProp secondary_ranked_info.Graphing.text setTo 'Second: ASC A→B→C'
+  ]]
 ]]
 
 # PROGRAM UPDATE
@@ -953,7 +965,7 @@ prop primary_ranked_info.y setTo 41.89`
       "label": "secondary_ranked_info10",
       "bpid": "secondary_ranked_info",
       "initScript": `prop secondary_ranked_info.x setTo -466.65
-prop secondary_ranked_info.y setTo 140.90`
+prop secondary_ranked_info.y setTo 140.9`
     }
   ]
 }
