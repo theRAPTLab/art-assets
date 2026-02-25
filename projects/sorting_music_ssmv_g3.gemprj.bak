@@ -1,6 +1,6 @@
 {
-  "id": "sorting_music_ssmv",
-  "label": "sorting_music_ssmv",
+  "id": "sorting_music_ssmv_g3",
+  "label": "sorting_music_ssmv_g3",
   "metadata": {
     "top": -400,
     "right": 400,
@@ -56,15 +56,15 @@ addProp chart_center_y number
 
 // <editable>
 // first sorting parameter block
-addProp index_primary_sort number 5
-addProp name_primary_sort string 'plays'
-addProp type_primary_sort string 'number'
-addProp is_primary_sort_asc boolean False
+addProp index_primary_sort number 4
+addProp name_primary_sort string 'year'
+addProp type_primary_sort string 'number'           
+addProp is_primary_sort_asc boolean false
 // second sorting parameter block     
-addProp index_secondary_sort number 3
-addProp name_secondary_sort string 'artists'
+addProp index_secondary_sort number 2
+addProp name_secondary_sort string 'song_name'
 addProp type_secondary_sort string 'string'
-addProp is_secondary_sort_asc boolean true
+addProp is_secondary_sort_asc boolean True
 
 // this prop needs the reflect the number of attributes for each song, including image and boolean
 addProp number_of_attributes_for_a_song number 6
@@ -853,68 +853,6 @@ every 1 runAtStart [[
 ]]
 //</DO_NOT_CHANGE>
 `
-    },
-    {
-      "name": "primary_ranked_info",
-      "scriptText": `# BLUEPRINT primary_ranked_info
-# TAG isCharControllable false
-# TAG isPozyxControllable false
-# TAG isPTrackControllable false
-
-# PROGRAM INIT
-addFeature Costume
-addFeature Graphing
-
-// <DO_NOT_CHANGE>
-featProp primary_ranked_info.Costume.costumeName setTo 'GEN_onexone.json'
-featProp primary_ranked_info.Costume.scale setTo 1
-
-featProp primary_ranked_info.Graphing.fontSize setTo 20
-featProp primary_ranked_info.Graphing.text setTo 'Primary: DESC ③→②→①'
-ifExpr {{ (global.getProp('type_primary_sort').value =='string') }} [[
-  \tfeatProp primary_ranked_info.Graphing.text setTo 'Primary: DESC Z→Y→X'
-]]
-// if is_primary_sort_asc == true
-ifExpr {{ (global.getProp('is_primary_sort_asc').value == true) }} [[
-  featProp primary_ranked_info.Graphing.text setTo 'Primary: ASC ①→②→③'
-  ifExpr {{ (global.getProp('type_primary_sort').value =='string') }} [[
-  \tfeatProp primary_ranked_info.Graphing.text setTo 'Primary: ASC A→B→C'
-  ]]
-]]
-
-# PROGRAM UPDATE
-// </DO_NOT_CHANGE>`
-    },
-    {
-      "name": "secondary_ranked_info",
-      "scriptText": `# BLUEPRINT secondary_ranked_info
-# TAG isCharControllable false
-# TAG isPozyxControllable false
-# TAG isPTrackControllable false
-
-# PROGRAM INIT
-addFeature Costume
-addFeature Graphing
-
-// <DO_NOT_CHANGE>
-featProp secondary_ranked_info.Costume.costumeName setTo 'GEN_onexone.json'
-featProp secondary_ranked_info.Costume.scale setTo 1
-
-featProp secondary_ranked_info.Graphing.fontSize setTo 20
-featProp secondary_ranked_info.Graphing.text setTo 'Second: DESC ③→②→①'
-ifExpr {{ (global.getProp('type_secondary_sort').value =='string') }} [[
-  \tfeatProp secondary_ranked_info.Graphing.text setTo 'Second: DESC Z→Y→X'
-]]
-
-ifExpr {{ (global.getProp('is_secondary_sort_asc').value == true) }} [[
-  featProp secondary_ranked_info.Graphing.text setTo 'Second: ASC ①→②→③'
-  ifExpr {{ (global.getProp('type_secondary_sort').value =='string') }} [[
-  \tfeatProp secondary_ranked_info.Graphing.text setTo 'Second: ASC A→B→C'
-  ]]
-]]
-
-# PROGRAM UPDATE
-// </DO_NOT_CHANGE>`
     }
   ],
   "instances": [
@@ -926,6 +864,20 @@ ifExpr {{ (global.getProp('is_secondary_sort_asc').value == true) }} [[
 prop Background.y setTo 4.15`
     },
     {
+      "id": "1",
+      "label": "rankChart1",
+      "bpid": "rankChart",
+      "initScript": `prop rankChart.x setTo 300.00
+prop rankChart.y setTo -0.17`
+    },
+    {
+      "id": "6",
+      "label": "graph_comparisons6",
+      "bpid": "graph_comparisons",
+      "initScript": `prop graph_comparisons.x setTo -468.4
+prop graph_comparisons.y setTo -144.46`
+    },
+    {
       "id": "7",
       "label": "Timer7",
       "bpid": "Timer",
@@ -933,39 +885,11 @@ prop Background.y setTo 4.15`
 prop Timer.y setTo -372.34`
     },
     {
-      "id": "13",
-      "label": "rankChart13",
-      "bpid": "rankChart",
-      "initScript": `prop rankChart.x setTo 272.54
-prop rankChart.y setTo -1.04`
-    },
-    {
-      "id": "14",
-      "label": "graph_comparisons14",
-      "bpid": "graph_comparisons",
-      "initScript": `prop graph_comparisons.x setTo -467.55
-prop graph_comparisons.y setTo -152.01`
-    },
-    {
-      "id": "15",
-      "label": "Value_comparisons15",
+      "id": "8",
+      "label": "Value_comparisons8",
       "bpid": "Value_comparisons",
-      "initScript": `prop Value_comparisons.x setTo -459.95
-prop Value_comparisons.y setTo -101.38`
-    },
-    {
-      "id": "9",
-      "label": "primary_ranked_info9",
-      "bpid": "primary_ranked_info",
-      "initScript": `prop primary_ranked_info.x setTo -468.86
-prop primary_ranked_info.y setTo 41.89`
-    },
-    {
-      "id": "10",
-      "label": "secondary_ranked_info10",
-      "bpid": "secondary_ranked_info",
-      "initScript": `prop secondary_ranked_info.x setTo -466.65
-prop secondary_ranked_info.y setTo 140.9`
+      "initScript": `prop Value_comparisons.x setTo -462.9
+prop Value_comparisons.y setTo -90.09`
     }
   ]
 }
