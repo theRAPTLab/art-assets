@@ -59,12 +59,12 @@ addProp chart_center_y number
 addProp index_primary_sort number 6
 addProp name_primary_sort string 'BPM'
 addProp type_primary_sort string 'number'
-addProp is_primary_sort_asc boolean False
+addProp is_primary_sort_asc boolean false
 // second sorting parameter block
 addProp index_secondary_sort number 5
 addProp name_secondary_sort string 'plays'
 addProp type_secondary_sort string 'number'
-addProp is_secondary_sort_asc boolean False
+addProp is_secondary_sort_asc boolean false
 
 // this prop needs the reflect the number of attributes for each song, including image and boolean
 addProp number_of_attributes_for_a_song number 7

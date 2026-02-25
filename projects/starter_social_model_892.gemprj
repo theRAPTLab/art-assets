@@ -1,0 +1,202 @@
+{
+  "id": "starter_social_model_892",
+  "label": "Starter Social Model",
+  "metadata": {
+    "top": -400,
+    "right": 400,
+    "bottom": 400,
+    "left": -400,
+    "wrap": [
+      false,
+      false
+    ],
+    "bounce": true,
+    "bgcolor": 102,
+    "roundsCanLoop": true,
+    "showWebCam": false,
+    "scaleX": 1,
+    "scaleY": 1,
+    "translateX": 0,
+    "translateY": 0,
+    "rotate": 0,
+    "mirrorX": false,
+    "mirrorY": false
+  },
+  "rounds": [],
+  "blueprints": [
+    {
+      "name": "global",
+      "scriptText": `# BLUEPRINT global
+# TAG IsCharControllable false
+# TAG IsPozyxControllable false
+# TAG IsPtrackControllable false
+
+// COMMENT KEY
+// 🔎 WHAT DOES THIS DO? heading
+// 🔎 body
+// ✏️ LETS CHANGE THIS: heading
+// ✏️ body
+
+# PROGRAM INIT
+
+// 🔎 WHAT DOES THIS MODEL DO?
+// 🔎 This starter model is inteded to help users explore how people interacting with each other
+// 🔎 might impact the other people. The existing code mirrors a basic disease spread scenario for 
+// 🔎 some sample code to muck with
+// 🔎 Change this description once you are ready to share the model so others know how it is supposed to work.
+
+prop global.visible setTo false
+
+// required directive
+# PROGRAM UPDATE`
+    },
+    {
+      "name": "PC",
+      "scriptText": `# BLUEPRINT PC
+# TAG isPozyxControllable true
+# TAG isCharControllable true
+# TAG isPTrackControllable false
+
+// COMMENT KEY
+// 🔎 WHAT DOES THIS DO? heading
+// 🔎 body
+// ✏️ LETS CHANGE THIS: heading
+// ✏️ body
+
+
+# PROGRAM INIT
+// add the features we are likely to use
+addFeature Costume
+
+// set the costume
+featProp PC.Costume.costumeName setTo 'AQ_fish.png'
+featProp PC.Costume.scale setTo 0.3
+
+// add other features
+addFeature Graphing
+addFeature Physics
+addFeature Touches
+
+// make sure we track interactions with the NPC
+featCall agent.Touches monitor 'NPC' b2b
+
+// add any properties specific to the PC
+
+// role is intended to capture the idea that people can have different jobs, or relationships, and that this might influence how they interact with each other
+// it's helpful to list roles here for other users to see
+// roles for this template are one, and two (they don't mean anything)
+addProp role string 'one'
+
+// virus is intended to capture the idea that people might have something (true or false) that they pass to each other ... it could be a virus, information, or something else ... to model something like money you'd want to change to a number or String
+addProp virus boolean false
+
+// display the meter if relevant
+// featCall agent.Graphing bindMeterTo energy
+
+# PROGRAM UPDATE
+// This is stuff that happens at particular events such as Start (when the start button is pushed) or Tick (every second or so)
+// This is also where you can handle touches between characters such as When Algae touches Fish
+when PC firstTouches NPC [[
+  // glow to show we are interacting
+  featProp PC.Costume.glow setTo 1
+
+  // check if the NPC has the virus (or whatever else)
+  ifExpr {{ NPC.getProp('virus').value == true }} [[
+    // we are in contact with the virus, so we have it now too
+    prop PC.virus setTo true
+  ]]
+]]
+
+// This is stuff that happens constantly and you can also check certain conditions
+// For example every 1 runAtStart will run every time this is called, including the first, whereas every 5 will happen less offten and not the first time
+
+every 1 runAtStart [[
+  // insert code here to run all the time
+  ifExpr {{ agent.getProp('virus').value == true }} [[
+    featProp agent.Graphing.text setTo '🤢'
+  ]]
+
+  ifExpr {{ agent.getProp('virus').value == false }} [[
+    featProp agent.Graphing.text setTo '🙂'
+  ]]
+
+]]`
+    },
+    {
+      "name": "NPC",
+      "scriptText": `# BLUEPRINT NPC
+# TAG isPozyxControllable false
+# TAG isCharControllable true
+# TAG isPTrackControllable false
+
+// COMMENT KEY
+// 🔎 WHAT DOES THIS DO? heading
+// 🔎 body
+// ✏️ LETS CHANGE THIS: heading
+// ✏️ body
+
+# PROGRAM INIT
+// setup the NPC costume
+addFeature Costume
+featProp NPC.Costume.costumeName setTo 'AQ_fish.png'
+featProp NPC.Costume.scale setTo 0.3
+
+// add other features
+addFeature Movement
+addFeature Graphing
+addFeature Physics
+addFeature Touches
+
+// add any properties specific to the PC / NPC
+// role is intended to capture the idea that people can have different jobs, or relationships, and that this might influence how they interact with each other
+// it's helpful to list roles here for other users to see
+// roles for this template are one, and two (they don't mean anything)
+addProp role string 'one'
+
+// virus is intended to capture the idea that people might have something (true or false) that they pass to each other ... it could be a virus, information, or something else ... to model something like money you'd want to change to a number or String
+addProp virus boolean false
+// display the meter if relevant
+// featCall agent.Graphing bindMeterTo energy
+
+// Set the NPC to move if relevant (wander by default)
+featProp NPC.Movement.movementType setTo 'wander'
+featProp NPC.Movement.distance setTo 0.2
+
+# PROGRAM UPDATE
+// This is stuff that happens constantly and you can also check certain conditions
+// For example every 1 runAtStart will run every time this is called, including the first, whereas every 5 will happen less offten and not the first time
+// This is also where you can handle touches between characters such as When Algae touches Fish
+every 1 runAtStart [[
+  // insert code here to run all the time
+  ifProp NPC.virus equal true [[
+    featProp agent.Graphing.text setTo '🤢'
+  ]]
+
+  ifProp NPC.virus equal false [[
+    featProp agent.Graphing.text setTo '🙂'
+  ]]
+
+]]`
+    }
+  ],
+  "instances": [
+    {
+      "id": "0",
+      "label": "NPC One True",
+      "bpid": "NPC",
+      "initScript": `prop x setTo 136.88
+prop y setTo 50.13
+prop virus setTo true
+prop role setTo 'one'`
+    },
+    {
+      "id": "1",
+      "label": "NPC Two False",
+      "bpid": "NPC",
+      "initScript": `prop x setTo -205.03
+prop y setTo 48.39
+prop virus setTo false
+prop role setTo 'two'`
+    }
+  ]
+}
